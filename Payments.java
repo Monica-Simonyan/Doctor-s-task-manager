@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Payments implements Cloneable {
     private static class Fee {
@@ -23,24 +22,27 @@ public class Payments implements Cloneable {
     }
 
     private ArrayList<Fee> fees;
+
     public Payments clone() {
         try {
             Payments clone = (Payments) super.clone();
             ArrayList<Fee> clonedList = new ArrayList<>();
             // Copy mutable state here, so the clone can't change the internals of the original
             for (Fee fee : fees) {
-                clonedList.add((Fee) fee.clone()); // Performs deep cloning of each element
+                clonedList.add(fee.clone()); // Performs deep cloning of each element
             }
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
         }
     }
+
     public Payments(ArrayList<Fee> fees) {
         ArrayList<Fee> clonedList = new ArrayList<>();
         for (Fee fee : fees) {
-            clonedList.add((Fee) fee.clone()); // Performs deep cloning of each element
+            clonedList.add(fee.clone()); // Performs deep cloning of each element
         }
+        this.fees = clonedList;
     }
 
     public void addPayment(Fee fee) {
