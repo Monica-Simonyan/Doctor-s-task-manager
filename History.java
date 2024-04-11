@@ -29,7 +29,6 @@ public class History extends Utility {
         return prescriptions;
     }
 
-
     public void addProcedures(String... procedure) {
         procedures = appendElementsToArrayList(procedures, procedure);
     }
