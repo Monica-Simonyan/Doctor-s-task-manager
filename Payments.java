@@ -1,15 +1,32 @@
 import java.util.ArrayList;
 
+/**
+ * The class Payments represents payments of a patient
+ */
 public class Payments implements Cloneable {
+    /**
+     * Inner class presenting a specific fee paid by patient
+     */
     private static class Fee {
-        boolean wasPayed;
-        int fee;
+        boolean wasPaid;
+        int amount;
 
-        public Fee(boolean wasPayed, int fee) {
-            this.wasPayed = wasPayed;
-            this.fee = fee;
+        /**
+         * No argument constructor creates an object Fee with given fee amount wasPid boolean value
+         *
+         * @param wasPaid true if fee was paid
+         * @param amount  amount of fee
+         */
+        public Fee(boolean wasPaid, int amount) {
+            this.wasPaid = wasPaid;
+            this.amount = amount;
         }
 
+        /**
+         * Overridden clone method
+         *
+         * @return clone of the calling object of type Fee
+         */
         public Fee clone() {
             try {
                 return (Fee) super.clone();
@@ -22,7 +39,11 @@ public class Payments implements Cloneable {
     }
 
     private ArrayList<Fee> fees;
-
+    /**
+     * Overridden clone method
+     *
+     * @return  deep copy of the calling object of type Payments
+     */
     public Payments clone() {
         try {
             Payments clone = (Payments) super.clone();
@@ -31,12 +52,18 @@ public class Payments implements Cloneable {
             for (Fee fee : fees) {
                 clonedList.add(fee.clone()); // Performs deep cloning of each element
             }
+            clone.fees = clonedList;
             return clone;
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            System.out.println(e.getMessage());
+            return null;
         }
     }
 
+    /**Constructor that creates an object Payments with given fees
+     *
+     * @param fees ArrayList<> of fees of base type Fee
+     */
     public Payments(ArrayList<Fee> fees) {
         ArrayList<Fee> clonedList = new ArrayList<>();
         for (Fee fee : fees) {
@@ -45,29 +72,38 @@ public class Payments implements Cloneable {
         this.fees = clonedList;
     }
 
-    public void addPayment(Fee fee) {
+    /**Adds the given fee to the list of fees
+     *
+     * @param fee fee for a procedure of type Fee
+     */
+    public void addFee(Fee fee) {
         fees.add(fee);
     }
 
-    public int countPayedFee(){
+    /**Returns total paid fees
+     *
+     * @return int total paid fees
+     */
+    public int countPaidFee() {
         int total = 0;
         for (Fee fee : fees) {
-            if (fee.wasPayed) {
-                total += fee.fee;
+            if (fee.wasPaid) {
+                total += fee.amount;
             }
         }
         return total;
     }
-
-    public int countNotPayed() {
+    /**Returns total unpaid fees
+     *
+     * @return int total unpaid fees
+     */
+    public int countUnpaid() {
         int total = 0;
         for (Fee fee : fees) {
-            if (!fee.wasPayed) {
-                total += fee.fee;
+            if (!fee.wasPaid) {
+                total += fee.amount;
             }
         }
         return total;
     }
-
-
 }
