@@ -37,7 +37,10 @@ public class Payments implements Cloneable {
         }
     }
     public Payments(ArrayList<Fee> fees) {
-        this.fees = (ArrayList<Fee>) fees.clone();
+        ArrayList<Fee> clonedList = new ArrayList<>();
+        for (Fee fee : fees) {
+            clonedList.add((Fee) fee.clone()); // Performs deep cloning of each element
+        }
     }
 
     public void addPayment(Fee fee) {
