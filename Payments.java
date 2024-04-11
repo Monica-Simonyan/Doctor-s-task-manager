@@ -49,7 +49,17 @@ public class Payments implements Cloneable {
         fees.add(fee);
     }
 
-    public int countTotalFee() {
+    public int countPayedFee(){
+        int total = 0;
+        for (Fee fee : fees) {
+            if (fee.wasPayed) {
+                total += fee.fee;
+            }
+        }
+        return total;
+    }
+
+    public int countNotPayed() {
         int total = 0;
         for (Fee fee : fees) {
             if (!fee.wasPayed) {
