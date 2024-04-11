@@ -77,4 +77,9 @@ public class PersonalInformation {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public String toString() {
+        return name + " " + lastName + "\n" + "Age: " + age + "\nAddress: " + address +"\nPhone number: "
+                +phoneNumber+"\nGender: "+gender;
+    }
 }
