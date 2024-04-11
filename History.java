@@ -1,23 +1,23 @@
 import Utilities.Utility;
 
 import java.util.ArrayList;
+
 public class History extends Utility {
-    private ArrayList<String> allergies;
+    private String allergies;
     private ArrayList<String> procedures;
-    private ArrayList<String> prescriptions;
+    private String prescriptions;
 
     public History() {
-        allergies = new ArrayList<>();
-        prescriptions = new ArrayList<>();
         procedures = new ArrayList<>();
-
     }
 
     public History(History that) {
-
+        this.allergies = that.allergies;
+        this.prescriptions = that.prescriptions;
+        this.procedures = (ArrayList<String>) that.procedures.clone();
     }
 
-    public ArrayList<String> getAllergies() {
+    public String getAllergies() {
         return allergies;
     }
 
@@ -25,19 +25,13 @@ public class History extends Utility {
         return procedures;
     }
 
-    public ArrayList<String> getPrescriptions() {
+    public String getPrescriptions() {
         return prescriptions;
     }
 
-    public void addAllergies(String... allergy) {
-        allergies = appendElementsToArrayList(allergies, allergy);
-    }
 
     public void addProcedures(String... procedure) {
         procedures = appendElementsToArrayList(procedures, procedure);
     }
 
-    public void addPrescriptions(String... prescription) {
-        prescriptions = appendElementsToArrayList(prescriptions, prescription);
-    }
 }
