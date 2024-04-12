@@ -1,3 +1,5 @@
+package Patient;
+
 public class PersonalInformation {
     private String name;
     private String lastName;
