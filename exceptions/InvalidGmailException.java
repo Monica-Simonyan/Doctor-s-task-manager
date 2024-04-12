@@ -3,11 +3,11 @@ package exceptions;
 /**
  * InvalidEmailException is an Exception class which is thrown when given email is not valid
  */
-public class InvalidEmailException extends Exception {
+public class InvalidGmailException extends Exception {
     /**
      * No argument constructor with default message
      */
-    public InvalidEmailException() {
+    public InvalidGmailException() {
         super("Email address is invalid.");
     }
 
@@ -16,7 +16,7 @@ public class InvalidEmailException extends Exception {
      *
      * @param msg String message
      */
-    public InvalidEmailException(String msg) {
+    public InvalidGmailException(String msg) {
         super(msg);
     }
 }

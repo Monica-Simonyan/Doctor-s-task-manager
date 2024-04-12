@@ -1,10 +1,12 @@
 package patient;
 
+import exceptions.InvalidGmailException;
+
 public class PersonalInformation {
     private String name;
     private String lastName;
     private int age;
-    private String email;
+    private String gmail;
     private String address;
     private String phoneNumber;
     private Gender gender;
@@ -13,12 +15,17 @@ public class PersonalInformation {
         MALE, FEMALE
     }
 
-    public PersonalInformation(String name, String lastName, int age, String email,
+    public void verifyGmail(String gmail) throws InvalidGmailException {
+        String domain = "@gmail.com";
+        if (!(gmail.endsWith(domain)))
+            throw new InvalidGmailException();
+    }
+
+    public PersonalInformation(String name, String lastName, int age, String gmail,
                                String address, String phoneNumber, Gender gender) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
-        this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.gender = gender;
@@ -40,12 +47,21 @@ public class PersonalInformation {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
+    public String getGmail() {
+        return gmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGmail(String gmail) {
+        boolean validGmail = false;
+        while (!validGmail) {
+            try {
+                verifyGmail(gmail);
+                validGmail = true;
+            } catch (InvalidGmailException e) {
+                System.out.println("Please enter a valid gmail.");
+            }
+        }
+        this.gmail = gmail;
     }
 
     public int getAge() {
@@ -77,11 +93,21 @@ public class PersonalInformation {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        boolean validPhoneNumber = false;
+
+        while (!validPhoneNumber) {
+            try {
+                verifyGmail(gmail);
+                validPhoneNumber = true;
+            } catch (InvalidGmailException e) {
+                System.out.println("Please enter a valid phone number.");
+            }
+        }
         this.phoneNumber = phoneNumber;
     }
 
     public String toString() {
-        return name + " " + lastName + "\n" + "Age: " + age + "\nAddress: " + address +"\nPhone number: "
-                +phoneNumber+"\nGender: "+gender;
+        return name + " " + lastName + "\n" + "Age: " + age + "\nAddress: " + address + "\nPhone number: "
+                + phoneNumber + "\nGender: " + gender;
     }
 }
