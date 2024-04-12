@@ -35,14 +35,14 @@ public class Payments implements Cloneable {
                 return null;
             }
         }
-
     }
 
     private ArrayList<Fee> fees;
+
     /**
      * Overridden clone method
      *
-     * @return  deep copy of the calling object of type Payments
+     * @return deep copy of the calling object of type Payments
      */
     public Payments clone() {
         try {
@@ -59,18 +59,20 @@ public class Payments implements Cloneable {
         }
     }
 
-    /**Constructor that creates an object Payments with given fees
+    /**
+     * Constructor that creates an object Payments with given fees
      *
      * @param newFees ArrayList<> of fees of base type Fee
      */
     public Payments(ArrayList<Fee> newFees) {
-       fees = new ArrayList<>(newFees.size());
+        fees = new ArrayList<>(newFees.size());
         for (Fee fee : newFees) {
-           this.fees.add(fee.clone()); // Performs deep cloning of each element
+            this.fees.add(fee.clone()); // Performs deep cloning of each element
         }
     }
 
-    /**Adds the given fee to the list of fees
+    /**
+     * Adds the given fee to the list of fees
      *
      * @param fee fee for a procedure of type Fee
      */
@@ -78,7 +80,8 @@ public class Payments implements Cloneable {
         fees.add(fee);
     }
 
-    /**Returns total paid fees
+    /**
+     * Returns total paid fees
      *
      * @return int total paid fees
      */
@@ -91,7 +94,9 @@ public class Payments implements Cloneable {
         }
         return total;
     }
-    /**Returns total unpaid fees
+
+    /**
+     * Returns total unpaid fees
      *
      * @return int total unpaid fees
      */
