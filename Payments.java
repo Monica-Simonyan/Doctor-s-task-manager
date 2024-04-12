@@ -47,12 +47,11 @@ public class Payments implements Cloneable {
     public Payments clone() {
         try {
             Payments clone = (Payments) super.clone();
-            ArrayList<Fee> clonedList = new ArrayList<>();
+            clone.fees = new ArrayList<>();
             // Copy mutable state here, so the clone can't change the internals of the original
             for (Fee fee : fees) {
-                clonedList.add(fee.clone()); // Performs deep cloning of each element
+                clone.fees.add(fee.clone()); // Performs deep cloning of each element
             }
-            clone.fees = clonedList;
             return clone;
         } catch (CloneNotSupportedException e) {
             System.out.println(e.getMessage());
@@ -62,12 +61,12 @@ public class Payments implements Cloneable {
 
     /**Constructor that creates an object Payments with given fees
      *
-     * @param fees ArrayList<> of fees of base type Fee
+     * @param newFees ArrayList<> of fees of base type Fee
      */
-    public Payments(ArrayList<Fee> fees) {
-       this.fees = new ArrayList<>(fees.size());
-        for (Fee fee : fees) {
-           this.feest.add(fee.clone()); // Performs deep cloning of each element
+    public Payments(ArrayList<Fee> newFees) {
+       fees = new ArrayList<>(newFees.size());
+        for (Fee fee : newFees) {
+           this.fees.add(fee.clone()); // Performs deep cloning of each element
         }
     }
 
