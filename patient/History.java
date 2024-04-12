@@ -1,6 +1,6 @@
-package Patient;
+package patient;
 
-import Utilities.Utility;
+import utilities.Utility;
 
 import java.util.ArrayList;
 
