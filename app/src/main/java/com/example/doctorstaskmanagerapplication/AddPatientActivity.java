@@ -3,11 +3,12 @@ package com.example.doctorstaskmanagerapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.doctorstaskmanagerapplication.exceptions.CannotAddPatientException;
 
 public class AddPatientActivity extends AppCompatActivity {
 
@@ -26,11 +27,16 @@ public class AddPatientActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseHelper dh = new DatabaseHelper(AddPatientActivity.this);
-                dh.addPatient(name.getText().toString().trim(),
-                        //Integer.valueOf(age.getText().toString().trim()),
-                        age.getText().toString().trim(),
-                        visitDate.getText().toString().trim());
+                try {
+                    DatabaseHelper dh = new DatabaseHelper(AddPatientActivity.this);
+                    dh.addPatient(name.getText().toString().trim(),
+                            age.getText().toString().trim(),
+                            visitDate.getText().toString().trim());
+                    throw new CannotAddPatientException();
+                }
+                catch (CannotAddPatientException e){
+                    e.printStackTrace();
+                }
             }
         });
 

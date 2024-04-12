@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PatientCard"
+            android:name=".patient.PatientCard"
             android:exported="true"></activity>
     </application>
 

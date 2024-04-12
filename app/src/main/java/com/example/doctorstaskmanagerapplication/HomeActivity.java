@@ -3,18 +3,26 @@ package com.example.doctorstaskmanagerapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doctorstaskmanagerapplication.patient.Patient;
+import com.example.doctorstaskmanagerapplication.patient.PatientCard;
+import com.example.doctorstaskmanagerapplication.patient.PatientsAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements PatientCardInterface{
-    ArrayList<Patients> patients = new ArrayList<>();
+public class HomeActivity extends AppCompatActivity implements PatientCardViewable {
+    ArrayList<Patient> patients = new ArrayList<>();
     ArrayList<Categories> categories = new ArrayList<>();
+    ListView patientListView;
+    PatientsAdapter patientsAdapter;
 
     int[] patientImages = {R.drawable.patient_default_image, R.drawable.patient_default_image,
             R.drawable.patient_default_image, R.drawable.patient_default_image,
@@ -47,9 +55,25 @@ public class HomeActivity extends AppCompatActivity implements PatientCardInterf
 
 
 
-        PatientsAdapter adapter = new PatientsAdapter(this, patients, this);
-        recyclerView.setAdapter(adapter);
+        patientsAdapter = new PatientsAdapter(this, patients, this);
+        recyclerView.setAdapter(patientsAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        SearchView searchView = findViewById(R.id.searchView);
+        //searchView.clearFocus();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterPatients(newText);
+                return true;
+            }
+        });
     }
 
     private void setPatients(){
@@ -59,7 +83,7 @@ public class HomeActivity extends AppCompatActivity implements PatientCardInterf
         String[] patientHistory = getResources().getStringArray(R.array.patientHistory);
 
         for(int i = 0; i < patientNames.length; i++){
-            patients.add(new Patients(patientNames[i], patientAges[i],
+            patients.add(new Patient(patientNames[i], patientAges[i],
                     patientLastVisit[i], patientHistory[i], patientImages[i]));
         }
     }
@@ -83,5 +107,15 @@ public class HomeActivity extends AppCompatActivity implements PatientCardInterf
         intent.putExtra("Image", patients.get(position).getImage());
 
         startActivity(intent);
+    }
+
+    private void filterPatients(String text){
+        List<Patient> filtered = new ArrayList<>();
+        for(Patient p: patients){
+            if(p.getName().toLowerCase().contains(text.toLowerCase())){
+                filtered.add(p);
+            }
+        }
+        patientsAdapter.filterPatients(filtered);
     }
 }

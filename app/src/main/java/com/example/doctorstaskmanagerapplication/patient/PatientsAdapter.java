@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.patient;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,15 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doctorstaskmanagerapplication.PatientCardViewable;
+import com.example.doctorstaskmanagerapplication.R;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyViewHolder> {
 
     Context context;
-    ArrayList<Patients> patients;
-    private final PatientCardInterface patientCardInterface;
+    ArrayList<Patient> patients;
+    private final PatientCardViewable patientCardInterface;
 
-    public PatientsAdapter(Context context, ArrayList<Patients> patients, PatientCardInterface patientCardInterface){
+    public PatientsAdapter(Context context, ArrayList<Patient> patients, PatientCardViewable patientCardInterface){
         this.context = context;
         this.patients = patients;
         this.patientCardInterface = patientCardInterface;
@@ -46,6 +50,11 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyView
         return patients.size();
     }
 
+    public void filterPatients(List<Patient> filtered){
+        patients = (ArrayList<Patient>) filtered;
+        notifyDataSetChanged();
+    }
+
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView name;
@@ -53,7 +62,7 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyView
         TextView date;
         ImageView image;
 
-        public MyViewHolder(@NonNull View itemView, PatientCardInterface patientCardInterface) {
+        public MyViewHolder(@NonNull View itemView, PatientCardViewable patientCardInterface) {
             super(itemView);
 
             name = itemView.findViewById(R.id.patientName);

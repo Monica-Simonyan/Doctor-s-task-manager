@@ -1,5 +1,5 @@
 package com.example.doctorstaskmanagerapplication;
 
-public interface PatientCardInterface {
+public interface PatientCardViewable {
     void onPatientClick(int position);
 }

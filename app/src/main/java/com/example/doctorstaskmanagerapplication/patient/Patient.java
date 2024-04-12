@@ -1,15 +1,16 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.patient;
 
 
+import com.example.doctorstaskmanagerapplication.MyDate;
 
-public class Patients {
+public class Patient {
     private String name;
     private String age;
     private MyDate lastDate;
     private String history;
     int image;
 
-    public Patients(String name, String age, String lastDate, String history, int image){
+    public Patient(String name, String age, String lastDate, String history, int image){
         this.name = name;
         this.age = age;
         this.lastDate = new MyDate(lastDate.split(" ")[0], lastDate.split(" ")[1], lastDate.split(" ")[2]);
