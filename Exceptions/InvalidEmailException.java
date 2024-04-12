@@ -5,7 +5,7 @@ package Exceptions;
  */
 public class InvalidEmailException extends Exception {
     /**
-     * No argument constructor which default message
+     * No argument constructor with default message
      */
     public InvalidEmailException() {
         super("Email address is invalid.");
