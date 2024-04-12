@@ -2,5 +2,5 @@ package patientCategories;
 
 import patient.Patient;
 
-public class MinorPatient extends Patient {
+public class MinorPatient extends Patient implements Cloneable {
 }
