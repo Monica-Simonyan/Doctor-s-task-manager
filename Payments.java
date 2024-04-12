@@ -65,11 +65,10 @@ public class Payments implements Cloneable {
      * @param fees ArrayList<> of fees of base type Fee
      */
     public Payments(ArrayList<Fee> fees) {
-        ArrayList<Fee> clonedList = new ArrayList<>();
+       this.fees = new ArrayList<>(fees.size());
         for (Fee fee : fees) {
-            clonedList.add(fee.clone()); // Performs deep cloning of each element
+           this.feest.add(fee.clone()); // Performs deep cloning of each element
         }
-        this.fees = clonedList;
     }
 
     /**Adds the given fee to the list of fees
