@@ -74,16 +74,6 @@ public class Payments implements Cloneable {
     }
 
     /**
-     * Adds the given fee to the list of fees
-     *
-     * @param fee fee for a procedure of type Fee
-     */
-    public void addFee(Fee fee) {
-
-        fees.add(fee);
-    }
-
-    /**
      * Returns total paid fees
      *
      * @return int total paid fees
