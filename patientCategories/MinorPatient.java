@@ -1,4 +1,6 @@
 package patientCategories;
 
-public class MinorPatient {
+import patient.Patient;
+
+public class MinorPatient extends Patient {
 }
