@@ -5,5 +5,4 @@ public abstract class Patient {
     History history;
     Payments payments;
 
-
 }
