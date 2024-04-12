@@ -1,15 +1,15 @@
-package patient;
+package patient.FeeManagement;
 
 import java.util.ArrayList;
 
 /**
  * The class Payments represents payments of a patient
  */
-public abstract class Payments implements Cloneable {
+public class Payments implements Cloneable {
     /**
      * Inner class presenting a specific fee paid by patient
      */
-    private static class Fee {
+    static class Fee {
         boolean wasPaid;
         int amount;
 
@@ -78,7 +78,10 @@ public abstract class Payments implements Cloneable {
      *
      * @param fee fee for a procedure of type Fee
      */
-    public abstract void addFee(Fee fee);
+    public void addFee(Fee fee) {
+
+        fees.add(fee);
+    }
 
     /**
      * Returns total paid fees
