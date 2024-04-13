@@ -1,14 +1,12 @@
 package Model.patient;
 
-import Model.patientCategories.utilities.Utility;
-
 import java.util.ArrayList;
 
-/**Class History represents allergies, prescriptions and procedures of a patient
- *
+/**
+ * Class History represents allergies, prescriptions and procedures of a patient
  */
 
-public class History implements Cloneable{
+public class History implements Cloneable {
     //Instance variables
     private String allergies;
     private ArrayList<String> procedures;
@@ -18,7 +16,8 @@ public class History implements Cloneable{
         procedures = new ArrayList<>();
     }
 
-    /**Copy constructor that creates a new History object as an independent copy of the given object
+    /**
+     * Copy constructor that creates a new History object as an independent copy of the given object
      *
      * @param that object to be copied of type History
      */
@@ -28,7 +27,8 @@ public class History implements Cloneable{
         this.procedures = (ArrayList<String>) that.procedures.clone();
     }
 
-    /**Returns allergies
+    /**
+     * Returns allergies
      *
      * @return allergies of type String
      */
@@ -36,14 +36,17 @@ public class History implements Cloneable{
         return allergies;
     }
 
-    /**Returns procedures
+    /**
+     * Returns procedures
      *
      * @return ArrayList of  procedures of typeString
      */
     public ArrayList<String> getProcedures() {
         return procedures;
     }
-    /**Returns procedures
+
+    /**
+     * Returns procedures
      *
      * @return ArrayList of  procedures of typeString
      */
@@ -51,7 +54,8 @@ public class History implements Cloneable{
         return prescriptions;
     }
 
-    /**Adds procedure to the list
+    /**
+     * Adds procedure to the list
      *
      * @param procedure procedure of type String
      */
@@ -59,12 +63,16 @@ public class History implements Cloneable{
         procedures.add(procedure);
     }
 
-
+    /**
+     * Creates independent clone of the calling History object
+     *
+     * @return cloned object of type History
+     */
     public History clone() {
         try {
             History clone = (History) super.clone();
             clone.procedures = new ArrayList<>();
-            for(String procedure: procedures){
+            for (String procedure : procedures) {
                 clone.procedures.add(procedure);
             }
             return clone;
