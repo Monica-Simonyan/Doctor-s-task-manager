@@ -1,8 +1,12 @@
 package patientCategories;
 
+import patient.Discount;
+import patient.Payments;
 import patient.Patient;
 
-public class MinorPatient extends Patient implements Cloneable {
+import java.util.ArrayList;
+
+public class MinorPatient extends Patient implements Discount {
     private String motherGuardianName;
     private String fatherGuardianName;
     private String motherPhoneNumber;
@@ -38,5 +42,20 @@ public class MinorPatient extends Patient implements Cloneable {
 
     public void setFatherGuardianPhoneNumber(String fatherGuardianPhoneNumber) {
         this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
+    }
+
+    /**method from interface Discount which adds fee to the ArrayList of fees in Payments
+     *
+     * @param fees ArrayList of fees of type Payments.Fee
+     * @param fee fee of type Payments.Fee
+     */
+    public void addFee(ArrayList<Payments.Fee> fees, Payments.Fee fee) {
+        fee.setAmount(applyDiscount(fee.getAmount()));
+        fees.add(fee);
+    }
+
+    public int applyDiscount(int amount) {
+        amount*=0.2;
+        return amount;
     }
 }
