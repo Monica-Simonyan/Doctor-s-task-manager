@@ -1,9 +1,10 @@
 package model.patient;
 
+import model.exceptions.InvalidAgeException;
 import model.exceptions.InvalidGmailException;
 import model.exceptions.InvalidPhoneNumberException;
 
-public class PersonalInformation implements Cloneable{
+public class PersonalInformation implements Cloneable {
     //Instance variables
     private String name;
     private String lastName;
@@ -13,18 +14,10 @@ public class PersonalInformation implements Cloneable{
     private String phoneNumber;
     private Gender gender;
 
-    @Override
-    public PersonalInformation clone() {
-        try {
-            return (PersonalInformation) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
-    }
-
     private enum Gender {
         MALE, FEMALE
     }
+
     public PersonalInformation(String name, String lastName, int age, String gmail,
                                String address, String phoneNumber, Gender gender) {
         this.name = name;
@@ -35,6 +28,7 @@ public class PersonalInformation implements Cloneable{
         setPhoneNumber(phoneNumber);
         setGmail(gmail);
     }
+
     public PersonalInformation(PersonalInformation that) {
         this.name = that.name;
         this.lastName = that.lastName;
@@ -44,6 +38,7 @@ public class PersonalInformation implements Cloneable{
         setPhoneNumber(that.phoneNumber);
         setGmail(that.gmail);
     }
+
     public void verifyGmail(String gmail) throws InvalidGmailException {
         String domain = "@gmail.com";
         if (!(gmail.endsWith(domain)))
@@ -55,6 +50,11 @@ public class PersonalInformation implements Cloneable{
             if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(i) == '+'))
                 throw new InvalidPhoneNumberException();
         }
+    }
+
+    public void verifyAge(int age) throws InvalidAgeException {
+        if (age <= 0)
+            throw new InvalidAgeException();
     }
 
     public Gender getGender() {
@@ -95,6 +95,15 @@ public class PersonalInformation implements Cloneable{
     }
 
     public void setAge(int age) {
+        boolean validAge = false;
+        while (!validAge) {
+            try {
+                verifyAge(age);
+                validAge = true;
+            } catch (InvalidAgeException e) {
+                System.out.println(e.getMessage());
+            }
+        }
         this.age = age;
     }
 
@@ -129,6 +138,14 @@ public class PersonalInformation implements Cloneable{
             }
         }
         this.phoneNumber = phoneNumber;
+    }
+
+    public PersonalInformation clone() {
+        try {
+            return (PersonalInformation) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 
     public String toString() {
