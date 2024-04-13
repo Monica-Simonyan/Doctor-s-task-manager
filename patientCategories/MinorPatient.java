@@ -44,7 +44,7 @@ public class MinorPatient extends Patient implements Discount {
         this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
     }
 
-    /**method from interface Discount which adds fee to the ArrayList of fees in Payments
+    /**Method from interface Discount which adds fee to the ArrayList of fees in Payments
      *
      * @param fees ArrayList of fees of type Payments.Fee
      * @param fee fee of type Payments.Fee

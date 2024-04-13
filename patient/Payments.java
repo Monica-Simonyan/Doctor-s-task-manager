@@ -38,8 +38,8 @@ public abstract class Payments implements Cloneable {
             }
         }
 
-        public void setAmount(int newAmount) {
-            amount = newAmount;
+        public void setAmount(int amount) {
+            this.amount = amount;
         }
 
         public int getAmount() {
