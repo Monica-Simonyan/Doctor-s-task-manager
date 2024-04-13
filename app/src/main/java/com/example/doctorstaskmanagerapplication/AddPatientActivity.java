@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.doctorstaskmanagerapplication.exceptions.CannotAddPatientException;
-
 public class AddPatientActivity extends AppCompatActivity {
 
     EditText name, age, visitDate;

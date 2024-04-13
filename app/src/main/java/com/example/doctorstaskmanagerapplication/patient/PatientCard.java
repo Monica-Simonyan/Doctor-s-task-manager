@@ -27,7 +27,7 @@ public class PatientCard extends AppCompatActivity {
         TextView nameTextView = findViewById(R.id.cardName);
         TextView ageTextView = findViewById(R.id.cardAge);
         TextView lastVisitTextView = findViewById(R.id.cardLastVisit);
-        TextView historyTextView = findViewById(R.id.cardHistory);
+        TextView historyTextView = findViewById(R.id.cardAllergies);
         ImageView imageView = findViewById(R.id.cardImage);
         Button back = findViewById(R.id.backButton);
         back.setOnClickListener(new View.OnClickListener() {

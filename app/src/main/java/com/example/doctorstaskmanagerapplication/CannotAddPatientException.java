@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication.exceptions;
+package com.example.doctorstaskmanagerapplication;
 
 public class CannotAddPatientException extends Exception{
     public CannotAddPatientException(){
