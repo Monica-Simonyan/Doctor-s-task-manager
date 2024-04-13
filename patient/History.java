@@ -4,7 +4,7 @@ import utilities.Utility;
 
 import java.util.ArrayList;
 
-public class History extends Utility {
+public class History extends Utility implements Cloneable{
     private String allergies;
     private ArrayList<String> procedures;
     private String prescriptions;
@@ -35,4 +35,17 @@ public class History extends Utility {
         procedures = appendElementsToArrayList(procedures, procedure);
     }
 
+
+    public History clone() {
+        try {
+            History clone = (History) super.clone();
+            clone.procedures = new ArrayList<>();
+            for(String procedure: procedures){
+                clone.procedures.add(procedure);
+            }
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
+    }
 }

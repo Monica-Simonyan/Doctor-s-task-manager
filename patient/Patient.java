@@ -1,6 +1,6 @@
 package patient;
 
-public abstract class Patient {
+public abstract class Patient implements Cloneable {
     //instance variables
     PersonalInformation personalInfo;
     History history;
@@ -17,13 +17,15 @@ public abstract class Patient {
         return payments.clone();
     }
 
-    /**Sets the payments of the patient
+    /**
+     * Sets the payments of the patient
      *
      * @param payments new payments of type Payments
      */
     public void setPayments(Payments payments) {
         this.payments = payments.clone();
     }
+
     /**
      * Returns history of the patient
      *
@@ -33,11 +35,22 @@ public abstract class Patient {
         return history;
     }
 
-    /**Sets the history of the patient
+    /**
+     * Sets the history of the patient
      *
      * @param history new history of type History
      */
     public void setHistory(History history) {
         history = new History(history);
+    }
+
+    public Patient clone() {
+        try {
+            Patient clone = (Patient) super.clone();
+            clone.history = history.clone();
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 }
