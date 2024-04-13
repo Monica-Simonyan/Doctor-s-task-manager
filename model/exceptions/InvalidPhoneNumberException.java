@@ -1,4 +1,4 @@
-package Model.exceptions;
+package model.exceptions;
 /**
  * InvalidPhoneNumberException is an Exception class which is thrown when given phone number is not valid
  */
