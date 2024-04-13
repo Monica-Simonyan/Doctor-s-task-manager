@@ -1,0 +1,52 @@
+package com.example.doctorstaskmanagerapplication;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
+import com.example.doctorstaskmanagerapplication.exceptions.CannotAddPatientException;
+
+public class AddPatientActivity extends AppCompatActivity {
+
+    EditText name, age, visitDate;
+    Button button, back;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.add_patient_layout);
+
+        name = findViewById(R.id.addPatientName);
+        age = findViewById(R.id.addPatientAge);
+        visitDate = findViewById(R.id.addPatientVisitDate);
+        button = findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    DatabaseHelper dh = new DatabaseHelper(AddPatientActivity.this);
+                    dh.addPatient(name.getText().toString().trim(),
+                            age.getText().toString().trim(),
+                            visitDate.getText().toString().trim());
+                    throw new CannotAddPatientException();
+                }
+                catch (CannotAddPatientException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        back = findViewById(R.id.backButton);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddPatientActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
