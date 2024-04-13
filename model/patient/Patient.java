@@ -1,7 +1,5 @@
 package model.patient;
 
-import model.Date;
-
 public abstract class Patient implements Cloneable {
     //instance variables
     PersonalInformation personalInfo;
