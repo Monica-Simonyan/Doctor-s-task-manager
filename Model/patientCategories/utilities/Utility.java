@@ -1,4 +1,4 @@
-package utilities;
+package Model.patientCategories.utilities;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,11 +1,11 @@
-package patient;
+package Model.patient;
 
 import java.util.ArrayList;
 
 /**
  * The class Payments represents payments of a patient
  */
-public abstract class Payments implements Cloneable {
+public class Payments implements Cloneable {
     /**
      * Inner class presenting a specific fee paid by patient
      */
@@ -69,7 +69,9 @@ public abstract class Payments implements Cloneable {
         }
     }
 
-    public abstract void addFee(Fee fee);
+    public void addFee(Fee fee){
+        this.fees.add(fee.clone());
+    };
 
     public Payments() {
 

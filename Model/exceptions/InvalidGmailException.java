@@ -1,4 +1,4 @@
-package exceptions;
+package Model.exceptions;
 
 /**
  * InvalidEmailException is an Exception class which is thrown when given email is not valid
