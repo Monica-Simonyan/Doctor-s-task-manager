@@ -80,4 +80,18 @@ public class History implements Cloneable {
             return null;
         }
     }
+
+    public void printProcedures() {
+        for (String procedure : procedures)
+            System.out.println(procedure + "\n");
+    }
+
+    /**
+     * Overridden toString method returns the string representation of a patient's history
+     *
+     * @return string representation of a patient's history
+     */
+    public String toString() {
+        return allergies + '\n' + procedures + " " + prescriptions;
+    }
 }
