@@ -1,24 +1,43 @@
 package patient;
 
-public abstract class Patient{
+public abstract class Patient {
+    //instance variables
     PersonalInformation personalInfo;
     History history;
     Payments payments;
 
-    public Payments getPayments(){
+    //Accessors and mutators
+
+    /**
+     * Returns payments of the patient
+     *
+     * @return payments of type Payments
+     */
+    public Payments getPayments() {
         return payments.clone();
     }
-    public void setPayments(Payments newPayments){
-        payments = newPayments.clone();
-    }
 
+    /**Sets the payments of the patient
+     *
+     * @param payments new payments of type Payments
+     */
+    public void setPayments(Payments payments) {
+        this.payments = payments.clone();
+    }
+    /**
+     * Returns history of the patient
+     *
+     * @return history of type History
+     */
     public History getHistory() {
         return history;
     }
-    public void setHistory(History newHistory) {
-        history = new History(newHistory);
+
+    /**Sets the history of the patient
+     *
+     * @param history new history of type History
+     */
+    public void setHistory(History history) {
+        history = new History(history);
     }
-
-
-
 }
