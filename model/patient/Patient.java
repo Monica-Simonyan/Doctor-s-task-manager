@@ -5,13 +5,16 @@ public abstract class Patient implements Cloneable {
     PersonalInformation personalInfo;
     History history;
     Payments payments;
-public Patient(){
 
-}
-public Patient(PersonalInformation personalInfo, History history, Payments payments){
-    setHistory(history);
-    setPayments(payments);
-}
+    public Patient() {
+
+    }
+
+    public Patient(PersonalInformation personalInfo, History history, Payments payments) {
+
+        setHistory(history);
+        setPayments(payments);
+    }
     //Accessors and mutators
 
     /**
@@ -49,15 +52,33 @@ public Patient(PersonalInformation personalInfo, History history, Payments payme
     public void setHistory(History history) {
         history = new History(history);
     }
-
-    public PersonalInformation getPersonalInfo(){
-        return personalInfo;
+    /**
+     * Returns the personal information of the patient
+     *
+     * @return  personal information of type PersonalInformation
+     */
+    public PersonalInformation getPersonalInfo() {
+        return new PersonalInformation(personalInfo);
     }
-
+    /**
+     * Sets the personal information of the patient
+     *
+     * @param personalInfo new personal information of type PersonalInformation
+     */
+    public void setPersonalInfo(PersonalInformation personalInfo) {
+        this.personalInfo = new PersonalInformation(personalInfo);
+    }
+    /**
+     * Creates independent clone of the calling Patient object
+     *
+     * @return cloned object of type Patient
+     */
     public Patient clone() {
         try {
             Patient clone = (Patient) super.clone();
             clone.history = history.clone();
+            clone.personalInfo = personalInfo.clone();
+            clone.payments = payments.clone();
             return clone;
         } catch (CloneNotSupportedException e) {
             return null;
