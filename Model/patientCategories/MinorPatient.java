@@ -7,6 +7,7 @@ import Model.patient.Patient;
 import java.util.ArrayList;
 
 public class MinorPatient extends Patient implements Discount{
+    //instance variables
     private String motherGuardianName;
     private String fatherGuardianName;
     private String motherPhoneNumber;
