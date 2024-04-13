@@ -96,7 +96,7 @@ public class MinorPatient extends Patient implements Discount {
      * @return integer amount of money with discount applied
      */
     public int applyDiscount(int amount) {
-        amount *= 0.2;
+        amount *= 0.8;
         return amount;
     }
 }
