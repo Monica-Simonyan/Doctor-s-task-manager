@@ -9,7 +9,7 @@ public class Payments implements Cloneable {
     /**
      * Inner class presenting a specific fee paid by patient
      */
-    public static class Fee {
+    protected static class Fee {
         boolean wasPaid;
         int amount;
 
