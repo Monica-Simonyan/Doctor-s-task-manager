@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  */
 
-public class History extends Utility implements Cloneable{
+public class History implements Cloneable{
     //Instance variables
     private String allergies;
     private ArrayList<String> procedures;
@@ -43,13 +43,20 @@ public class History extends Utility implements Cloneable{
     public ArrayList<String> getProcedures() {
         return procedures;
     }
-
+    /**Returns procedures
+     *
+     * @return ArrayList of  procedures of typeString
+     */
     public String getPrescriptions() {
         return prescriptions;
     }
 
-    public void addProcedures(String... procedure) {
-        procedures = appendElementsToArrayList(procedures, procedure);
+    /**Adds procedure to the list
+     *
+     * @param procedure procedure of type String
+     */
+    public void addProcedures(String procedure) {
+        procedures.add(procedure);
     }
 
 
