@@ -6,7 +6,7 @@ import model.patient.Payments;
 
 import java.util.ArrayList;
 
-public class PregnantPatient extends Patient implements Cloneable, Discount {
+public class PregnantPatient extends Patient implements Discount {
     private int trimester;
     private String contraindications;
     private final double DISCOUNT = 0.2;
@@ -17,7 +17,8 @@ public class PregnantPatient extends Patient implements Cloneable, Discount {
      * @param fee fee for a procedure of type Fee
      */
     public void addFee(ArrayList<Payments.Fee> fees, Payments.Fee fee) {
-
+        fee.setAmount(applyDiscount(fee.getAmount()));
+        fees.add(fee);
     }
 
     /**
