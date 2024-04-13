@@ -1,15 +1,15 @@
-package patient.FeeManagement;
+package patient;
 
 import java.util.ArrayList;
 
 /**
  * The class Payments represents payments of a patient
  */
-public class Payments implements Cloneable {
+public abstract class Payments implements Cloneable {
     /**
      * Inner class presenting a specific fee paid by patient
      */
-    static class Fee {
+    public static class Fee {
         boolean wasPaid;
         int amount;
 
@@ -37,9 +37,18 @@ public class Payments implements Cloneable {
                 return null;
             }
         }
+
+        public void setAmount(int newAmount) {
+            amount = newAmount;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
     }
 
     private ArrayList<Fee> fees;
+
 
     /**
      * Overridden clone method
@@ -61,6 +70,12 @@ public class Payments implements Cloneable {
         }
     }
 
+    public abstract void addFee(Fee fee);
+
+    public Payments() {
+
+    }
+
     /**
      * Constructor that creates an object Payments with given fees
      *
@@ -71,6 +86,10 @@ public class Payments implements Cloneable {
         for (Fee fee : newFees) {
             this.fees.add(fee.clone()); // Performs deep cloning of each element
         }
+    }
+
+    public ArrayList<Fee> getFees() {
+        return fees;//shallow
     }
 
     /**
