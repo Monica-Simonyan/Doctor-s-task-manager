@@ -1,4 +1,4 @@
-package Model;
+package model;
 
 public class Date {
     public static void main(String[] args) {
