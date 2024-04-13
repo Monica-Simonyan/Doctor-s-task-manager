@@ -5,7 +5,13 @@ public abstract class Patient implements Cloneable {
     PersonalInformation personalInfo;
     History history;
     Payments payments;
+public Patient(){
 
+}
+public Patient(PersonalInformation personalInfo, History history, Payments payments){
+    setHistory(history);
+    setPayments(payments);
+}
     //Accessors and mutators
 
     /**
@@ -32,7 +38,7 @@ public abstract class Patient implements Cloneable {
      * @return history of type History
      */
     public History getHistory() {
-        return history;
+        return new History(history);
     }
 
     /**
@@ -42,6 +48,10 @@ public abstract class Patient implements Cloneable {
      */
     public void setHistory(History history) {
         history = new History(history);
+    }
+
+    public PersonalInformation getPersonalInfo(){
+        return personalInfo;
     }
 
     public Patient clone() {

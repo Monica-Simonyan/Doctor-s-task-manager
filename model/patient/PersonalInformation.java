@@ -1,6 +1,7 @@
 package model.patient;
 
 import model.exceptions.InvalidGmailException;
+import model.exceptions.InvalidPhoneNumberException;
 
 public class PersonalInformation {
     private String name;
@@ -21,14 +22,22 @@ public class PersonalInformation {
             throw new InvalidGmailException();
     }
 
+    public void verifyPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(i) == '+'))
+                throw new InvalidPhoneNumberException();
+        }
+    }
+
     public PersonalInformation(String name, String lastName, int age, String gmail,
                                String address, String phoneNumber, Gender gender) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.address = address;
-        this.phoneNumber = phoneNumber;
         this.gender = gender;
+        setPhoneNumber(phoneNumber);
+        setGmail(gmail);
     }
 
     public Gender getGender() {
@@ -94,12 +103,11 @@ public class PersonalInformation {
 
     public void setPhoneNumber(String phoneNumber) {
         boolean validPhoneNumber = false;
-
         while (!validPhoneNumber) {
             try {
-                verifyGmail(gmail);
+                verifyPhoneNumber(phoneNumber);
                 validPhoneNumber = true;
-            } catch (InvalidGmailException e) {
+            } catch (InvalidPhoneNumberException e) {
                 System.out.println("Please enter a valid phone number.");
             }
         }
