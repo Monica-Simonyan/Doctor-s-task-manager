@@ -33,7 +33,6 @@ public abstract class Payments implements Cloneable {
             try {
                 return (Fee) super.clone();
             } catch (CloneNotSupportedException e) {
-                System.out.println(e.getMessage());
                 return null;
             }
         }
