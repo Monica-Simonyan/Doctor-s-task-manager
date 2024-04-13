@@ -36,6 +36,10 @@ public class History extends Utility implements Cloneable{
         return allergies;
     }
 
+    /**Returns procedures
+     *
+     * @return ArrayList of  procedures of typeString
+     */
     public ArrayList<String> getProcedures() {
         return procedures;
     }
