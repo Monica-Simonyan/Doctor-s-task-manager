@@ -3,7 +3,8 @@ package model.patient;
 import model.exceptions.InvalidGmailException;
 import model.exceptions.InvalidPhoneNumberException;
 
-public class PersonalInformation {
+public class PersonalInformation implements Cloneable{
+    //Instance variables
     private String name;
     private String lastName;
     private int age;
@@ -12,10 +13,37 @@ public class PersonalInformation {
     private String phoneNumber;
     private Gender gender;
 
+    @Override
+    public PersonalInformation clone() {
+        try {
+            return (PersonalInformation) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
     private enum Gender {
         MALE, FEMALE
     }
-
+    public PersonalInformation(String name, String lastName, int age, String gmail,
+                               String address, String phoneNumber, Gender gender) {
+        this.name = name;
+        this.lastName = lastName;
+        this.age = age;
+        this.address = address;
+        this.gender = gender;
+        setPhoneNumber(phoneNumber);
+        setGmail(gmail);
+    }
+    public PersonalInformation(PersonalInformation that) {
+        this.name = that.name;
+        this.lastName = that.lastName;
+        this.age = that.age;
+        this.address = that.address;
+        this.gender = that.gender;
+        setPhoneNumber(that.phoneNumber);
+        setGmail(that.gmail);
+    }
     public void verifyGmail(String gmail) throws InvalidGmailException {
         String domain = "@gmail.com";
         if (!(gmail.endsWith(domain)))
@@ -27,17 +55,6 @@ public class PersonalInformation {
             if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(i) == '+'))
                 throw new InvalidPhoneNumberException();
         }
-    }
-
-    public PersonalInformation(String name, String lastName, int age, String gmail,
-                               String address, String phoneNumber, Gender gender) {
-        this.name = name;
-        this.lastName = lastName;
-        this.age = age;
-        this.address = address;
-        this.gender = gender;
-        setPhoneNumber(phoneNumber);
-        setGmail(gmail);
     }
 
     public Gender getGender() {
@@ -115,7 +132,7 @@ public class PersonalInformation {
     }
 
     public String toString() {
-        return name + " " + lastName + "\n" + "Age: " + age + "\nAddress: " + address + "\nPhone number: "
+        return name + " " + lastName + "\nAge: " + age + "\nAddress: " + address + "\nPhone number: "
                 + phoneNumber + "\nGender: " + gender;
     }
 }
