@@ -1,6 +1,6 @@
-package patient;
+package Model.patient;
 
-import exceptions.InvalidGmailException;
+import Model.exceptions.InvalidGmailException;
 
 public class PersonalInformation {
     private String name;

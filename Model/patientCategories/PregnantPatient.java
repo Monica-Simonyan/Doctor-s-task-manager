@@ -1,7 +1,7 @@
-package patientCategories;
+package Model.patientCategories;
 
-import patient.Payments;
-import patient.Patient;
+import Model.patient.Payments;
+import Model.patient.Patient;
 
 import java.util.ArrayList;
 
