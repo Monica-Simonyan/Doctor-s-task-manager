@@ -1,4 +1,4 @@
-package model.exceptions;
+package console.model.exceptions;
 
 /**
  * Class InvalidAgeException is an exception which is thrown when input age is not valid
