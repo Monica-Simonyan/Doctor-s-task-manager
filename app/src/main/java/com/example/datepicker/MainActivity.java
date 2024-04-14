@@ -13,10 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Calendar;
-
 public class MainActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
+
+    /**
+     * Void type method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -27,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         dateButton.setText(getTodaysDate());
     }
 
+    /**
+     * Accessor
+     * that gets date
+     * @return date as a String
+     */
     private String  getTodaysDate() {
         Calendar cal= Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -36,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         return makeDateString(day,month,year);
     }
 
+    /**
+     * Void type method that initializes
+     * year,month and day
+     */
     private void initDatePicker(){
         DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -53,10 +66,23 @@ public class MainActivity extends AppCompatActivity {
         datePickerDialog=new DatePickerDialog(this,style,dateSetListener,year,month,day);
 
     }
+
+    /**
+     * A method that takes parameters
+     * @param day Day
+     * @param month Month
+     * @param year Year
+     * @return Month Day Year
+     */
     private String makeDateString(int day, int month, int year){
         return getMonthFormat(month)+" "+day+" "+year;
     }
 
+    /**
+     * A method that takes month as a number
+     * @param month Month
+     * @return month in terms of String
+     */
     private String getMonthFormat(int month) {
         switch(month){
             case 1:
