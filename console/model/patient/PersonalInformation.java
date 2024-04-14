@@ -1,8 +1,8 @@
-package model.patient;
+package console.model.patient;
 
-import model.exceptions.InvalidAgeException;
-import model.exceptions.InvalidGmailException;
-import model.exceptions.InvalidPhoneNumberException;
+import console.model.exceptions.InvalidAgeException;
+import console.model.exceptions.InvalidGmailException;
+import console.model.exceptions.InvalidPhoneNumberException;
 
 /**
  * Represents personal information for an individual in a patient management system.

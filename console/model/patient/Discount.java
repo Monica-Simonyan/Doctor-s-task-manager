@@ -1,4 +1,4 @@
-package model.patient;
+package console.model.patient;
 
 public interface Discount {
     /**Method to apply discount to the given integer amount of money
