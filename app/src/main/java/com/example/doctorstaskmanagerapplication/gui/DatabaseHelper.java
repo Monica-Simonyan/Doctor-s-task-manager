@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 import android.content.ContentValues;
 import android.content.Context;

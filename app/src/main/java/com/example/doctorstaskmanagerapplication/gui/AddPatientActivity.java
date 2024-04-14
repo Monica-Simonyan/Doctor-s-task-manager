@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.doctorstaskmanagerapplication.R;
 
 /**
  * <code>AddPatientActivity</code> is the class responsible for adding patients

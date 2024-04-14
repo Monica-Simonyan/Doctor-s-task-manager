@@ -1,7 +1,7 @@
 package com.example.doctorstaskmanagerapplication.patient;
 
 
-import com.example.doctorstaskmanagerapplication.MyDate;
+import com.example.doctorstaskmanagerapplication.gui.MyDate;
 
 /**
  * <code>Patient</code> creates an object with 3 <code>String</code> fields:

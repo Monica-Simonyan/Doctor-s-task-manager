@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorstaskmanagerapplication.HomeActivity;
+import com.example.doctorstaskmanagerapplication.gui.HomeActivity;
 import com.example.doctorstaskmanagerapplication.R;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.doctorstaskmanagerapplication.R;
 
 import java.util.ArrayList;
 

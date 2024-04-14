@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 /**
  * <code>MyDate</code> class creates objects representing a date

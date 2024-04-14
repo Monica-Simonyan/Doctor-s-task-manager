@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 /**
  * <code>CannotAddPatientException</code> constructs an exception if a patient

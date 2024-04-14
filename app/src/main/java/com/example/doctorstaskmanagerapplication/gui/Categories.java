@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 /**
  * <code>Categories</code> class creates objects with <code>String</code> category fields

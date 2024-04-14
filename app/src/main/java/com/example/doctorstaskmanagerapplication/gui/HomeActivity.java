@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doctorstaskmanagerapplication.R;
 import com.example.doctorstaskmanagerapplication.patient.Patient;
 import com.example.doctorstaskmanagerapplication.patient.PatientCard;
 import com.example.doctorstaskmanagerapplication.patient.PatientsAdapter;
