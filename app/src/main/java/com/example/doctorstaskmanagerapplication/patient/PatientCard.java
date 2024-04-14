@@ -9,10 +9,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.doctorstaskmanagerapplication.HomeActivity;
+import com.example.doctorstaskmanagerapplication.gui.HomeActivity;
 import com.example.doctorstaskmanagerapplication.R;
 
+/**
+ * <code>PatientCard</code> class is responsible for implementing the activities
+ * on the pages of the medical cards of the patients
+ */
 public class PatientCard extends AppCompatActivity {
+
+    /**
+     * initializes the <code>PatientCard</code> activity
+     * @param savedInstanceState     <code>Bundle</code> savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,10 +36,15 @@ public class PatientCard extends AppCompatActivity {
         TextView nameTextView = findViewById(R.id.cardName);
         TextView ageTextView = findViewById(R.id.cardAge);
         TextView lastVisitTextView = findViewById(R.id.cardLastVisit);
-        TextView historyTextView = findViewById(R.id.cardHistory);
+        TextView historyTextView = findViewById(R.id.cardAllergies);
         ImageView imageView = findViewById(R.id.cardImage);
         Button back = findViewById(R.id.backButton);
         back.setOnClickListener(new View.OnClickListener() {
+            /**
+             * allows the user to go from <code>PatientCard</code> to <code>HomeActivity</code>
+             * by clicking on the arrow button
+             * @param view
+             */
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(PatientCard.this, HomeActivity.class);

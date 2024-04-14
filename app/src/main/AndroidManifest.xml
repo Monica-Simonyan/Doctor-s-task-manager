@@ -12,11 +12,11 @@
         android:theme="@style/Theme.DoctorsTaskManagerApplication"
         tools:targetApi="31">
         <activity
-            android:name=".AddPatientActivity"
+            android:name=".gui.AddPatientActivity"
             android:exported="false"
-            android:parentActivityName=".HomeActivity"/>
+            android:parentActivityName=".gui.HomeActivity"/>
         <activity
-            android:name=".HomeActivity"
+            android:name=".gui.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

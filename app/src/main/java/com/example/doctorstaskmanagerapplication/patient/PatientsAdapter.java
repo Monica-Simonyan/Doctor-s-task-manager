@@ -10,18 +10,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.doctorstaskmanagerapplication.PatientCardViewable;
+import com.example.doctorstaskmanagerapplication.gui.PatientCardViewable;
 import com.example.doctorstaskmanagerapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * <code>PatientsAdapter</code> sets the recyclerview that displays the list of the patients
+ * the doctor has
+ */
 public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyViewHolder> {
 
     Context context;
     ArrayList<Patient> patients;
     private final PatientCardViewable patientCardInterface;
 
+    /**
+     * initializes the fields of a <code>PatientsAdapter</code> object
+     * @param context               the <code>Context</code> context
+     * @param patients              the <code>ArrayList<Patient></code> patients
+     * @param patientCardInterface  the <code>PatientCardViewable</code> patientCardInterface
+     */
     public PatientsAdapter(Context context, ArrayList<Patient> patients, PatientCardViewable patientCardInterface){
         this.context = context;
         this.patients = patients;
@@ -45,11 +55,20 @@ public class PatientsAdapter extends RecyclerView.Adapter<PatientsAdapter.MyView
         holder.image.setImageResource(patients.get(position).getImage());
     }
 
+    /**
+     * returns the size of the <code>ArrayList<Patient></code>
+     * @return the size of the <code>ArrayList<Patient></code>
+     */
     @Override
     public int getItemCount() {
         return patients.size();
     }
 
+    /**
+     * filters the <code>List<Patient></code> to display the patient
+     * the user was searching for
+     * @param filtered
+     */
     public void filterPatients(List<Patient> filtered){
         patients = (ArrayList<Patient>) filtered;
         notifyDataSetChanged();

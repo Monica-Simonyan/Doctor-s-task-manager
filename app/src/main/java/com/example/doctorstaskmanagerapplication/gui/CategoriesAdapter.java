@@ -1,4 +1,4 @@
-package com.example.doctorstaskmanagerapplication;
+package com.example.doctorstaskmanagerapplication.gui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,12 +9,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doctorstaskmanagerapplication.R;
+
 import java.util.ArrayList;
 
+/**
+ * <code>CategoriesAdapter</code> sets the recyclerview that displays the categories of patients
+ */
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.MyViewHolder> {
     Context context;
     ArrayList<Categories> categories;
 
+    /**
+     * initializes the fields of a <code>CategoriesAdapter</code> object
+     * @param context      the <code>Context</code> context
+     * @param categories   the <code>Arraylist<Categories></code> categories
+     */
     public CategoriesAdapter(Context context, ArrayList<Categories> categories){
         this.context = context;
         this.categories = categories;
@@ -34,6 +44,10 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.My
     }
 
 
+    /**
+     * returns the size of the <code>ArrayList<Categories></code>
+     * @return the size of the <code>ArrayList<Categories></code>
+     */
     @Override
     public int getItemCount() {
         return categories.size();
