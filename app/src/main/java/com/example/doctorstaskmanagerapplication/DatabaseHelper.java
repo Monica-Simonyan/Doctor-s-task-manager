@@ -10,6 +10,9 @@ import androidx.annotation.Nullable;
 
 import java.util.Date;
 
+/**
+ * <code>DatabaseHelper</code> class sets the database necessary to add patients
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
     private Context context;
     private static final String DATABASE_NAME = "PatientsList.db";
@@ -42,6 +45,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Date nextVisit?
+
+    /**
+     * adds a patient to the existing list of patients
+     * @param name       the <code>String</code> name of the patient
+     * @param age        the <code>String</code> age of the patient
+     * @param nextVisit  the <code>String</code> date of the patient's
+     *                   next visit
+     */
     void addPatient(String name, String age, String nextVisit){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
