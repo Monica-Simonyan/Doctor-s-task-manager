@@ -1,6 +1,6 @@
-package model.patientCategories;
+package console.model.patientCategories;
 
-import model.patient.Patient;
+import console.model.patient.Patient;
 
 public class AdultPatient extends Patient {
     public AdultPatient(){

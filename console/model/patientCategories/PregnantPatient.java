@@ -1,8 +1,8 @@
-package model.patientCategories;
+package console.model.patientCategories;
 
-import model.patient.Discount;
-import model.patient.Patient;
-import model.patient.Payments;
+import console.model.patient.Discount;
+import console.model.patient.Patient;
+import console.model.patient.Payments;
 
 import java.util.ArrayList;
 
