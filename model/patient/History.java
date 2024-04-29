@@ -1,4 +1,4 @@
-package console.model.patient;
+package model.patient;
 
 import java.util.ArrayList;
 

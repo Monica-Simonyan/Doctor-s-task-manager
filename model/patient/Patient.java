@@ -1,4 +1,4 @@
-package console.model.patient;
+package model.patient;
 
 public abstract class Patient implements Cloneable {
     //instance variables

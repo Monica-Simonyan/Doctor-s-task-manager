@@ -1,9 +1,8 @@
-package console.model.patientCategories;
+package model.patientCategories;
 
-import console.model.patient.Discount;
-import console.model.patient.Patient;
-import console.model.patient.Payments;
-
+import model.patient.Discount;
+import model.patient.Patient;
+import model.patient.Payments;
 import java.util.ArrayList;
 
 public class PregnantPatient extends Patient implements Discount {

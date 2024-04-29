@@ -1,4 +1,4 @@
-package console.model.patient;
+package model.patient;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,9 @@ public class Payments implements Cloneable {
     /**
      * Represents a specific fee with its payment status and amount.
      */
-    protected static class Fee {
-        boolean wasPaid;
-        int amount;
+     public static class Fee {
+        private boolean wasPaid;
+        private int amount;
 
         /**
          * Constructs a Fee with its payment status and amount.
