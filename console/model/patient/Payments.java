@@ -30,7 +30,6 @@ public class Payments implements Cloneable {
          * Clones this Fee object.
          * @return a clone of this Fee instance
          */
-        @Override
         public Fee clone() {
             try {
                 return (Fee) super.clone();
@@ -53,6 +52,10 @@ public class Payments implements Cloneable {
          */
         public int getAmount() {
             return amount;
+        }
+
+        public String toString(){
+            return amount+" AMD";
         }
     }
 
@@ -143,5 +146,12 @@ public class Payments implements Cloneable {
         } catch (CloneNotSupportedException e) {
             return null; // This should never happen since we're Cloneable
         }
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        for(Fee fee:fees)
+            str.append(fee+"\n");
+        return str.toString();
     }
 }
