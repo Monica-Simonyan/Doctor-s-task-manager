@@ -10,7 +10,7 @@ public class AddButton extends JButton {
         setFont(new Font("Arial", Font.BOLD, 24));
         addActionListener(e -> {
             // Add your action here
-            JOptionPane.showMessageDialog(this, "Button clicked!");
+            new AddPatientPopup();
         });
     }
 
@@ -25,5 +25,11 @@ public class AddButton extends JButton {
         g2d.setColor(Color.BLUE);
         g2d.fill(circle);
         g2d.dispose();
+    }
+    public static void main(String[] args) {
+        JFrame f = new JFrame();
+        f.setSize(200,200);
+        f.setVisible(true);
+        f.add(new AddButton());
     }
 }
