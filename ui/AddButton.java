@@ -7,7 +7,7 @@ import java.awt.geom.Ellipse2D;
 
 public class AddButton extends JButton {
     int diameter;
-    public AddButton(int diameter) {
+    public AddButton(int diameter, JFrame container) {
         this.diameter = diameter;
         setPreferredSize(new Dimension(diameter, diameter));
         setFont(new Font("Arial", Font.BOLD, 24));
@@ -16,7 +16,7 @@ public class AddButton extends JButton {
         setFocusable(false);
         addActionListener(e -> {
             // Add your action here
-            new AddPatientPopup();
+            new AddPatientPopup(container);
         });
     }
 

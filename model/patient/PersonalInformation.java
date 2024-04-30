@@ -18,7 +18,7 @@ public class PersonalInformation implements Cloneable {
     private Gender gender;
 
     // Enum to define gender types
-    private enum Gender {
+    public enum Gender {
         MALE, FEMALE
     }
 
