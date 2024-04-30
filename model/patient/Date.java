@@ -1,4 +1,4 @@
-package console.model.patient;
+package model.patient;
 
 public class Date {
     private int day;

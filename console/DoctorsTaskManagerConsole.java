@@ -1,6 +1,4 @@
-package console.cli;
+package console;
 
 public class DoctorsTaskManagerConsole {
-
-
 }

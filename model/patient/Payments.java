@@ -1,4 +1,4 @@
-package console.model.patient;
+package model.patient;
 
 import java.util.ArrayList;
 
@@ -11,9 +11,9 @@ public class Payments implements Cloneable {
     /**
      * Represents a specific fee with its payment status and amount.
      */
-    protected static class Fee {
-        boolean wasPaid;
-        int amount;
+     public static class Fee {
+        private boolean wasPaid;
+        private int amount;
 
         /**
          * Constructs a Fee with its payment status and amount.
@@ -30,7 +30,6 @@ public class Payments implements Cloneable {
          * Clones this Fee object.
          * @return a clone of this Fee instance
          */
-        @Override
         public Fee clone() {
             try {
                 return (Fee) super.clone();
@@ -53,6 +52,10 @@ public class Payments implements Cloneable {
          */
         public int getAmount() {
             return amount;
+        }
+
+        public String toString(){
+            return amount+" AMD";
         }
     }
 
@@ -143,5 +146,12 @@ public class Payments implements Cloneable {
         } catch (CloneNotSupportedException e) {
             return null; // This should never happen since we're Cloneable
         }
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        for(Fee fee:fees)
+            str.append(fee+"\n");
+        return str.toString();
     }
 }
