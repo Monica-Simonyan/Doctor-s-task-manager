@@ -8,14 +8,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PatientListItem extends JPanel {
-    public static int count;
-    private int width;
     private String name;
     private String lastName;
     private int age;
     private PersonalInformation.Gender gender;
     private final int HEIGHT = 100;
-    public PatientListItem(int WIDTH, String name, String lastName, int age,PersonalInformation.Gender gender){
+
+    public PatientListItem( String name, String lastName, int age, PersonalInformation.Gender gender) {
         JButton closeBtn = new JButton("x");
         boolean isInList = true;
         closeBtn.addActionListener(new ActionListener() {
@@ -37,16 +36,17 @@ public class PatientListItem extends JPanel {
         add(fullNameTxt);
         add(ageTxt);
         //Date
-        setSize(new Dimension(WIDTH, HEIGHT));
+        setSize(new Dimension(PatientList.WIDTH, PatientList.HEIGHT));
         setBackground(new Color(255, 208, 208));
-        count++;
+
     }
 
-    public static void main(String[] args) {
-        JFrame f = new JFrame();
-        f.setSize(300,600);
-        f.setVisible(true);
-f.setLayout(new GridLayout(6,1));
-        f.add( new PatientListItem(150, "M", "L", 16, PersonalInformation.Gender.FEMALE));
-    }
+//    public static void main(String[] args) {
+//        JFrame f = new JFrame();
+//        f.setSize(300,600);
+//        f.setVisible(true);
+//f.setLayout(new GridLayout(6,1));
+//        f.add( new PatientListItem(150, "M", "L", 16, PersonalInformation.Gender.FEMALE));
+//        f.add( new PatientListItem(150, "AAAA", "L", 16, PersonalInformation.Gender.FEMALE));
+    // }
 }

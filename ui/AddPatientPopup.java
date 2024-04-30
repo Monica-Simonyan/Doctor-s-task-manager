@@ -13,8 +13,8 @@ public class AddPatientPopup extends JDialog {
     private JTextField ageField;
     private JTextField genderField;
 
-    public AddPatientPopup(JFrame container) {
-     //   super(parent, "Enter Information", true);
+    public AddPatientPopup(JPanel container) {
+        //   super(parent, "Enter Information", true);
         JPanel panel = new JPanel(new GridLayout(5, 2)); // Create a panel with a grid layout
         panel.setPreferredSize(new Dimension(300, 150));
 
@@ -47,7 +47,7 @@ public class AddPatientPopup extends JDialog {
                 int age = Integer.parseInt(ageField.getText());
                 String gender = genderField.getText();
                 // Display the collected information
-                container.add(new PatientListItem(getParent().getWidth(), firstName, lastName, age, PersonalInformation.Gender.valueOf(gender.toUpperCase())));
+                container.add(new PatientListItem(firstName, lastName, age, PersonalInformation.Gender.valueOf(gender.toUpperCase())));
                 dispose(); // Close the dialog
             }
         });
