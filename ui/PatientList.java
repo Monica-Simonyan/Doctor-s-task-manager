@@ -93,11 +93,8 @@ public class PatientList extends JFrame {
         }
         area.setText(results.toString());
     }
-
-
-
-
      */
+  
     public static void main(String[] args) {
         new PatientList();
     }
