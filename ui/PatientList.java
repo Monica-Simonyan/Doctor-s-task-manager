@@ -24,6 +24,14 @@ public class PatientList extends JFrame {
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
+        AddButton addButton = new AddButton(50, listPanel);
+        addButton.setBackground(Color.WHITE);
+        addButton.setBounds( 200, 200, 50, 50);
+        JPanel btnP = new JPanel();
+        btnP.setSize(WIDTH, addButton.HEIGHT);
+        btnP.setLayout(null);
+        btnP.add(addButton);
+        add(btnP);
 
         // Add the scroll pane to the frame
         add(scrollPane);
@@ -34,12 +42,6 @@ public class PatientList extends JFrame {
         listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
         listPanel.add(new PatientListItem( "mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
         listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-
-
-        AddButton addButton = new AddButton(50, listPanel);
-        addButton.setBackground(Color.WHITE);
-        addButton.setBounds(WIDTH - 70, HEIGHT - 90, 50, 50);
-        add(addButton);
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
