@@ -96,6 +96,8 @@ public class PatientList extends JFrame {
     }
 
 
+
+
      */
     public static void main(String[] args) {
         new PatientList();
