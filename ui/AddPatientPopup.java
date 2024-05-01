@@ -2,6 +2,8 @@ package ui;
 
 import model.patient.PersonalInformation;
 
+import model.patientCategories.DateTimePicker;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +32,7 @@ public class AddPatientPopup extends JDialog {
         panel.add(new JLabel("Age:"));
         ageField = new JTextField();
         panel.add(ageField);
-
+//panel.add(new DateTimePicker());
         panel.add(new JLabel("Gender:"));
         genderField = new JTextField();
         panel.add(genderField);
