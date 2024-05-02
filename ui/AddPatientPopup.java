@@ -1,5 +1,9 @@
 package ui;
 
+import model.exceptions.InvalidAgeException;
+import model.exceptions.InvalidGenderException;
+import model.exceptions.InvalidGmailException;
+import model.exceptions.InvalidPhoneNumberException;
 import model.patient.PersonalInformation;
 
 import javax.swing.*;
@@ -82,26 +86,19 @@ public class AddPatientPopup extends JDialog {
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Custom behavior for OK button
-                String firstName = firstNameField.getText();
-                String lastName = lastNameField.getText();
-                int age = Integer.parseInt(ageField.getText());
-                String gender = genderField.getText();
-                String gmail = gmailField.getText();
-                String address = addressField.getText();
-                String phoneNumber = phoneNumberField.getText();
                 boolean isInputValid = false;
                 PersonalInformation info = null;
                 while (!isInputValid) {
 
                     isInputValid = true;
                     try {
-                        info = new PersonalInformation(firstName, lastName, age, gmail, address,
-                                phoneNumber, gender);
+                        info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
+                               ageField.getText(), gmailField.getText(), addressField.getText(),
+                                phoneNumberField.getText(), genderField.getText());
                         categoriesMenu.accessCategory();
-                        // Display the collected information
                         container.add(new PatientListItem(info));
-                    } catch (Exception ex) {
+                    } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+                             InvalidGmailException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
                     }
                 }

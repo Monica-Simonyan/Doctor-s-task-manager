@@ -1,5 +1,9 @@
 package ui;
 
+import model.exceptions.InvalidAgeException;
+import model.exceptions.InvalidGenderException;
+import model.exceptions.InvalidGmailException;
+import model.exceptions.InvalidPhoneNumberException;
 import model.patient.PersonalInformation;
 
 import javax.swing.*;
@@ -44,10 +48,11 @@ public class PatientList extends JFrame {
 
         PersonalInformation info = null ;
         try {
-            info = new PersonalInformation("firstName", "lastName", 12, "gmail@gmail.com", "address",
+            info = new PersonalInformation("firstName", "lastName", "12", "gmail@gmail.com", "address",
                     "+378989989", "MALE");
-        } catch (Exception e) {
-
+        } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+                 InvalidGmailException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
         listPanel.add(new PatientListItem(info));
         listPanel.add(new PatientListItem(info));

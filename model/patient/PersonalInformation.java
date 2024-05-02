@@ -34,13 +34,13 @@ public class PersonalInformation implements Cloneable {
      * @param phoneNumber the phone number of the individual
      * @param gender      the gender of the individual
      */
-    public PersonalInformation(String name, String lastName, int age, String gmail,
+    public PersonalInformation(String name, String lastName, String stringAge, String gmail,
                                String address, String phoneNumber, String gender) throws InvalidGenderException,
             InvalidGmailException, InvalidAgeException, InvalidPhoneNumberException {
         this.name = name;
         this.lastName = lastName;
         this.address = address;
-        setAge(age);
+        setAge(stringAge);
         setGender(gender);
         setPhoneNumber(phoneNumber); // Validates and sets phone number
         setGmail(gmail);             // Validates and sets Gmail
@@ -137,13 +137,20 @@ public class PersonalInformation implements Cloneable {
      * Sets and validates the age of the individual. If the age is not valid,
      * an exception message is printed and revalidation is prompted.
      *
-     * @param age the age to set.
+     * @param stringAge the age to set.
      */
-    public void setAge(int age) throws InvalidAgeException {
-        if (age <= 0)
+    public void setAge(String stringAge) throws InvalidAgeException {
+        int intAge = 0;
+        try{
+            intAge = Integer.parseInt(stringAge);
+        }
+        catch (Exception ex){
+            throw new InvalidAgeException();
+        }
+        if (intAge <= 0)
             throw new InvalidAgeException();
         else
-            this.age = age;
+            this.age = intAge;
     }
 
     /**
