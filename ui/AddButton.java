@@ -21,7 +21,7 @@ public class AddButton extends JButton {
         this.diameter = diameter;
         setSize(new Dimension(diameter, diameter));
         setBackground(new Color(0, 0, 0, 0)); //setting background transparent
-        setBorder(new EmptyBorder(0, 0, 0, 0)); //get rid of default the border
+        setBorder(new EmptyBorder(0, 0, 0, 0)); //get rid of the default border
         setFocusable(false);
     }
 
