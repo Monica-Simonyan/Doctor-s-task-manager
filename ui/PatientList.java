@@ -51,7 +51,6 @@ public class PatientList extends JFrame {
         setVisible(true);
         setTitle("Patient List");
     }
-
     public static void main(String[] args) {
         new PatientList();
     }
