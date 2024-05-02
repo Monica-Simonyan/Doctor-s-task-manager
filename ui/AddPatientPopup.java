@@ -86,9 +86,10 @@ public class AddPatientPopup extends JDialog {
                             ageField.getText(), gmailField.getText(), addressField.getText(),
                             phoneNumberField.getText(), genderField.getText());
                     categoriesMenu.accessCategory().setPersonalInfo(info);
+                   HomePage.accessPatients().contains(categoriesMenu.accessCategory());
                     HomePage.update(categoriesMenu.accessCategory());
                 } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
-                         InvalidGmailException ex) {
+                         InvalidGmailException | InvalidPatientException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }

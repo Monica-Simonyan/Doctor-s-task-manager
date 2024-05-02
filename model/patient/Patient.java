@@ -89,6 +89,12 @@ public abstract class Patient implements Cloneable {
         }
     }
 
+    public boolean equals(Object obj){
+        if(obj == null || obj.getClass()!=this.getClass())
+            return false;
+        else return this.personalInfo == ((Patient) obj).personalInfo;
+
+    }
     /**
      * Overridden toString method returns the string representation of a patient
      *
