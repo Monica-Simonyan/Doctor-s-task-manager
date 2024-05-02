@@ -10,7 +10,7 @@ public class AddButton extends JButton {
 
     public AddButton(int diameter, JPanel container) {
         this.diameter = diameter;
-        setPreferredSize(new Dimension(diameter, diameter));
+        setSize(new Dimension(diameter, diameter));
         setFont(new Font("Arial", Font.BOLD, 24));
         setBackground(new Color(5, 5, 5, 0));
         setBorder(new EmptyBorder(1, 1, 1, 1));

@@ -1,14 +1,28 @@
 package model.patientCategories;
 
-import model.patient.Discount;
-import model.patient.Patient;
-import model.patient.Payments;
+import model.patient.*;
+
 import java.util.ArrayList;
 
 public class PregnantPatient extends Patient implements Discount {
     private int trimester;
     private String contraindications;
     private final double DISCOUNT = 0.2;
+
+    public PregnantPatient() {
+        super();
+    }
+
+    public PregnantPatient(PersonalInformation personalInfo, History history, Payments payments, int trimester, String contraindications) {
+        super(personalInfo, history, payments);
+        this.trimester = trimester;
+        this.contraindications = contraindications;
+    }
+
+    public PregnantPatient(int trimester, String contraindications) {
+        this.trimester = trimester;
+        this.contraindications = contraindications;
+    }
 
     /**
      * Adds the given fee to the list of fees
@@ -30,6 +44,22 @@ public class PregnantPatient extends Patient implements Discount {
         if (amount >= 20)
             return (int) (amount * 0.9 - 5);
         else
-            return (int) (amount*0.85);
+            return (int) (amount * 0.85);
+    }
+
+    public int getTrimester() {
+        return trimester;
+    }
+
+    public void setTrimester(int trimester) {
+        this.trimester = trimester;
+    }
+
+    public String getContraindications() {
+        return contraindications;
+    }
+
+    public void setContraindications(String contraindications) {
+        this.contraindications = contraindications;
     }
 }

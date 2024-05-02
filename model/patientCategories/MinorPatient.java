@@ -1,8 +1,6 @@
 package model.patientCategories;
 
-import model.patient.Discount;
-import model.patient.Patient;
-import model.patient.Payments;
+import model.patient.*;
 
 import java.util.ArrayList;
 
@@ -12,6 +10,25 @@ public class MinorPatient extends Patient implements Discount {
     private String fatherGuardianName;
     private String motherPhoneNumber;
     private String fatherGuardianPhoneNumber;
+
+    public MinorPatient() {
+        super();
+    }
+
+    public MinorPatient(PersonalInformation personalInfo, History history, Payments payments, String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
+        super(personalInfo, history, payments);
+        this.motherGuardianName = motherGuardianName;
+        this.fatherGuardianName = fatherGuardianName;
+        this.motherPhoneNumber = motherPhoneNumber;
+        this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
+    }
+
+    public MinorPatient(String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
+        this.motherGuardianName = motherGuardianName;
+        this.fatherGuardianName = fatherGuardianName;
+        this.motherPhoneNumber = motherPhoneNumber;
+        this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
+    }
 
     //Accessors and mutators
 
@@ -41,6 +58,7 @@ public class MinorPatient extends Patient implements Discount {
     public String getFatherGuardianName() {
         return fatherGuardianName;
     }
+
     /**
      * Sets the name of father guardian
      *
@@ -49,6 +67,7 @@ public class MinorPatient extends Patient implements Discount {
     public void setFatherGuardianName(String fatherGuardianName) {
         this.fatherGuardianName = fatherGuardianName;
     }
+
     /**
      * Returns the phone number of mother guardian
      *
@@ -58,13 +77,15 @@ public class MinorPatient extends Patient implements Discount {
         return motherPhoneNumber;
     }
 
-    /**Sets the phone number of mother guardian
+    /**
+     * Sets the phone number of mother guardian
      *
      * @param motherPhoneNumber new phone number of mother guardian of type String
      */
     public void setMotherPhoneNumber(String motherPhoneNumber) {
         this.motherPhoneNumber = motherPhoneNumber;
     }
+
     /**
      * Returns the phone number of father guardian
      *
