@@ -1,6 +1,7 @@
 package ui;
 
 import model.patient.Patient;
+import model.patientCategories.AdultPatient;
 import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 
@@ -22,13 +23,22 @@ private Patient category;
         item1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Perform actions for Item 1
+                menu.setText(item1.getText());
                 category = new PregnantPatient();
             }
         });
         item2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Perform actions for Item 1
+                menu.setText(item2.getText());
                 category = new MinorPatient();
+            }
+        });
+        item3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform actions for Item 1
+                menu.setText(item3.getText());
+                category = new AdultPatient();
             }
         });
         // Add menu items to the menu
@@ -40,7 +50,7 @@ private Patient category;
         add(menu);
     }
 
-    public Patient getCategory() {
+    public Patient accessCategory() {
         return category;
     }
 

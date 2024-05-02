@@ -10,11 +10,16 @@ public class PregnantPatient extends Patient implements Discount {
     private final double DISCOUNT = 0.2;
 
     public PregnantPatient() {
-
+        super();
     }
 
     public PregnantPatient(PersonalInformation personalInfo, History history, Payments payments, int trimester, String contraindications) {
         super(personalInfo, history, payments);
+        this.trimester = trimester;
+        this.contraindications = contraindications;
+    }
+
+    public PregnantPatient(int trimester, String contraindications) {
         this.trimester = trimester;
         this.contraindications = contraindications;
     }

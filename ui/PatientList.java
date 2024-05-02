@@ -42,21 +42,27 @@ public class PatientList extends JFrame {
         scrollPane.setBounds(0, 70, WIDTH, 550); // Set bounds for scrollPane
         add(scrollPane);
 
+        PersonalInformation info = null ;
+        try {
+            info = new PersonalInformation("firstName", "lastName", 12, "gmail@gmail.com", "address",
+                    "+378989989", "MALE");
+        } catch (Exception e) {
 
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mo", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
-        listPanel.add(new PatientListItem("mno", "lastName", 14, PersonalInformation.Gender.FEMALE));
+        }
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+        listPanel.add(new PatientListItem(info));
+
+
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);

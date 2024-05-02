@@ -1,6 +1,7 @@
 package model.patient;
 
 import model.exceptions.InvalidAgeException;
+import model.exceptions.InvalidGenderException;
 import model.exceptions.InvalidGmailException;
 import model.exceptions.InvalidPhoneNumberException;
 
@@ -34,12 +35,13 @@ public class PersonalInformation implements Cloneable {
      * @param gender      the gender of the individual
      */
     public PersonalInformation(String name, String lastName, int age, String gmail,
-                               String address, String phoneNumber, Gender gender) {
+                               String address, String phoneNumber, String gender) throws InvalidGenderException,
+            InvalidGmailException, InvalidAgeException, InvalidPhoneNumberException {
         this.name = name;
         this.lastName = lastName;
-        this.age = age;
         this.address = address;
-        this.gender = gender;
+        setAge(age);
+        setGender(gender);
         setPhoneNumber(phoneNumber); // Validates and sets phone number
         setGmail(gmail);             // Validates and sets Gmail
     }
@@ -59,46 +61,6 @@ public class PersonalInformation implements Cloneable {
         this.gmail = that.gmail;             // Assume already validated
     }
 
-    /**
-     * Validates the provided Gmail address to ensure it ends with "@gmail.com".
-     * Throws InvalidGmailException if validation fails.
-     *
-     * @param gmail the Gmail address to validate
-     * @throws InvalidGmailException if the Gmail address does not end with "@gmail.com"
-     */
-    public void verifyGmail(String gmail) throws InvalidGmailException {
-        String domain = "@gmail.com";
-        if (!(gmail.endsWith(domain)))
-            throw new InvalidGmailException();
-    }
-
-    /**
-     * Validates the provided phone number to ensure it contains only digits or starts with '+'.
-     * Throws InvalidPhoneNumberException if validation fails.
-     *
-     * @param phoneNumber the phone number to validate
-     * @throws InvalidPhoneNumberException if the phone number contains invalid characters
-     */
-    public void verifyPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
-        for (int i = 0; i < phoneNumber.length(); i++) {
-            if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(i) == '+'))
-                throw new InvalidPhoneNumberException();
-        }
-    }
-
-    /**
-     * Validates the provided age to ensure it is greater than zero.
-     * Throws InvalidAgeException if validation fails.
-     *
-     * @param age the age to validate
-     * @throws InvalidAgeException if the age is zero or negative
-     */
-    public void verifyAge(int age) throws InvalidAgeException {
-        if (age <= 0)
-            throw new InvalidAgeException();
-    }
-
-
     // Getters and setters with documentation
 
     /**
@@ -115,8 +77,11 @@ public class PersonalInformation implements Cloneable {
      *
      * @param gender the gender to set.
      */
-    public void setGender(Gender gender) {
-        this.gender = gender;
+    public void setGender(String gender) throws InvalidGenderException {
+        if (!(Gender.valueOf(gender.toUpperCase()).equals(Gender.MALE) || Gender.valueOf(gender.toUpperCase()).equals(Gender.FEMALE)))
+            throw new InvalidGenderException("Please enter a valid gender");
+        else
+            this.gender = Gender.valueOf(gender.toUpperCase());
     }
 
     /**
@@ -152,16 +117,10 @@ public class PersonalInformation implements Cloneable {
      *
      * @param gmail the Gmail address to set.
      */
-    public void setGmail(String gmail) {
-        boolean validGmail = false;
-        while (!validGmail) {
-            try {
-                verifyGmail(gmail);
-                validGmail = true;
-            } catch (InvalidGmailException e) {
-                System.out.println("Please enter a valid Gmail.");
-            }
-        }
+    public void setGmail(String gmail) throws InvalidGmailException {
+        String domain = "@gmail.com";
+        if (!(gmail.endsWith(domain)))
+            throw new InvalidGmailException();
         this.gmail = gmail;
     }
 
@@ -180,17 +139,11 @@ public class PersonalInformation implements Cloneable {
      *
      * @param age the age to set.
      */
-    public void setAge(int age) {
-        boolean validAge = false;
-        while (!validAge) {
-            try {
-                verifyAge(age);
-                validAge = true;
-            } catch (InvalidAgeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        this.age = age;
+    public void setAge(int age) throws InvalidAgeException {
+        if (age <= 0)
+            throw new InvalidAgeException();
+        else
+            this.age = age;
     }
 
     /**
@@ -244,15 +197,10 @@ public class PersonalInformation implements Cloneable {
      *
      * @param phoneNumber the phone number to set.
      */
-    public void setPhoneNumber(String phoneNumber) {
-        boolean validPhoneNumber = false;
-        while (!validPhoneNumber) {
-            try {
-                verifyPhoneNumber(phoneNumber);
-                validPhoneNumber = true;
-            } catch (InvalidPhoneNumberException e) {
-                System.out.println("Please enter a valid phone number.");
-            }
+    public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
+        for (int i = 0; i < phoneNumber.length(); i++) {
+            if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(0) == '+'))
+                throw new InvalidPhoneNumberException();
         }
         this.phoneNumber = phoneNumber;
     }

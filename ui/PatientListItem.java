@@ -8,15 +8,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PatientListItem extends JPanel {
-    private String name;
-    private String lastName;
-    private int age;
-    private PersonalInformation.Gender gender;
     private static final int HEIGHT = 100;
+    private static final Color color = new Color(252, 217, 217);
 
-    public PatientListItem( String name, String lastName, int age, PersonalInformation.Gender gender) {
+    public PatientListItem(PersonalInformation info) {
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridLayout(4, 2));
+        infoPanel.setBackground(color);
         JButton closeBtn = new JButton("x");
-    //    boolean isInList = true;
+        closeBtn.setForeground(Color.RED);
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        closeBtn.setBackground(color);
+        infoPanel.add(closeBtn);
+        //    boolean isInList = true;
         closeBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -30,14 +38,21 @@ public class PatientListItem extends JPanel {
                 }
             }
         });
-        JLabel fullNameTxt = new JLabel(name + " " + lastName);
-        JLabel ageTxt = new JLabel("Age: " + age);
-        setLayout(new GridLayout(3, 1));
-        add(fullNameTxt);
-        add(ageTxt);
-        //Date
-        setSize(new Dimension(PatientList.WIDTH, HEIGHT));
-        setBackground(new Color(252, 217, 217));
+        JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
+        JLabel ageTxt = new JLabel("Age: " + info.getAge());
+        JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
+        ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
+        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
+        JLabel img = new JLabel(resizedImageIcon);
+
+        infoPanel.add(fullNameTxt);
+        infoPanel.add(ageTxt);
+        infoPanel.add(genderTxt);
+        add(infoPanel);
+        add(img);
+        setSize(new Dimension(PatientList.WIDTH, 200));
+        setBackground(color);
 
     }
 }

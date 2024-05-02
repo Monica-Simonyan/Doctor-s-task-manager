@@ -11,8 +11,19 @@ public class MinorPatient extends Patient implements Discount {
     private String motherPhoneNumber;
     private String fatherGuardianPhoneNumber;
 
+    public MinorPatient() {
+        super();
+    }
+
     public MinorPatient(PersonalInformation personalInfo, History history, Payments payments, String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
         super(personalInfo, history, payments);
+        this.motherGuardianName = motherGuardianName;
+        this.fatherGuardianName = fatherGuardianName;
+        this.motherPhoneNumber = motherPhoneNumber;
+        this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
+    }
+
+    public MinorPatient(String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
         this.motherGuardianName = motherGuardianName;
         this.fatherGuardianName = fatherGuardianName;
         this.motherPhoneNumber = motherPhoneNumber;

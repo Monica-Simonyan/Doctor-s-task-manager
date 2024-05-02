@@ -1,6 +1,7 @@
 package ui;
 
 import model.patient.PersonalInformation;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -15,11 +16,14 @@ public class AddPatientPopup extends JDialog {
     private JTextField lastNameField;
     private JTextField ageField;
     private JTextField genderField;
+    private JTextField gmailField;
+    private JTextField addressField;
+    private JTextField phoneNumberField;
 
     public AddPatientPopup(JPanel container) {
         //   super(parent, "Enter Information", true);
-        JPanel panel = new JPanel(new GridLayout(8, 2,0,5)); // Create a panel with a grid layout
-        panel.setPreferredSize(new Dimension(400, 300));
+        JPanel panel = new JPanel(new GridLayout(12, 2, 0, 5)); // Create a panel with a grid layout
+        panel.setPreferredSize(new Dimension(400, 500));
 
         // Add labels and text fields for each input
         panel.add(new JLabel("First Name:"));
@@ -38,13 +42,24 @@ public class AddPatientPopup extends JDialog {
         genderField = new JTextField();
         panel.add(genderField);
 
+        panel.add(new JLabel("Gmail:"));
+        gmailField = new JTextField();
+        panel.add(gmailField);
+
+        panel.add(new JLabel("Address:"));
+        addressField = new JTextField();
+        panel.add(addressField);
+
+        panel.add(new JLabel("Phone Number:"));
+        phoneNumberField = new JTextField();
+        panel.add(phoneNumberField);
 
         JLabel dateTxt = new JLabel("Date: ");
         dateTxt.setSize(dateTxt.getWidth(), dateTxt.getHeight());
         panel.add(dateTxt);
         JPanel datePanel = new JPanel();
 
-        datePanel.setBorder(new EmptyBorder(11,0,0,0));
+        datePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeComponents(datePanel);
         panel.add(datePanel);
 
@@ -53,12 +68,14 @@ public class AddPatientPopup extends JDialog {
         panel.add(timeTxt);
         JPanel timePanel = new JPanel();
 
-        timePanel.setBorder(new EmptyBorder(11,0,0,0));
+        timePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeTimeComponents(timePanel);
         panel.add(timePanel);
+
         JLabel menuTxt = new JLabel("Choose: ");
         panel.add(menuTxt);
-        panel.add(new PatientCategoryMenu());
+        PatientCategoryMenu categoriesMenu = new PatientCategoryMenu();
+        panel.add(categoriesMenu);
         // Add OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
@@ -70,8 +87,25 @@ public class AddPatientPopup extends JDialog {
                 String lastName = lastNameField.getText();
                 int age = Integer.parseInt(ageField.getText());
                 String gender = genderField.getText();
-                // Display the collected information
-                container.add(new PatientListItem(firstName, lastName, age, PersonalInformation.Gender.valueOf(gender.toUpperCase())));
+                String gmail = gmailField.getText();
+                String address = addressField.getText();
+                String phoneNumber = phoneNumberField.getText();
+                boolean isInputValid = false;
+                PersonalInformation info = null;
+                while (!isInputValid) {
+
+                    isInputValid = true;
+                    try {
+                        info = new PersonalInformation(firstName, lastName, age, gmail, address,
+                                phoneNumber, gender);
+                        categoriesMenu.accessCategory();
+                        // Display the collected information
+                        container.add(new PatientListItem(info));
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, ex.getMessage());
+                    }
+                }
+
                 dispose(); // Close the dialog
             }
         });
