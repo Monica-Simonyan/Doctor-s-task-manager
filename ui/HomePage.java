@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class PatientList extends JFrame {
+public class HomePage extends JFrame {
     JPanel searchPanel;
     JPanel listPanel;
     JTextField search;
@@ -13,7 +13,7 @@ public class PatientList extends JFrame {
     static final int WIDTH = 350;
     static final int HEIGHT = 650;
 
-    public PatientList() {
+    public HomePage() {
         listPanel = new JPanel();
         listPanel.setLayout(new GridLayout(1000, 1, 0, 5));
 
@@ -27,17 +27,17 @@ public class PatientList extends JFrame {
         searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
-        searchPanel.setBounds(0, 10, 250, 50); // Set bounds for searchPanel
+        searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
-        AddButton addButton = new ui.AddButton(40, listPanel);
+        AddButton addButton = new AddButton(40, listPanel);
         addButton.setBackground(Color.WHITE);
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
-       // Set grid layout for listPanel
+
 
         JScrollPane scrollPane = new JScrollPane(listPanel);
-        scrollPane.setBounds(0, 70, WIDTH, 550); // Set bounds for scrollPane
+        scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
 
         setLayout(null);
@@ -50,6 +50,6 @@ public class PatientList extends JFrame {
     }
 
     public static void main(String[] args) {
-        new PatientList();
+        new HomePage();
     }
 }
