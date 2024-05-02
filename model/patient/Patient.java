@@ -51,7 +51,7 @@ public abstract class Patient implements Cloneable {
      * @param history new history of type History
      */
     public void setHistory(History history) {
-        this.history = new History(history);
+        this.history = history.clone();
     }
 
     /**
