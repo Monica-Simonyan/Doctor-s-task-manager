@@ -72,7 +72,7 @@ public class AddPatientPopup extends JDialog {
         panel.add(menuTxt);
         PatientCategoryMenu categoriesMenu = new PatientCategoryMenu();
         panel.add(categoriesMenu);
-        // Add OK and Cancel buttons
+        // Adding OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
