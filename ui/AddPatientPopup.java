@@ -103,18 +103,18 @@ public class AddPatientPopup extends JDialog {
                     }
                 }
 
-                dispose(); // Close the dialog
+                dispose();
             }
         });
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose(); // Close the dialog without saving
+                dispose();
             }
         });
         panel.add(okButton);
         panel.add(cancelButton);
-        // Display the panel in the dialog
+
         getContentPane().add(panel);
         pack();
         setLocationRelativeTo(null);
