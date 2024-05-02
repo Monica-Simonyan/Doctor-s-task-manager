@@ -1,3 +1,8 @@
+/**
+ * The HomePage class represents the main user interface for managing patient information.
+ * It provides functionality for displaying a list of patients, searching for specific patients,
+ * and adding new patients.
+ */
 package ui;
 
 import model.patient.Patient;
@@ -14,9 +19,13 @@ public class HomePage extends JFrame {
     static final int HEIGHT = 650;
 
 
+    /**
+     * Constructs a new HomePage object.
+     */
     public HomePage() {
         patientListPanel = new JPanel();
         patientListPanel.setLayout(new GridLayout(1000, 1, 0, 5));
+        patientListPanel.setBackground(new Color(255, 255, 255, 255));
 
         JTextField search = new JTextField(10);
         JButton searchButton = new JButton("Search");
@@ -50,15 +59,28 @@ public class HomePage extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adds a patient to the list of patients.
+     *
+     * @param patient The patient to be added.
+     */
     public static void addPatient(Patient patient) {
         patients.add(patient);
     }
 
+    /**
+     * Updates the patient list panel with the latest patient information.
+     */
     public static void update() {
         for (Patient p : patients)
             patientListPanel.add(new PatientListItem(p.getPersonalInfo()));
     }
 
+    /**
+     * The main method to start the application.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         new HomePage();
     }

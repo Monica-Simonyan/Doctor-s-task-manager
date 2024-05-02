@@ -22,8 +22,8 @@ public class AddPatientPopup extends JDialog {
     private final JTextField phoneNumberField;
 
     public AddPatientPopup( ) {
-        JPanel panel = new JPanel(new GridLayout(12, 2, 5, 5)); // Create a panel with a grid layout
-        panel.setPreferredSize(new Dimension(400, 500));
+        JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5)); // Create a panel with a grid layout
+        panel.setPreferredSize(new Dimension(400, 550));
 
         // Add labels and text fields for each input
         panel.add(new JLabel("First Name:"));
@@ -55,10 +55,8 @@ public class AddPatientPopup extends JDialog {
         panel.add(phoneNumberField);
 
         JLabel dateTxt = new JLabel("Date: ");
-        dateTxt.setSize(dateTxt.getWidth(), dateTxt.getHeight());
         panel.add(dateTxt);
         JPanel datePanel = new JPanel();
-
         datePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeComponents(datePanel);
         panel.add(datePanel);
@@ -67,7 +65,6 @@ public class AddPatientPopup extends JDialog {
         timeTxt.setSize(timeTxt.getWidth(), timeTxt.getHeight());
         panel.add(timeTxt);
         JPanel timePanel = new JPanel();
-
         timePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeTimeComponents(timePanel);
         panel.add(timePanel);
@@ -114,6 +111,7 @@ public class AddPatientPopup extends JDialog {
 
         getContentPane().add(panel);
         pack();
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
     }
