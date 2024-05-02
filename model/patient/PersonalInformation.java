@@ -206,7 +206,7 @@ public class PersonalInformation implements Cloneable {
      */
     public void setPhoneNumber(String phoneNumber) throws InvalidPhoneNumberException {
         for (int i = 0; i < phoneNumber.length(); i++) {
-            if (!((phoneNumber.charAt(i) >= '1' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(0) == '+'))
+            if (!((phoneNumber.charAt(i) >= '0' && phoneNumber.charAt(i) <= '9') || phoneNumber.charAt(0) == '+'))
                 throw new InvalidPhoneNumberException();
         }
         this.phoneNumber = phoneNumber;

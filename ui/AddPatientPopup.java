@@ -1,9 +1,6 @@
 package ui;
 
-import model.exceptions.InvalidAgeException;
-import model.exceptions.InvalidGenderException;
-import model.exceptions.InvalidGmailException;
-import model.exceptions.InvalidPhoneNumberException;
+import model.exceptions.*;
 import model.patient.PersonalInformation;
 
 import javax.swing.*;
@@ -16,17 +13,16 @@ import static ui.DatePicker.placeComponents;
 import static ui.TimePicker.placeTimeComponents;
 
 public class AddPatientPopup extends JDialog {
-    private JTextField firstNameField;
-    private JTextField lastNameField;
-    private JTextField ageField;
-    private JTextField genderField;
-    private JTextField gmailField;
-    private JTextField addressField;
-    private JTextField phoneNumberField;
+    private final JTextField firstNameField;
+    private final JTextField lastNameField;
+    private final JTextField ageField;
+    private final JTextField genderField;
+    private final JTextField gmailField;
+    private final JTextField addressField;
+    private final JTextField phoneNumberField;
 
-    public AddPatientPopup(JPanel container) {
-        //   super(parent, "Enter Information", true);
-        JPanel panel = new JPanel(new GridLayout(12, 2, 0, 5)); // Create a panel with a grid layout
+    public AddPatientPopup( ) {
+        JPanel panel = new JPanel(new GridLayout(12, 2, 5, 5)); // Create a panel with a grid layout
         panel.setPreferredSize(new Dimension(400, 500));
 
         // Add labels and text fields for each input
@@ -95,8 +91,9 @@ public class AddPatientPopup extends JDialog {
                         info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
                                ageField.getText(), gmailField.getText(), addressField.getText(),
                                 phoneNumberField.getText(), genderField.getText());
-                        categoriesMenu.accessCategory();
-                        container.add(new PatientListItem(info));
+                        categoriesMenu.accessCategory().setPersonalInfo(info);
+                        HomePage.addPatient(categoriesMenu.accessCategory());
+                        HomePage.update();
                     } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
                              InvalidGmailException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
