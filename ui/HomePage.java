@@ -70,16 +70,17 @@ public class HomePage extends JFrame {
     /**
      * Updates the patient list panel with the latest patient information
      */
-    public static void update(Patient patient) throws InvalidPatientException{
-        if(patients.contains(patient))
+    public static void update(Patient patient) throws InvalidPatientException {
+        if (patients.contains(patient))
             throw new InvalidPatientException();
         patients.add(patient);
         patientListPanel.add(new PatientListItem(patient));
     }
 
-    public static ArrayList<Patient> accessPatients(){
+    public static ArrayList<Patient> accessPatients() {
         return patients;
     }
+
     /**
      * The main method to start the application.
      *

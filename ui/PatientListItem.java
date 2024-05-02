@@ -15,7 +15,7 @@ public class PatientListItem extends JPanel {
     /**
      * Constructs a PatientListItem with the specified Patient object.
      *
-     * @param patient The Patient object to display information about.
+     * @param patient The Patient object to display information about
      */
     public PatientListItem(Patient patient) {
         PersonalInformation info = patient.getPersonalInfo();
