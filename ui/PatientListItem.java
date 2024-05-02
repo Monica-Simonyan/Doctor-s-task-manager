@@ -1,5 +1,6 @@
 package ui;
 
+import model.patient.Patient;
 import model.patient.PersonalInformation;
 
 import javax.swing.*;
@@ -12,8 +13,8 @@ public class PatientListItem extends JPanel {
     private static final int HEIGHT = 100;
     private static final Color color = new Color(252, 217, 217);
 
-    public PatientListItem(PersonalInformation info) {
-
+    public PatientListItem(Patient patient) {
+        PersonalInformation info = patient.getPersonalInfo();
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception e) {
@@ -31,23 +32,25 @@ public class PatientListItem extends JPanel {
                 if (parent != null) {
                     // Remove this panel from its parent
                     parent.remove(PatientListItem.this);
-                    // Repaint the parent to reflect the change
+                    // Repaint the parent
                     parent.revalidate();
                     parent.repaint();
                 }
             }
         });
 
+        JLabel category = new JLabel("Category: "+ patient);
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
 
         JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new GridLayout(4, 2));
-        infoPanel.setBorder(new EmptyBorder(0,0,0,HEIGHT));
+        infoPanel.setLayout(new GridLayout(5, 2));
+        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 150));
         infoPanel.setBackground(color);
 
         infoPanel.add(closeBtn);
+        infoPanel.add(category);
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
@@ -59,7 +62,7 @@ public class PatientListItem extends JPanel {
 
         add(infoPanel);
         add(img);
-        setSize(new Dimension(HomePage.WIDTH, HEIGHT*2));
+        setSize(new Dimension(HomePage.WIDTH, HEIGHT * 2));
         setBackground(color);
     }
 }

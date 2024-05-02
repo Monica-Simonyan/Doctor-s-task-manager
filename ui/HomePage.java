@@ -73,7 +73,7 @@ public class HomePage extends JFrame {
      */
     public static void update() {
         for (Patient p : patients)
-            patientListPanel.add(new PatientListItem(p.getPersonalInfo()));
+            patientListPanel.add(new PatientListItem(p));
     }
 
     /**

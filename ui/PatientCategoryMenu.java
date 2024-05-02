@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PatientCategoryMenu extends JMenuBar {
-    private Patient category;
+    private Patient category = new AdultPatient();
 
     /**
      * Constructs a new PatientCategoryMenu object.
