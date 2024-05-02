@@ -140,7 +140,7 @@ public class PersonalInformation implements Cloneable {
      * @param stringAge the age to set.
      */
     public void setAge(String stringAge) throws InvalidAgeException {
-        int intAge = 0;
+        int intAge;
         try {
             intAge = Integer.parseInt(stringAge);
         } catch (Exception ex) {
