@@ -31,10 +31,7 @@ public class AddButton extends JButton {
         Ellipse2D circle = new Ellipse2D.Double(x, y, diameter, diameter);
         g2d.setColor(new Color(225, 172, 172));
         g2d.fill(circle);
-        ;
-        // Draw the resized plus sign image at the center of the button
-        int plusX = getWidth() / 2;
-        int plusY = getWidth() / 2;
+
         g2d.setFont(new Font("Arial", Font.CENTER_BASELINE, diameter / 3)); // Example font and size
         g2d.setColor(Color.BLACK);
         String btnText = "Add";

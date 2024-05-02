@@ -40,7 +40,7 @@ public class PatientList extends JFrame {
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
-        listPanel.setLayout(new GridLayout(0, 1, 0, 5)); // Set grid layout for listPanel
+        listPanel.setLayout(new GridLayout(1000, 1, 0, 5)); // Set grid layout for listPanel
 
         JScrollPane scrollPane = new JScrollPane(listPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550); // Set bounds for scrollPane
