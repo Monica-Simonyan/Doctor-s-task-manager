@@ -1,8 +1,4 @@
-/**
- * The HomePage class represents the main user interface for managing patient information.
- * It provides functionality for displaying a list of patients, searching for specific patients,
- * and adding new patients.
- */
+
 package ui;
 
 import model.patient.Patient;
@@ -12,6 +8,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+/**
+ * The HomePage class represents the main user interface for managing patient information.
+ * It provides functionality for displaying a list of patients, searching for specific patients,
+ * and adding new patients.
+ */
 public class HomePage extends JFrame {
     private static JPanel patientListPanel;
     private static ArrayList<Patient> patients = new ArrayList<>();

@@ -1,6 +1,4 @@
-/**
- * A utility class for creating a time picker component.
- */
+
 package ui;
 
 import javax.swing.*;
@@ -8,6 +6,9 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * A utility class for creating a time picker component.
+ */
 public class TimePicker {
 
     /**
