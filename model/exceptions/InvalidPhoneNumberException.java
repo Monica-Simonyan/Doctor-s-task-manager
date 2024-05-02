@@ -7,7 +7,7 @@ public class InvalidPhoneNumberException extends Exception{
      * No argument constructor with default message
      */
     public InvalidPhoneNumberException(){
-        super("Phone number is not valid.");
+        super("Please enter a valid phone number");
     }
     /**
      * Constructor that initializes exception with the give message

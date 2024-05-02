@@ -10,7 +10,6 @@ import java.awt.*;
  * Represents a JPanel for displaying information about a patient in a list.
  */
 public class PatientListItem extends JPanel {
-    private static final int HEIGHT = 100;
     private static final Color color = new Color(252, 217, 217);
 
     /**
@@ -48,7 +47,7 @@ public class PatientListItem extends JPanel {
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(5, 2));
-        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 150));
+        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
         infoPanel.setBackground(color);
 
         infoPanel.add(closeBtn);
@@ -64,7 +63,7 @@ public class PatientListItem extends JPanel {
 
         add(infoPanel);
         add(img);
-        setSize(new Dimension(HomePage.WIDTH, HEIGHT * 2));
+        setSize(new Dimension(HomePage.WIDTH, 200));
         setBackground(color);
     }
 }

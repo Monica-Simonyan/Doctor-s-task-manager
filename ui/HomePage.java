@@ -65,16 +65,13 @@ public class HomePage extends JFrame {
      *
      * @param patient The patient to be added.
      */
-    public static void addPatient(Patient patient) {
-        patients.add(patient);
-    }
 
     /**
      * Updates the patient list panel with the latest patient information.
      */
-    public static void update() {
-        for (Patient p : patients)
-            patientListPanel.add(new PatientListItem(p));
+    public static void update(Patient patient) {
+        patients.add(patient);
+        patientListPanel.add(new PatientListItem(patient));
     }
 
     /**
