@@ -1,9 +1,6 @@
 package ui;
 
 import model.patient.PersonalInformation;
-
-import model.patientCategories.DateTimePicker;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -21,7 +18,7 @@ public class AddPatientPopup extends JDialog {
 
     public AddPatientPopup(JPanel container) {
         //   super(parent, "Enter Information", true);
-        JPanel panel = new JPanel(new GridLayout(7, 2,0,5)); // Create a panel with a grid layout
+        JPanel panel = new JPanel(new GridLayout(8, 2,0,5)); // Create a panel with a grid layout
         panel.setPreferredSize(new Dimension(400, 300));
 
         // Add labels and text fields for each input
@@ -36,7 +33,7 @@ public class AddPatientPopup extends JDialog {
         panel.add(new JLabel("Age:"));
         ageField = new JTextField();
         panel.add(ageField);
-//panel.add(new DateTimePicker());
+
         panel.add(new JLabel("Gender:"));
         genderField = new JTextField();
         panel.add(genderField);
@@ -47,7 +44,7 @@ public class AddPatientPopup extends JDialog {
         panel.add(dateTxt);
         JPanel datePanel = new JPanel();
 
-       datePanel.setBorder(new EmptyBorder(11,0,0,0));
+        datePanel.setBorder(new EmptyBorder(11,0,0,0));
         placeComponents(datePanel);
         panel.add(datePanel);
 
@@ -59,7 +56,9 @@ public class AddPatientPopup extends JDialog {
         timePanel.setBorder(new EmptyBorder(11,0,0,0));
         placeTimeComponents(timePanel);
         panel.add(timePanel);
-
+        JLabel menuTxt = new JLabel("Choose: ");
+        panel.add(menuTxt);
+        panel.add(new PatientCategoryMenu());
         // Add OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
@@ -84,7 +83,6 @@ public class AddPatientPopup extends JDialog {
         });
         panel.add(okButton);
         panel.add(cancelButton);
-
         // Display the panel in the dialog
         getContentPane().add(panel);
         pack();
