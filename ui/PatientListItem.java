@@ -44,7 +44,7 @@ public class PatientListItem extends JPanel {
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(4, 2));
-        infoPanel.setBorder(new EmptyBorder(0,0,0,100));
+        infoPanel.setBorder(new EmptyBorder(0,0,0,HEIGHT));
         infoPanel.setBackground(color);
 
         infoPanel.add(closeBtn);
@@ -59,7 +59,7 @@ public class PatientListItem extends JPanel {
 
         add(infoPanel);
         add(img);
-        setSize(new Dimension(HomePage.WIDTH, 200));
+        setSize(new Dimension(HomePage.WIDTH, HEIGHT*2));
         setBackground(color);
     }
 }

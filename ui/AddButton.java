@@ -15,10 +15,6 @@ public class AddButton extends JButton {
         setBackground(new Color(5, 5, 5, 0));
         setBorder(new EmptyBorder(1, 1, 1, 1));
         setFocusable(false);
-        addActionListener(e -> {
-            // Add your action here
-            new AddPatientPopup(container);
-        });
     }
 
     @Override

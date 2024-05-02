@@ -1,42 +1,45 @@
 package ui;
 
+import model.patient.Patient;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class HomePage extends JFrame {
-    JPanel searchPanel;
-    JPanel listPanel;
-    JTextField search;
-    JTextArea area;
-    JButton searchButton;
+    private static JPanel patientListPanel;
+    private static ArrayList<Patient> patients = new ArrayList<>();
     static final int WIDTH = 350;
     static final int HEIGHT = 650;
 
+
+
     public HomePage() {
-        listPanel = new JPanel();
-        listPanel.setLayout(new GridLayout(1000, 1, 0, 5));
 
+        patientListPanel = new JPanel();
+        patientListPanel.setLayout(new GridLayout(1000, 1, 0, 5));
 
-        search = new JTextField(10);
-        searchButton = new JButton("Search");
+        JTextField search = new JTextField(10);
+        JButton searchButton = new JButton("Search");
         searchButton.addActionListener((ActionEvent e) -> {
             // Perform search action here
         });
 
-        searchPanel = new JPanel();
+        JPanel searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
         searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
-        AddButton addButton = new AddButton(40, listPanel);
-        addButton.setBackground(Color.WHITE);
+        AddButton addButton = new AddButton(40, patientListPanel);
+        addButton.addActionListener(e -> {
+            // Add your action here
+            new AddPatientPopup(patientListPanel);
+        });
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
-
-
-        JScrollPane scrollPane = new JScrollPane(listPanel);
+        JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
 
@@ -49,6 +52,14 @@ public class HomePage extends JFrame {
         setVisible(true);
     }
 
+    public static void addPatient(Patient patient){
+        patients.add(patient);
+    }
+
+    public static void update(){
+        for(Patient p : patients)
+            patientListPanel.add(new PatientListItem(p.getPersonalInfo()));
+    }
     public static void main(String[] args) {
         new HomePage();
     }

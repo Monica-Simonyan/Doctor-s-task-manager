@@ -26,7 +26,7 @@ public class AddPatientPopup extends JDialog {
 
     public AddPatientPopup(JPanel container) {
         //   super(parent, "Enter Information", true);
-        JPanel panel = new JPanel(new GridLayout(12, 2, 0, 5)); // Create a panel with a grid layout
+        JPanel panel = new JPanel(new GridLayout(12, 2, 5, 5)); // Create a panel with a grid layout
         panel.setPreferredSize(new Dimension(400, 500));
 
         // Add labels and text fields for each input
@@ -95,8 +95,9 @@ public class AddPatientPopup extends JDialog {
                         info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
                                ageField.getText(), gmailField.getText(), addressField.getText(),
                                 phoneNumberField.getText(), genderField.getText());
-                        categoriesMenu.accessCategory();
-                        container.add(new PatientListItem(info));
+                        categoriesMenu.accessCategory().setPersonalInfo(info);
+                        HomePage.addPatient(categoriesMenu.accessCategory());
+                        HomePage.update();
                     } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
                              InvalidGmailException ex) {
                         JOptionPane.showMessageDialog(null, ex.getMessage());
