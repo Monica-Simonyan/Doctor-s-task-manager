@@ -1,6 +1,7 @@
 package ui;
 
 import model.patient.Patient;
+import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 
 import javax.swing.*;
@@ -24,6 +25,12 @@ private Patient category;
                 category = new PregnantPatient();
             }
         });
+        item2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Perform actions for Item 1
+                category = new MinorPatient();
+            }
+        });
         // Add menu items to the menu
         menu.add(item1);
         menu.add(item2);
@@ -31,6 +38,14 @@ private Patient category;
 
         // Add the menu to the menu bar
         add(menu);
+    }
+
+    public Patient getCategory() {
+        return category;
+    }
+
+    public void setCategory(Patient category) {
+        this.category = category.clone();
     }
 }
 

@@ -267,7 +267,7 @@ public class PersonalInformation implements Cloneable {
         try {
             return (PersonalInformation) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError(); // This should never happen
+            return null; // This should never happen
         }
     }
 
