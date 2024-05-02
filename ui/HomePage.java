@@ -14,9 +14,7 @@ public class HomePage extends JFrame {
     static final int HEIGHT = 650;
 
 
-
     public HomePage() {
-
         patientListPanel = new JPanel();
         patientListPanel.setLayout(new GridLayout(1000, 1, 0, 5));
 
@@ -34,7 +32,7 @@ public class HomePage extends JFrame {
         AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             // Add your action here
-            new AddPatientPopup(patientListPanel);
+            new AddPatientPopup();
         });
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
@@ -52,14 +50,15 @@ public class HomePage extends JFrame {
         setVisible(true);
     }
 
-    public static void addPatient(Patient patient){
+    public static void addPatient(Patient patient) {
         patients.add(patient);
     }
 
-    public static void update(){
-        for(Patient p : patients)
+    public static void update() {
+        for (Patient p : patients)
             patientListPanel.add(new PatientListItem(p.getPersonalInfo()));
     }
+
     public static void main(String[] args) {
         new HomePage();
     }
