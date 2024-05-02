@@ -31,7 +31,7 @@ public class HomePage extends JFrame {
         searchPanel.add(searchButton);
         searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
-        AddButton addButton = new AddButton(40, patientListPanel);
+        AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             // Add your action here
             new AddPatientPopup(patientListPanel);

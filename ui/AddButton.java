@@ -8,7 +8,7 @@ import java.awt.geom.Ellipse2D;
 public class AddButton extends JButton {
     int diameter;
 
-    public AddButton(int diameter, JPanel container) {
+    public AddButton(int diameter) {
         this.diameter = diameter;
         setSize(new Dimension(diameter, diameter));
         setFont(new Font("Arial", Font.BOLD, 24));
