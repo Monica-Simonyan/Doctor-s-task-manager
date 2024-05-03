@@ -40,7 +40,7 @@ public class AddButton extends JButton {
 
         g2d.setColor(color);
         g2d.fill(circle);
-        g2d.setFont(new Font("Arial", Font.CENTER_BASELINE, diameter / 3));
+        g2d.setFont(new Font("Arial", Font.PLAIN, diameter / 3));
         g2d.setColor(Color.BLACK);
 
         String btnText = "Add";

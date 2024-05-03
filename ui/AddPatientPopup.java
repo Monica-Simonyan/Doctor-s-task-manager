@@ -16,16 +16,14 @@ public class AddPatientPopup extends JDialog {
     private final JTextField firstNameField;
     private final JTextField lastNameField;
     private final JTextField ageField;
-    private final JRadioButton maleRadioButton;
-    private final JRadioButton femaleRadioButton;
+    private final JTextField genderField;
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
 
     public AddPatientPopup( ) {
-        JPanel panel = new JPanel(new GridLayout(12, 2, 0, 5)); // Create a panel with a grid layout
+        JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5)); // Create a panel with a grid layout
         panel.setPreferredSize(new Dimension(400, 550));
-
 
         // Add labels and text fields for each input
         panel.add(new JLabel("First Name:"));
@@ -40,13 +38,9 @@ public class AddPatientPopup extends JDialog {
         ageField = new JTextField();
         panel.add(ageField);
 
-        ButtonGroup genderGroup = new ButtonGroup();
-        maleRadioButton = new JRadioButton("Male");
-        femaleRadioButton = new JRadioButton("Female");
-        genderGroup.add(maleRadioButton);
-        genderGroup.add(femaleRadioButton);
-        panel.add(maleRadioButton);
-        panel.add(femaleRadioButton);
+        panel.add(new JLabel("Gender:"));
+        genderField = new JTextField();
+        panel.add(genderField);
 
         panel.add(new JLabel("Gmail:"));
         gmailField = new JTextField();
@@ -91,10 +85,9 @@ public class AddPatientPopup extends JDialog {
 
                     isInputValid = true;
                     try {
-                        String gender = maleRadioButton.isSelected() ? "Male" : "Female";
                         info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
                                ageField.getText(), gmailField.getText(), addressField.getText(),
-                                phoneNumberField.getText(), gender);
+                                phoneNumberField.getText(), genderField.getText());
                         categoriesMenu.accessCategory().setPersonalInfo(info);
                         HomePage.addPatient(categoriesMenu.accessCategory());
                         HomePage.update();

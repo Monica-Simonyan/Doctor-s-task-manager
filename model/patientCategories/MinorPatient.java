@@ -120,4 +120,8 @@ public class MinorPatient extends Patient implements Discount {
         amount *= 0.8;
         return amount;
     }
+
+    public String toString(){
+        return "Minor";
+    }
 }
