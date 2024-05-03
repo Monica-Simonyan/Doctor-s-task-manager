@@ -8,12 +8,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PatientCardPopup extends JFrame {
+public class PatientCardPopup extends JDialog {
     private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
 
-    static JFrame t;
-    static JButton close, saveAllergy, savePrescription;
+    static JPanel t;
+    static JButton saveAllergy, savePrescription;
     static ImageIcon profile, imgIcon;
     static Image image;
     static JLabel img, name, age, gender, lastVisit, nextVisit, phone, email, address, history, allergyLabel, prescLabel;
@@ -24,7 +24,7 @@ public class PatientCardPopup extends JFrame {
     public PatientCardPopup(PersonalInformation info) {
         this.info = info;
 
-        t = new JFrame("Patient Card");
+        t = new JPanel();
 
         profile = new ImageIcon("src/ui/149071.png");
         image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
@@ -92,6 +92,11 @@ public class PatientCardPopup extends JFrame {
                 }
             }
         });
+        setPreferredSize(new Dimension(400, 550));
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
 }
