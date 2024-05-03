@@ -6,6 +6,8 @@ import model.patient.PersonalInformation;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import static ui.DatePicker.placeComponents;
 import static ui.TimePicker.placeTimeComponents;
@@ -14,7 +16,10 @@ public class AddPatientPopup extends JDialog {
     private final JTextField firstNameField;
     private final JTextField lastNameField;
     private final JTextField ageField;
-    private final JTextField genderField;
+    private String gender;
+
+    private final JRadioButton maleRadioButton;
+    private final JRadioButton femaleRadioButton;
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
@@ -37,9 +42,27 @@ public class AddPatientPopup extends JDialog {
         ageField = new JTextField();
         panel.add(ageField);
 
-        panel.add(new JLabel("Gender:"));
-        genderField = new JTextField();
-        panel.add(genderField);
+        ButtonGroup genderGroup = new ButtonGroup();
+        maleRadioButton = new JRadioButton("Male");
+        maleRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JRadioButton selected=(JRadioButton)e.getSource();
+                gender=selected.getText();
+            }
+        });
+        femaleRadioButton = new JRadioButton("Female");
+        femaleRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JRadioButton selected=(JRadioButton)e.getSource();
+                gender=selected.getText();
+            }
+        });
+        genderGroup.add(maleRadioButton);
+        genderGroup.add(femaleRadioButton);
+        panel.add(maleRadioButton);
+        panel.add(femaleRadioButton);
 
         panel.add(new JLabel("Gmail:"));
         gmailField = new JTextField();
@@ -84,11 +107,11 @@ public class AddPatientPopup extends JDialog {
                 try {
                     info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
                             ageField.getText(), gmailField.getText(), addressField.getText(),
-                            phoneNumberField.getText(), genderField.getText());
+                            phoneNumberField.getText(), gender);
                     categoriesMenu.accessCategory().setPersonalInfo(info);
                     HomePage.update(categoriesMenu.accessCategory());
                 } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
-                         InvalidGmailException ex) {
+                         InvalidGmailException | InvalidPatientException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
