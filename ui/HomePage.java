@@ -68,7 +68,7 @@ public class HomePage extends JFrame {
      */
 
     /**
-     * Updates the patient list panel with the latest patient information.
+     * Updates the patient list panel with the latest patient information
      */
     public static void update(Patient patient) throws InvalidPatientException{
         if(patients.contains(patient))
