@@ -54,7 +54,6 @@ public class PatientListItem extends JPanel {
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
         JLabel img = new JLabel(resizedImageIcon);
 
-        ShowPatientCard more = new ShowPatientCard(info);
         JPanel infoPanel = new JPanel();
         infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
         infoPanel.setLayout(new GridLayout(6, 2));
@@ -65,7 +64,7 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
-        infoPanel.add(more);
+        infoPanel.add(new ShowPatientCard(info));
         add(infoPanel);
         add(img);
         setSize(new Dimension(HomePage.WIDTH, 170));
