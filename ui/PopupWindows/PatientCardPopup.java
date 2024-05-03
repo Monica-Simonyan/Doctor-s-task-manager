@@ -6,6 +6,7 @@ import model.patient.PersonalInformation;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PatientCardPopup extends JFrame {
     private static final Color color = new Color(252, 217, 217);
@@ -19,24 +20,11 @@ public class PatientCardPopup extends JFrame {
     static JTextField allergies, prescriptions;
     Patient patient;
     PersonalInformation info;
-    public PatientCardPopup(){
+
+    public PatientCardPopup(PersonalInformation info) {
+        this.info = info;
 
         t = new JFrame("Patient Card");
-        close = new JButton("x");
-        close.setBackground(color);
-        close.setForeground(Color.RED);
-        close.setBorder(null);
-        close.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Container previous = getParent();
-                if(previous != null){
-                    previous.remove(PatientCardPopup.this);
-                    previous.revalidate();
-                    previous.repaint();
-                }
-            }
-        });
 
         profile = new ImageIcon("src/ui/149071.png");
         image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
@@ -77,11 +65,11 @@ public class PatientCardPopup extends JFrame {
         allergies.setBackground(backgroundColor);
 
         saveAllergy = new JButton("Save");
-        saveAllergy.addActionListener(new AbstractAction() {
+        saveAllergy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = e.getActionCommand();
-                if(s.equals("Save")){
+                if (s.equals("Save")) {
                     JOptionPane.showMessageDialog(null, "Saved");
                     // make allergies seen
                 }
@@ -98,7 +86,7 @@ public class PatientCardPopup extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = e.getActionCommand();
-                if(s.equals("Save")){
+                if (s.equals("Save")) {
                     JOptionPane.showMessageDialog(null, "Saved");
                     // make prescriptions seen
                 }
@@ -106,5 +94,5 @@ public class PatientCardPopup extends JFrame {
         });
     }
 
-
 }
+
