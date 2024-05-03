@@ -6,8 +6,6 @@ import model.patient.PersonalInformation;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static ui.DatePicker.placeComponents;
 import static ui.TimePicker.placeTimeComponents;
@@ -21,8 +19,9 @@ public class AddPatientPopup extends JDialog {
     private final JTextField addressField;
     private final JTextField phoneNumberField;
 
-    public AddPatientPopup( ) {
-        JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5)); // Create a panel with a grid layout
+    public AddPatientPopup() {
+        JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5));
+        panel.setBorder(new EmptyBorder(0,5,0,0));
         panel.setPreferredSize(new Dimension(400, 550));
 
         // Add labels and text fields for each input
@@ -76,36 +75,27 @@ public class AddPatientPopup extends JDialog {
         // Add OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
-        okButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                boolean isInputValid = false;
-                PersonalInformation info = null;
-                while (!isInputValid) {
+        okButton.addActionListener(e -> {
+            boolean isInputValid = false;
+            PersonalInformation info;
+            while (!isInputValid) {
 
-                    isInputValid = true;
-                    try {
-                        info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
-                               ageField.getText(), gmailField.getText(), addressField.getText(),
-                                phoneNumberField.getText(), genderField.getText());
-                        categoriesMenu.accessCategory().setPersonalInfo(info);
-                        HomePage.addPatient(categoriesMenu.accessCategory());
-                        HomePage.update();
-                    } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
-                             InvalidGmailException ex) {
-                        JOptionPane.showMessageDialog(null, ex.getMessage());
-                    }
+                isInputValid = true;
+                try {
+                    info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
+                            ageField.getText(), gmailField.getText(), addressField.getText(),
+                            phoneNumberField.getText(), genderField.getText());
+                    categoriesMenu.accessCategory().setPersonalInfo(info);
+                    HomePage.update(categoriesMenu.accessCategory());
+                } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+                         InvalidGmailException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
+            }
 
-                dispose();
-            }
+            dispose();
         });
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
+        cancelButton.addActionListener(e -> dispose());
         panel.add(okButton);
         panel.add(cancelButton);
 

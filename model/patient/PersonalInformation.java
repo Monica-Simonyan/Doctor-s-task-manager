@@ -28,7 +28,7 @@ public class PersonalInformation implements Cloneable {
      *
      * @param name        the first name of the individual
      * @param lastName    the last name of the individual
-     * @param age         the age of the individual
+     * @param stringAge         the age of the individual
      * @param gmail       the Gmail address of the individual
      * @param address     the physical address of the individual
      * @param phoneNumber the phone number of the individual
