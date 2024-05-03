@@ -72,7 +72,7 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
-        infoPanel.add(moreBtn, BorderLayout.PAGE_END);
+        infoPanel.add(moreBtn);
 
         ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
         Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);

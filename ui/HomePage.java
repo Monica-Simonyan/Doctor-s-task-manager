@@ -80,11 +80,6 @@ public class HomePage extends JFrame {
         return patients;
     }
 
-    /**
-     * The main method to start the application.
-     *
-     * @param args Command line arguments (not used).
-     */
     public static void main(String[] args) {
         new HomePage();
     }
