@@ -49,10 +49,10 @@ public class PatientListItem extends JPanel {
         patientHistory.setSize(3,2);
         patientHistory. setBackground(Color.PINK);
         patientHistory.addActionListener(e -> {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                patientHistory();
-            }
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                patientHistory();
+//            }
         });
 
 
