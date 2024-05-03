@@ -47,7 +47,7 @@ public class PatientListItem extends JPanel {
 
 
         ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
-        Image resizedImage = profileImage.getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH);
+        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
         JLabel img = new JLabel(resizedImageIcon);
 

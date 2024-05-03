@@ -3,6 +3,8 @@ package ui;
 
 import model.exceptions.InvalidPatientException;
 import model.patient.Patient;
+import model.patientCategories.AdultPatient;
+import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
 
@@ -55,8 +57,12 @@ public class HomePage extends JFrame {
 
         //TESTING
         PregnantPatient p = new PregnantPatient();
+        AdultPatient a = new AdultPatient();
+        MinorPatient m = new MinorPatient();
         try {
             update(p);
+            update(a);
+            update(m);
         } catch (InvalidPatientException e) {
             throw new RuntimeException(e);
         }
