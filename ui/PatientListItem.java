@@ -44,10 +44,20 @@ public class PatientListItem extends JPanel {
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
+        JButton patientHistory=new JButton("OPEN");
+        patientHistory.setForeground(Color.RED);
+        patientHistory.setSize(3,2);
+        patientHistory. setBackground(Color.PINK);
+        patientHistory.addActionListener(e -> {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                patientHistory();
+            }
+        });
+
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridLayout(5, 2));
-        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
         infoPanel.setBackground(color);
 
         infoPanel.add(closeBtn);
@@ -55,6 +65,7 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
+        infoPanel.add(patientHistory,BorderLayout.PAGE_END);
 
         ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
         Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
