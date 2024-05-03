@@ -3,6 +3,7 @@ package ui;
 
 import model.exceptions.InvalidPatientException;
 import model.patient.Patient;
+import ui.Buttons.AddButton;
 
 import javax.swing.*;
 import java.awt.*;

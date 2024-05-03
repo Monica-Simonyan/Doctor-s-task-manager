@@ -50,6 +50,12 @@ public class PatientListItem extends JPanel {
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
 
+        ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
+        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
+        JLabel img = new JLabel(resizedImageIcon);
+
+
         //More button opens the window with patient card
         JLabel moreBtn = new JLabel("More...");
         moreBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -61,7 +67,6 @@ public class PatientListItem extends JPanel {
                 openProfileWindow(info);
             }
         });
-
         JPanel infoPanel = new JPanel();
         infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
         infoPanel.setLayout(new GridLayout(6, 2));
@@ -73,12 +78,6 @@ public class PatientListItem extends JPanel {
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
         infoPanel.add(moreBtn);
-
-        ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
-        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
-        JLabel img = new JLabel(resizedImageIcon);
-
         add(infoPanel);
         add(img);
         setSize(new Dimension(HomePage.WIDTH, 170));
@@ -86,6 +85,7 @@ public class PatientListItem extends JPanel {
     }
 
     private void openProfileWindow(PersonalInformation info) {
+
         PatientCard profileFrame = new PatientCard();
         profileFrame.setVisible(true);
     }
