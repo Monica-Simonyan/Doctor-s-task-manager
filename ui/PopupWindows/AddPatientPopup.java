@@ -1,7 +1,8 @@
-package ui;
+package ui.PopupWindows;
 
 import model.exceptions.*;
 import model.patient.PersonalInformation;
+import ui.HomePage;
 import ui.PopupItems.DatePicker;
 import ui.PopupItems.GenderRadioButtons;
 import ui.PopupItems.PatientCategoryMenu;

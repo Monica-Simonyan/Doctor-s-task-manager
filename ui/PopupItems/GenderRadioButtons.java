@@ -8,6 +8,7 @@ public class GenderRadioButtons extends ButtonGroup {
     public JRadioButton maleRadioButton;
     public JRadioButton femaleRadioButton;
     private String selectedGender;
+
     public GenderRadioButtons() {
         maleRadioButton = new JRadioButton("Male");
         maleRadioButton.addActionListener(new ActionListener() {
@@ -29,7 +30,7 @@ public class GenderRadioButtons extends ButtonGroup {
         add(femaleRadioButton);
     }
 
-    public String getSelectedGender(){
+    public String getSelectedGender() {
         return selectedGender;
     }
 }

@@ -1,4 +1,4 @@
-package ui.PopupItems;
+package ui.PopupWindows;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;

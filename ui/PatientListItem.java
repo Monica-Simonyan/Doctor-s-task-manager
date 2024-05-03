@@ -37,6 +37,7 @@ public class PatientListItem extends JPanel {
         closeBtn.addActionListener(e -> {
             Container parent = getParent();
             if (parent != null) {
+                HomePage.accessPatients().remove(patient);
                 // Remove this panel from its parent
                 parent.remove(PatientListItem.this);
                 // Repaint the parent
