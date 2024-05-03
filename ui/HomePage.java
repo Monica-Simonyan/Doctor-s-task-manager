@@ -3,6 +3,7 @@ package ui;
 
 import model.exceptions.InvalidPatientException;
 import model.patient.Patient;
+import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
 
 import javax.swing.*;
@@ -52,6 +53,13 @@ public class HomePage extends JFrame {
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
 
+        //TESTING
+        PregnantPatient p = new PregnantPatient();
+        try {
+            update(p);
+        } catch (InvalidPatientException e) {
+            throw new RuntimeException(e);
+        }
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
