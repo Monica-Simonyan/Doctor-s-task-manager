@@ -1,5 +1,5 @@
 
-package ui;
+package ui.PopupItems;
 
 import javax.swing.*;
 import java.awt.*;

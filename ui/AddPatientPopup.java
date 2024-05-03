@@ -2,6 +2,7 @@ package ui;
 
 import model.exceptions.*;
 import model.patient.PersonalInformation;
+import ui.PopupItems.PatientCategoryMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,8 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static ui.DatePicker.placeComponents;
-import static ui.TimePicker.placeTimeComponents;
+import static ui.PopupItems.DatePicker.placeComponents;
+import static ui.PopupItems.TimePicker.placeTimeComponents;
 
 public class AddPatientPopup extends JDialog {
     private final JTextField firstNameField;
