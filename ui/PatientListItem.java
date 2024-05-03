@@ -6,6 +6,7 @@ import model.patient.PersonalInformation;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+
 /**
  * Represents a JPanel for displaying information about a patient in a list.
  */
@@ -44,15 +45,12 @@ public class PatientListItem extends JPanel {
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
-        JButton patientHistory=new JButton("OPEN");
-        patientHistory.setForeground(Color.RED);
-        patientHistory.setSize(3,2);
-        patientHistory. setBackground(Color.PINK);
-        patientHistory.addActionListener(e -> {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                patientHistory();
-//            }
+        JButton moreBtn = new JButton("OPEN");
+        moreBtn.setForeground(Color.RED);
+        moreBtn.setSize(3, 2);
+        moreBtn.setBackground(Color.PINK);
+        moreBtn.addActionListener(e -> {
+            openProfileWindow();
         });
 
 
@@ -65,7 +63,7 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
-        infoPanel.add(patientHistory,BorderLayout.PAGE_END);
+        infoPanel.add(moreBtn, BorderLayout.PAGE_END);
 
         ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
         Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
@@ -76,5 +74,10 @@ public class PatientListItem extends JPanel {
         add(img);
         setSize(new Dimension(HomePage.WIDTH, 200));
         setBackground(color);
+    }
+
+    private void openProfileWindow() {
+        PatientCard profileFrame = new PatientCard();
+        profileFrame.setVisible(true);
     }
 }
