@@ -6,5 +6,8 @@ public class AdultPatient extends Patient {
     public AdultPatient(){
         super();
     }
+    public String toString(){
+        return "Adult";
+    }
 
 }

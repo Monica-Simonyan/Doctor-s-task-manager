@@ -1,7 +1,6 @@
-package ui;
+package ui.Buttons;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 
@@ -20,9 +19,10 @@ public class AddButton extends JButton {
     public AddButton(int diameter) {
         this.diameter = diameter;
         setSize(new Dimension(diameter, diameter));
-        setBackground(new Color(0, 0, 0, 0)); //setting background transparent
-        setBorder(new EmptyBorder(0, 0, 0, 0)); //get rid of the default border
+        setBackground(Color.LIGHT_GRAY); //setting background transparent
+        setBorder(null); //get rid of default the border
         setFocusable(false);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -40,7 +40,7 @@ public class AddButton extends JButton {
 
         g2d.setColor(color);
         g2d.fill(circle);
-        g2d.setFont(new Font("Arial", Font.CENTER_BASELINE, diameter / 3));
+        g2d.setFont(new Font("Arial", Font.PLAIN, diameter / 3));
         g2d.setColor(Color.BLACK);
 
         String btnText = "Add";

@@ -8,6 +8,10 @@ public abstract class Patient implements Cloneable {
     Date nextVisitDate;
 
     public Patient() {
+        personalInfo = new PersonalInformation();
+        history = new History();
+        nextVisitDate = new Date();
+        payments = new Payments();
     }
 
     public Patient(PersonalInformation personalInfo, History history, Payments payments) {
@@ -89,6 +93,12 @@ public abstract class Patient implements Cloneable {
         }
     }
 
+    public boolean equals(Object obj){
+        if(obj == null || obj.getClass()!=this.getClass())
+            return false;
+        else return this.personalInfo.equals(((Patient) obj).personalInfo);
+
+    }
     /**
      * Overridden toString method returns the string representation of a patient
      *

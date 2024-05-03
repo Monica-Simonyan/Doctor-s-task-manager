@@ -23,12 +23,15 @@ public class PersonalInformation implements Cloneable {
         MALE, FEMALE
     }
 
+    public PersonalInformation(){
+
+    }
     /**
      * Constructor to create a new instance with full personal details.
      *
      * @param name        the first name of the individual
      * @param lastName    the last name of the individual
-     * @param age         the age of the individual
+     * @param stringAge   the age of the individual
      * @param gmail       the Gmail address of the individual
      * @param address     the physical address of the individual
      * @param phoneNumber the phone number of the individual
@@ -140,11 +143,10 @@ public class PersonalInformation implements Cloneable {
      * @param stringAge the age to set.
      */
     public void setAge(String stringAge) throws InvalidAgeException {
-        int intAge = 0;
-        try{
+        int intAge;
+        try {
             intAge = Integer.parseInt(stringAge);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             throw new InvalidAgeException();
         }
         if (intAge <= 0)
@@ -224,6 +226,14 @@ public class PersonalInformation implements Cloneable {
         } catch (CloneNotSupportedException e) {
             return null; // This should never happen
         }
+    }
+
+    public boolean equals(Object obj) {
+        if(obj == null || obj.getClass() != this.getClass())
+            return false;
+        PersonalInformation other = (PersonalInformation) obj;
+        return this.age == other.age && this.name.equals(other.name) && this.lastName.equals(other.lastName)
+                && this.gmail.equals(other.gmail) && this.address.equals(other.address) && this.phoneNumber.equals(other.phoneNumber);
     }
 
     /**
