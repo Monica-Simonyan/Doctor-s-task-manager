@@ -23,9 +23,14 @@ public class PersonalInformation implements Cloneable {
         MALE, FEMALE
     }
 
-    public PersonalInformation(){
-
+    public PersonalInformation() {
+        this.name = "Michael";
+        this.lastName = "Jackson";
+        this.age = 30;
+        this.phoneNumber = "5555555";
+        this.gender = Gender.MALE;
     }
+
     /**
      * Constructor to create a new instance with full personal details.
      *
@@ -229,7 +234,7 @@ public class PersonalInformation implements Cloneable {
     }
 
     public boolean equals(Object obj) {
-        if(obj == null || obj.getClass() != this.getClass())
+        if (obj == null || obj.getClass() != this.getClass())
             return false;
         PersonalInformation other = (PersonalInformation) obj;
         return this.age == other.age && this.name.equals(other.name) && this.lastName.equals(other.lastName)
