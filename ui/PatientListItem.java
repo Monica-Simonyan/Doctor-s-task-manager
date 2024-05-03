@@ -14,14 +14,16 @@ import java.awt.event.MouseEvent;
  */
 public class PatientListItem extends JPanel {
     private static final Color color = new Color(252, 217, 217);
-
+    Patient patient;
+    PersonalInformation info;
     /**
      * Constructs a PatientListItem with the specified Patient object.
      *
      * @param patient The Patient object to display information about
      */
     public PatientListItem(Patient patient) {
-        PersonalInformation info = patient.getPersonalInfo();
+        this.patient = patient.clone();
+         info = this.patient.getPersonalInfo();
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception e) {
@@ -48,14 +50,15 @@ public class PatientListItem extends JPanel {
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
 
+        //More button opens the window with patient card
         JLabel moreBtn = new JLabel("More...");
         moreBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         moreBtn.setForeground(new Color(38, 44, 107));
-        moreBtn.setBorder(new EmptyBorder(3,0,0,0));
+        moreBtn.setBorder(new EmptyBorder(3, 0, 0, 0));
         moreBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                openProfileWindow();
+                openProfileWindow(info);
             }
         });
 
@@ -82,7 +85,7 @@ public class PatientListItem extends JPanel {
         setBackground(color);
     }
 
-    private void openProfileWindow() {
+    private void openProfileWindow(PersonalInformation info) {
         PatientCard profileFrame = new PatientCard();
         profileFrame.setVisible(true);
     }
