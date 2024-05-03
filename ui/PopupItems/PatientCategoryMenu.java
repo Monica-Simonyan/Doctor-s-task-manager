@@ -1,5 +1,5 @@
 
-package ui;
+package ui.PopupItems;
 
 import model.patient.Patient;
 import model.patientCategories.*;

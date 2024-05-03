@@ -2,12 +2,11 @@ package ui;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
+import ui.Buttons.ShowPatientCard;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Represents a JPanel for displaying information about a patient in a list.
@@ -55,18 +54,7 @@ public class PatientListItem extends JPanel {
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
         JLabel img = new JLabel(resizedImageIcon);
 
-
-        //More button opens the window with patient card
-        JLabel moreBtn = new JLabel("More...");
-        moreBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        moreBtn.setForeground(new Color(38, 44, 107));
-        moreBtn.setBorder(new EmptyBorder(3, 0, 0, 0));
-        moreBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                openProfileWindow(info);
-            }
-        });
+        ShowPatientCard more = new ShowPatientCard(info);
         JPanel infoPanel = new JPanel();
         infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
         infoPanel.setLayout(new GridLayout(6, 2));
@@ -77,16 +65,12 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
-        infoPanel.add(moreBtn);
+        infoPanel.add(more);
         add(infoPanel);
         add(img);
         setSize(new Dimension(HomePage.WIDTH, 170));
         setBackground(color);
     }
 
-    private void openProfileWindow(PersonalInformation info) {
 
-        PatientCard profileFrame = new PatientCard();
-        profileFrame.setVisible(true);
-    }
 }
