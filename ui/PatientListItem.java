@@ -6,6 +6,8 @@ import model.patient.PersonalInformation;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Represents a JPanel for displaying information about a patient in a list.
@@ -45,17 +47,21 @@ public class PatientListItem extends JPanel {
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
-        JButton moreBtn = new JButton("OPEN");
-        moreBtn.setForeground(Color.RED);
-        moreBtn.setSize(3, 2);
-        moreBtn.setBackground(Color.PINK);
-        moreBtn.addActionListener(e -> {
-            openProfileWindow();
+
+        JLabel moreBtn = new JLabel("More...");
+        moreBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        moreBtn.setForeground(new Color(38, 44, 107));
+        moreBtn.setBorder(new EmptyBorder(3,0,0,0));
+        moreBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                openProfileWindow();
+            }
         });
 
-
         JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new GridLayout(5, 2));
+        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
+        infoPanel.setLayout(new GridLayout(6, 2));
         infoPanel.setBackground(color);
 
         infoPanel.add(closeBtn);
@@ -72,7 +78,7 @@ public class PatientListItem extends JPanel {
 
         add(infoPanel);
         add(img);
-        setSize(new Dimension(HomePage.WIDTH, 200));
+        setSize(new Dimension(HomePage.WIDTH, 170));
         setBackground(color);
     }
 
