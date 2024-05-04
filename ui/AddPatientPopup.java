@@ -30,7 +30,7 @@ public class AddPatientPopup extends JDialog {
         panel.setBorder(new EmptyBorder(0,5,0,0));
         panel.setPreferredSize(new Dimension(400, 550));
 
-        // Add labels and text fields for each input
+
         panel.add(new JLabel("First Name:"));
         firstNameField = new JTextField();
         panel.add(firstNameField);

@@ -9,6 +9,7 @@ import ui.Buttons.AddButton;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -37,17 +38,44 @@ public class HomePage extends JFrame {
             // Perform search action here
         });
 
+
         JPanel searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
         searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu sortMenu = new JMenu("Sort");
+        JMenuItem sortByNameItem = new JMenuItem("By Name");
+        JMenuItem sortByAgeItem = new JMenuItem("By Age");
+        JMenuItem sortByDateItem = new JMenuItem("By Date");
+
+
+        sortByNameItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {}
+        });
+
+        sortByAgeItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {}
+        });
+
+        sortByDateItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {}
+        });
+
         AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             new AddPatientPopup();
         });
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
+
+        sortMenu.add(sortByNameItem);
+        sortMenu.add(sortByAgeItem);
+        sortMenu.add(sortByDateItem);
+        setJMenuBar(menuBar);
+        menuBar.add(sortMenu);
 
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
@@ -60,6 +88,7 @@ public class HomePage extends JFrame {
         } catch (InvalidPatientException e) {
             throw new RuntimeException(e);
         }
+
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
