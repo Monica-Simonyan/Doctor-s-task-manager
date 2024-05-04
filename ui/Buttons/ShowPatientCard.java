@@ -23,7 +23,6 @@ public class ShowPatientCard extends JLabel {
         });
     }
 
-
     private void openProfileWindow(PersonalInformation info) {
 
         PatientCardPopup profileFrame = new PatientCardPopup(info);

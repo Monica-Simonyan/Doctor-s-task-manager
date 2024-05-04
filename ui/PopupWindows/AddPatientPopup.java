@@ -5,7 +5,7 @@ import model.patient.PersonalInformation;
 import ui.HomePage;
 import ui.PopupItems.DatePicker;
 import ui.PopupItems.GenderRadioButtons;
-import ui.PopupItems.PatientCategoryMenu;
+import ui.Menus.PatientCategoryMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,50 +13,70 @@ import java.awt.*;
 
 import static ui.PopupItems.TimePicker.placeTimeComponents;
 
+/**
+ * AddPatientPopup is a dialog window for adding a new patient's information.
+ */
 public class AddPatientPopup extends JDialog {
+
+    // Text fields for entering patient information
     private final JTextField firstNameField;
     private final JTextField lastNameField;
     private final JTextField ageField;
-    private String gender;
-
-
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
 
+    // String to store the selected gender
+    private String gender;
+
+    /**
+     * Constructs the AddPatientPopup dialog.
+     */
     public AddPatientPopup() {
         JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5));
         panel.setBorder(new EmptyBorder(0, 5, 0, 0));
         panel.setPreferredSize(new Dimension(400, 550));
 
-
+        // First Name
         panel.add(new JLabel("First Name:"));
         firstNameField = new JTextField();
         panel.add(firstNameField);
 
+        // Last Name
         panel.add(new JLabel("Last Name:"));
         lastNameField = new JTextField();
         panel.add(lastNameField);
 
+        // Age
         panel.add(new JLabel("Age:"));
         ageField = new JTextField();
         panel.add(ageField);
 
-        GenderRadioButtons genderRadioButtons = new GenderRadioButtons();
-        panel.add(genderRadioButtons.maleRadioButton);
-        panel.add(genderRadioButtons.femaleRadioButton);
+        // Gmail
         panel.add(new JLabel("Gmail:"));
         gmailField = new JTextField();
         panel.add(gmailField);
 
+        // Address
         panel.add(new JLabel("Address:"));
         addressField = new JTextField();
         panel.add(addressField);
 
+        // Phone Number
         panel.add(new JLabel("Phone Number:"));
         phoneNumberField = new JTextField();
         panel.add(phoneNumberField);
 
+
+        // Gender selection
+        panel.add(new JLabel("Gender: "));
+        GenderRadioButtons genderRadioButtons = new GenderRadioButtons();
+        JPanel radioBtns = new JPanel();
+        radioBtns.add(genderRadioButtons.maleRadioButton);
+        radioBtns.add(genderRadioButtons.femaleRadioButton);
+        panel.add(radioBtns);
+
+        // Date selection
         panel.add(new JLabel("Date: "));
         JPanel datePanel = new JPanel();
         datePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
@@ -64,16 +84,19 @@ public class AddPatientPopup extends JDialog {
         datePicker.placeComponents(datePanel);
         panel.add(datePanel);
 
+        // Time selection
         panel.add(new JLabel("Time: "));
         JPanel timePanel = new JPanel();
         timePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeTimeComponents(timePanel);
         panel.add(timePanel);
 
+        // Category selection
         panel.add(new JLabel("Choose: "));
         PatientCategoryMenu categoriesMenu = new PatientCategoryMenu();
         panel.add(categoriesMenu);
-        // Adding OK and Cancel buttons
+
+        // OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
@@ -88,7 +111,6 @@ public class AddPatientPopup extends JDialog {
                             phoneNumberField.getText(), gender);
                     categoriesMenu.accessCategory().setPersonalInfo(info);
                     HomePage.update(categoriesMenu.accessCategory());
-
                 } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
                          InvalidGmailException | InvalidPatientException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -107,5 +129,3 @@ public class AddPatientPopup extends JDialog {
         setVisible(true);
     }
 }
-
-

@@ -2,89 +2,36 @@ package ui.PopupWindows;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
-import ui.PatientCardPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.FileNotFoundException;
+import java.awt.event.ActionListener;
 
-public class PatientCardPopup extends JFrame {
+public class PatientCardPopup extends JDialog {
     private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
 
-    static JFrame f;
-    static JPanel panel;
-    static JButton close, saveAllergy, savePrescription;
+    static JPanel t;
+    static JButton saveAllergy, savePrescription;
     static ImageIcon profile, imgIcon;
     static Image image;
-    static JLabel img;
-    static JLabel name;
-    static JLabel age;
-    static JLabel gender;
-    static JLabel lastVisit;
-    static JLabel nextVisit;
-    static JLabel phone;
-    static JLabel email;
-    static JLabel address;
-    static JLabel history;
-    static JLabel allergyLabel;
-    static JLabel prescLabel;
+    static JLabel img, name, age, gender, lastVisit, nextVisit, phone, email, address, history, allergyLabel, prescLabel;
     static JTextField allergies, prescriptions;
     Patient patient;
     PersonalInformation info;
 
-    public PatientCardPopup(PersonalInformation info){
-        //this.patient = patient.clone();
-        System.out.println("I'm here");
-        f = new JFrame("Patient Card");
-        setSize(400, 500);
-        setTitle("Patient Card");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-        setLocationRelativeTo(null);
-
-        panel = new JPanel();
-        panel.setLayout(new GridLayout(1000, 1, 0, 5));
-        panel.setBackground(new Color(252, 217, 217));
-        panel.setLayout(new BorderLayout());
-
-//        close = new JButton("x");
-//        close.setBackground(color);
-//        close.setForeground(Color.RED);
-//        close.setBorder(null);
-//        close.addActionListener(new AbstractAction() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                Container previous = getParent();
-//                if(previous != null){
-//                    previous.remove(PatientCardPopup.this);
-//                    previous.revalidate();
-//                    previous.repaint();
-//                }
-//            }
-//        });
-
+    public PatientCardPopup(PersonalInformation info) {
         this.info = info;
-//        try{
-//            //image
-//            throw new NullPointerException();
-//        }
-//        catch (FileNotFoundException e){
-//            e.printStackTrace();
-//        }
-        setWindow();
-    }
 
-    public void setWindow(){
+        t = new JPanel();
 
         profile = new ImageIcon("src/ui/149071.png");
         image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
 
-        name = new JLabel();
-        name.setText("Name: ");
+        name = new JLabel("Name: " + info.getName() + " " + info.getLastName());
         name.setFont(new Font("Serif", Font.PLAIN, 15));
 
         age = new JLabel("Age: " + info.getAge());
@@ -118,11 +65,11 @@ public class PatientCardPopup extends JFrame {
         allergies.setBackground(backgroundColor);
 
         saveAllergy = new JButton("Save");
-        saveAllergy.addActionListener(new AbstractAction() {
+        saveAllergy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = e.getActionCommand();
-                if(s.equals("Save")){
+                if (s.equals("Save")) {
                     JOptionPane.showMessageDialog(null, "Saved");
                     // make allergies seen
                 }
@@ -139,15 +86,18 @@ public class PatientCardPopup extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String s = e.getActionCommand();
-                if(s.equals("Save")){
+                if (s.equals("Save")) {
                     JOptionPane.showMessageDialog(null, "Saved");
                     // make prescriptions seen
                 }
             }
         });
-
-
-
-        //PatientCardPanel p = new PatientCardPanel(patient);
+        setPreferredSize(new Dimension(400, 550));
+        pack();
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
+
 }
+
