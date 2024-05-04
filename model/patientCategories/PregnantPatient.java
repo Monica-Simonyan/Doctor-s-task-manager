@@ -7,7 +7,6 @@ import java.util.ArrayList;
 public class PregnantPatient extends Patient implements Discount {
     private int trimester;
     private String contraindications;
-    private final double DISCOUNT = 0.2;
 
     public PregnantPatient() {
         super();
