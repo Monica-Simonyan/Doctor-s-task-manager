@@ -13,6 +13,7 @@ import ui.PopupWindows.AddPatientPopup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -42,23 +43,17 @@ public class HomePage extends JFrame {
         });
 
 
-
         JPanel searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
-        searchPanel.add(new SortDropDownMenu());
         searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
 
-
-        AddButton addButton = new AddButton(40);
-        addButton.addActionListener(e -> {
-            new AddPatientPopup();
-        });
-        addButton.setBounds(270, 10, 40, 40);
-        add(addButton);
-
-
+        JMenuBar menuBar = new JMenuBar();
+        JMenu sortMenu = new JMenu("Sort");
+        JMenuItem sortByNameItem = new JMenuItem("By Name");
+        JMenuItem sortByAgeItem = new JMenuItem("By Age");
+        JMenuItem sortByDateItem = new JMenuItem("By Date");
 
 
 //        sortByNameItem.addActionListener(new ActionListener() {
@@ -73,8 +68,18 @@ public class HomePage extends JFrame {
 //            public void actionPerformed(ActionEvent e) {}
 //        });
 //
+        AddButton addButton = new AddButton(40);
+        addButton.addActionListener(e -> {
+            new AddPatientPopup();
+        });
+        addButton.setBounds(270, 10, 40, 40);
+        add(addButton);
 
-
+        sortMenu.add(sortByNameItem);
+        sortMenu.add(sortByAgeItem);
+        sortMenu.add(sortByDateItem);
+        setJMenuBar(menuBar);
+        menuBar.add(sortMenu);
 
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
