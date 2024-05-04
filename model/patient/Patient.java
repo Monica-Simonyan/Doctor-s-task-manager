@@ -84,7 +84,6 @@ public abstract class Patient implements Cloneable {
     public Date getNextVisitDate() {
         return nextVisitDate;
     }
-
     public void setNextVisitDate(Date nextVisitDate) {
         this.nextVisitDate = nextVisitDate;
     }
