@@ -1,5 +1,6 @@
 package ui.Buttons;
 
+import model.patient.Patient;
 import model.patient.PersonalInformation;
 import ui.PopupWindows.PatientCardPopup;
 
@@ -10,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class ShowPatientCard extends JLabel {
-    public ShowPatientCard(PersonalInformation info) {
+    public ShowPatientCard(Patient patient) {
         setText("More...");
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setForeground(new Color(38, 44, 107));
@@ -18,14 +19,14 @@ public class ShowPatientCard extends JLabel {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                openProfileWindow(info);
+                openProfileWindow(patient);
             }
         });
     }
 
-    private void openProfileWindow(PersonalInformation info) {
+    private void openProfileWindow(Patient patient) {
 
-        PatientCardPopup profileFrame = new PatientCardPopup(info);
+        PatientCardPopup profileFrame = new PatientCardPopup(patient);
         profileFrame.setVisible(true);
     }
 }

@@ -2,8 +2,10 @@ package ui.PopupWindows;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
+import ui.InformationPanel;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,7 +14,7 @@ public class PatientCardPopup extends JDialog {
     private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
 
-    static JPanel t;
+    static JPanel dataContainer;
     static JButton saveAllergy, savePrescription;
     static ImageIcon profile, imgIcon;
     static Image image;
@@ -21,16 +23,20 @@ public class PatientCardPopup extends JDialog {
     Patient patient;
     PersonalInformation info;
 
-    public PatientCardPopup(PersonalInformation info) {
-        this.info = info;
+    public PatientCardPopup(Patient patient) {
+        this.info = patient.getPersonalInfo();
 
-        t = new JPanel();
-
-        profile = new ImageIcon("src/ui/149071.png");
-        image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
+        dataContainer = new JPanel();
+        profile = new ImageIcon(patient.getImageURL());
+        image = profile.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
 
+        InformationPanel informationPanel = new InformationPanel(patient, new Color(0,0,0,0));
+        informationPanel.setBorder(new EmptyBorder(10,80,0,0));
+        dataContainer.add(img);
+        dataContainer.add(informationPanel);
+        add(dataContainer);
         name = new JLabel("Name: " + info.getName() + " " + info.getLastName());
         name.setFont(new Font("Serif", Font.PLAIN, 15));
 

@@ -11,10 +11,11 @@ public class PregnantPatient extends Patient implements Discount {
 
     public PregnantPatient() {
         super();
+        setImageURL("src/ui/DefaultImages/Pregnant.jpg");
     }
 
     public PregnantPatient(PersonalInformation personalInfo, History history, Payments payments, int trimester, String contraindications) {
-        super(personalInfo, history, payments);
+        super(personalInfo, history, payments, "src/ui/DefaultImages/Pregnant.jpg");
         this.trimester = trimester;
         this.contraindications = contraindications;
     }

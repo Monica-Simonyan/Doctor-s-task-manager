@@ -5,7 +5,7 @@ import model.patient.PersonalInformation;
 import ui.HomePage;
 import ui.PopupItems.DatePicker;
 import ui.PopupItems.GenderRadioButtons;
-import ui.PopupItems.PatientCategoryMenu;
+import ui.Menus.PatientCategoryMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
