@@ -2,10 +2,8 @@ package ui.PopupWindows;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
-import ui.InformationPanel;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +12,7 @@ public class PatientCardPopup extends JDialog {
     private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
 
-    static JPanel dataContainer;
+    static JPanel t;
     static JButton saveAllergy, savePrescription;
     static ImageIcon profile, imgIcon;
     static Image image;
@@ -23,21 +21,29 @@ public class PatientCardPopup extends JDialog {
     Patient patient;
     PersonalInformation info;
 
-    public PatientCardPopup(Patient patient) {
-        this.info = patient.getPersonalInfo();
+    public PatientCardPopup(PersonalInformation info) {
+        this.info = info;
 
-        //Contianer for profile image and personal information
-        dataContainer = new JPanel();
-        profile = new ImageIcon(patient.getImageURL());
-        image = profile.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        t = new JPanel();
+
+        profile = new ImageIcon("src/ui/149071.png");
+        image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
 
-        InformationPanel informationPanel = new InformationPanel(patient, new Color(0,0,0,0));
-        informationPanel.setBorder(new EmptyBorder(10,20,0,0));
+        name = new JLabel("Name: " + info.getName() + " " + info.getLastName());
+        name.setFont(new Font("Serif", Font.PLAIN, 15));
 
+        age = new JLabel("Age: " + info.getAge());
+        age.setFont(new Font("Serif", Font.PLAIN, 15));
+
+        gender = new JLabel("Gender: " + info.getGender());
+        gender.setFont(new Font("Serif", Font.PLAIN, 15));
         //
-        nextVisit = new JLabel("Next Visit Date: "+ patient.getNextVisitDate().toString().substring(0,19));
+        lastVisit = new JLabel();
+        lastVisit.setFont(new Font("Serif", Font.PLAIN, 15));
+        //
+        nextVisit = new JLabel();
         nextVisit.setFont(new Font("Serif", Font.PLAIN, 15));
 
         phone = new JLabel("Phone Number: " + info.getPhoneNumber());
@@ -86,14 +92,6 @@ public class PatientCardPopup extends JDialog {
                 }
             }
         });
-
-        dataContainer.add(img);
-        informationPanel.add(nextVisit);
-        informationPanel.add(phone);
-        informationPanel.add(email);
-        dataContainer.add(informationPanel);
-
-        add(dataContainer);
         setPreferredSize(new Dimension(400, 550));
         pack();
         setResizable(false);
