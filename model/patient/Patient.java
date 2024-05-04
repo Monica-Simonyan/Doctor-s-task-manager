@@ -81,6 +81,14 @@ public abstract class Patient implements Cloneable {
         this.personalInfo = new PersonalInformation(personalInfo);
     }
 
+    public Date getNextVisitDate() {
+        return nextVisitDate;
+    }
+
+    public void setNextVisitDate(Date nextVisitDate) {
+        this.nextVisitDate = nextVisitDate;
+    }
+
     /**
      * Creates independent clone of the calling Patient object
      *

@@ -26,28 +26,18 @@ public class PatientCardPopup extends JDialog {
     public PatientCardPopup(Patient patient) {
         this.info = patient.getPersonalInfo();
 
+        //Contianer for profile image and personal information
         dataContainer = new JPanel();
         profile = new ImageIcon(patient.getImageURL());
-        image = profile.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
+        image = profile.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
 
         InformationPanel informationPanel = new InformationPanel(patient, new Color(0,0,0,0));
-        informationPanel.setBorder(new EmptyBorder(10,80,0,0));
+        informationPanel.setBorder(new EmptyBorder(10,20,0,0));
 
-        name = new JLabel("Name: " + info.getName() + " " + info.getLastName());
-        name.setFont(new Font("Serif", Font.PLAIN, 15));
-
-        age = new JLabel("Age: " + info.getAge());
-        age.setFont(new Font("Serif", Font.PLAIN, 15));
-
-        gender = new JLabel("Gender: " + info.getGender());
-        gender.setFont(new Font("Serif", Font.PLAIN, 15));
         //
-        lastVisit = new JLabel();
-        lastVisit.setFont(new Font("Serif", Font.PLAIN, 15));
-        //
-        nextVisit = new JLabel();
+        nextVisit = new JLabel("Next Visit Date: "+ patient.getNextVisitDate().toString().substring(0,19));
         nextVisit.setFont(new Font("Serif", Font.PLAIN, 15));
 
         phone = new JLabel("Phone Number: " + info.getPhoneNumber());

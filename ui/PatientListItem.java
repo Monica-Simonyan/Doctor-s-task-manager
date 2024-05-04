@@ -55,7 +55,7 @@ public class PatientListItem extends JPanel {
         JLabel img = new JLabel(resizedImageIcon);
 
         InformationPanel infoPanel = new InformationPanel(patient, color);
-        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 100));
+        infoPanel.setBorder(new EmptyBorder(0, 0, 0, 70));
         add(infoPanel);
         infoPanel.add(new ShowPatientCard(patient));
         infoPanel.add(closeBtn);
