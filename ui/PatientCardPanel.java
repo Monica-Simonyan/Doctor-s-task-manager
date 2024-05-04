@@ -10,7 +10,7 @@ public class PatientCardPanel extends JPanel {
     public PatientCardPanel(Patient patient){
         PersonalInformation info = patient.getPersonalInfo();
         //change to getImage();
-        ImageIcon profile = new ImageIcon("src/ui/149071.png");
+        ImageIcon profile = new ImageIcon(patient.getImageURL());
         Image image = profile.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(image);
         JLabel img = new JLabel(imgIcon);
