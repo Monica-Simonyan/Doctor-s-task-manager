@@ -52,18 +52,18 @@ public class HomePage extends JFrame {
         JMenuItem sortByDateItem = new JMenuItem("By Date");
 
 
-        sortByNameItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {}
-        });
+//        sortByNameItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
 
-        sortByAgeItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {}
-        });
-
-        sortByDateItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {}
-        });
-
+//        sortByAgeItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
+//
+//        sortByDateItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
+//
         AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             new AddPatientPopup();
