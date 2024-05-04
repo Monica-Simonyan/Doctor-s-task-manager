@@ -8,7 +8,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 public class PatientCardPopup extends JDialog {
     private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
@@ -24,7 +24,6 @@ public class PatientCardPopup extends JDialog {
         this.patient = patient.clone();
         this.info = this.patient.getPersonalInfo();
 
-        //Contianer for profile image and personal information
         dataContainer = new JPanel();
         profile = new ImageIcon(patient.getImageURL());
         image = profile.getImage().getScaledInstance(120, 120, Image.SCALE_SMOOTH);
@@ -32,6 +31,11 @@ public class PatientCardPopup extends JDialog {
         imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
 
+        loadWindow();
+    }
+
+
+    private void loadWindow(){
         InformationPanel informationPanel = new InformationPanel(patient, new Color(0,0,0,0));
         informationPanel.setBorder(new EmptyBorder(10,80,0,0));
         informationPanel.setBorder(new EmptyBorder(10,20,0,0));
@@ -92,6 +96,7 @@ public class PatientCardPopup extends JDialog {
                 }
             }
         });
+
         dataContainer.add(img);
         informationPanel.add(nextVisit);
         informationPanel.add(phone);
