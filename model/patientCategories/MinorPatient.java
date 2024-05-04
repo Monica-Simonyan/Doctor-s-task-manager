@@ -122,7 +122,7 @@ public class MinorPatient extends Patient implements Discount {
         return amount;
     }
 
-    public String toString(){
+    public String toString() {
         return "Minor";
     }
 }

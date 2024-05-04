@@ -11,7 +11,7 @@ public abstract class Patient implements Cloneable {
     private String imageURL;
 
     public Patient() {
-        this.imageURL ="src/ui/DefaultImages/Adult.png";
+        this.imageURL = "src/ui/DefaultImages/Adult.png";
         personalInfo = new PersonalInformation();
         history = new History();
         nextVisitDate = new Date();

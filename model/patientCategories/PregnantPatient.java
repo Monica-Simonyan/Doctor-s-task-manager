@@ -63,7 +63,8 @@ public class PregnantPatient extends Patient implements Discount {
     public void setContraindications(String contraindications) {
         this.contraindications = contraindications;
     }
-    public String toString(){
+
+    public String toString() {
         return "Pregnant";
     }
 }
