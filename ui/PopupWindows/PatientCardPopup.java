@@ -3,23 +3,22 @@ package ui.PopupWindows;
 import model.patient.*;
 import ui.InformationPanel;
 
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class PatientCardPopup extends JDialog {
-    private static final Color color = new Color(252, 217, 217);
     private static final Color backgroundColor = new Color(222, 227, 235);
     static JPanel dataContainer;
     static JButton saveAllergy, savePrescription;
     static ImageIcon profile, imgIcon;
     static Image image;
-    static JLabel img, name, age, gender, lastVisit, nextVisit, phone, email, address, history, allergyLabel, prescLabel;
+    static JLabel img, name, age, gender, lastVisit, nextVisit, phone, email, address, history, allergyLabel, prescriptionLabel;
     static JTextField allergies, prescriptions;
     Patient patient;
     PersonalInformation info;
+
     public PatientCardPopup(Patient patient){
         this.patient = patient.clone();
         this.info = this.patient.getPersonalInfo();
@@ -81,8 +80,8 @@ public class PatientCardPopup extends JDialog {
             }
         });
 
-        prescLabel = new JLabel("Allergies");
-        prescLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        prescriptionLabel = new JLabel("Allergies");
+        prescriptionLabel.setFont(new Font("Serif", Font.PLAIN, 18));
         prescriptions = new JTextField("List Prescriptions", 10);
         prescriptions.setBackground(backgroundColor);
         savePrescription = new JButton("Save");
