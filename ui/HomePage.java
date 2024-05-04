@@ -7,6 +7,7 @@ import model.patientCategories.AdultPatient;
 import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
+import ui.Menus.SortDropDownMenu;
 import ui.PopupWindows.AddPatientPopup;
 
 import javax.swing.*;
