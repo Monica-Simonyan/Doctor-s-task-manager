@@ -2,12 +2,11 @@ package ui;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
+import ui.Buttons.ShowPatientCard;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Represents a JPanel for displaying information about a patient in a list.
@@ -50,17 +49,10 @@ public class PatientListItem extends JPanel {
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
 
-        //More button opens the window with patient card
-        JLabel moreBtn = new JLabel("More...");
-        moreBtn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        moreBtn.setForeground(new Color(38, 44, 107));
-        moreBtn.setBorder(new EmptyBorder(3, 0, 0, 0));
-        moreBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                openProfileWindow(info);
-            }
-        });
+        ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
+        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
+        JLabel img = new JLabel(resizedImageIcon);
 
         JPanel infoPanel = new JPanel();
         infoPanel.setBorder(new EmptyBorder(0, 0, 0, 120));
@@ -72,21 +64,12 @@ public class PatientListItem extends JPanel {
         infoPanel.add(fullNameTxt);
         infoPanel.add(ageTxt);
         infoPanel.add(genderTxt);
-        infoPanel.add(moreBtn);
-
-        ImageIcon profileImage = new ImageIcon("src/ui/149071.png");
-        Image resizedImage = profileImage.getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
-        ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
-        JLabel img = new JLabel(resizedImageIcon);
-
+        infoPanel.add(new ShowPatientCard(info));
         add(infoPanel);
         add(img);
         setSize(new Dimension(HomePage.WIDTH, 170));
         setBackground(color);
     }
 
-    private void openProfileWindow(PersonalInformation info) {
-        PatientCard profileFrame = new PatientCard();
-        profileFrame.setVisible(true);
-    }
+
 }

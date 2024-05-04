@@ -23,6 +23,9 @@ public class PersonalInformation implements Cloneable {
         MALE, FEMALE
     }
 
+    public PersonalInformation(){
+
+    }
     /**
      * Constructor to create a new instance with full personal details.
      *

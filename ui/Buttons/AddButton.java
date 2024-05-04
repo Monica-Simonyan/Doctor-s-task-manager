@@ -1,4 +1,4 @@
-package ui;
+package ui.Buttons;
 
 import javax.swing.*;
 import java.awt.*;
