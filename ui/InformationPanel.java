@@ -19,7 +19,7 @@ public class InformationPanel extends JPanel {
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());
         JLabel ageTxt = new JLabel("Age: " + info.getAge());
         JLabel genderTxt = new JLabel("Gender: " + info.getGender().toString().toLowerCase());
-        setLayout(new GridLayout(6, 2));
+        setLayout(new GridLayout(0, 1));
 
         setBackground(color);
         add(category);

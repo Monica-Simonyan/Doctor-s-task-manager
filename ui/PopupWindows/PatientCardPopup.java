@@ -34,9 +34,7 @@ public class PatientCardPopup extends JDialog {
 
         InformationPanel informationPanel = new InformationPanel(patient, new Color(0,0,0,0));
         informationPanel.setBorder(new EmptyBorder(10,80,0,0));
-        dataContainer.add(img);
-        dataContainer.add(informationPanel);
-        add(dataContainer);
+
         name = new JLabel("Name: " + info.getName() + " " + info.getLastName());
         name.setFont(new Font("Serif", Font.PLAIN, 15));
 
@@ -98,6 +96,14 @@ public class PatientCardPopup extends JDialog {
                 }
             }
         });
+
+        dataContainer.add(img);
+        informationPanel.add(nextVisit);
+        informationPanel.add(phone);
+        informationPanel.add(email);
+        dataContainer.add(informationPanel);
+
+        add(dataContainer);
         setPreferredSize(new Dimension(400, 550));
         pack();
         setResizable(false);
