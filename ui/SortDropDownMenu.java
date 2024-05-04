@@ -9,6 +9,7 @@ public class SortDropDownMenu extends JMenuBar{
         JMenuItem sortByNameItem = new JMenuItem("By Name");
         JMenuItem sortByAgeItem = new JMenuItem("By Age");
         JMenuItem sortByDateItem = new JMenuItem("By Date");
+        JMenuItem sortByDefault = new JMenuItem("By Default");
 
 //        sortByNameItem.addActionListener(new ActionListener() {
 //            public void actionPerformed(ActionEvent e) {}
@@ -26,6 +27,7 @@ public class SortDropDownMenu extends JMenuBar{
         sortMenu.add(sortByNameItem);
         sortMenu.add(sortByAgeItem);
         sortMenu.add(sortByDateItem);
+        sortMenu.add(sortByDefault);
         setBounds(0,30,70,20);
         menuBar.add(sortMenu);
         add(menuBar);
