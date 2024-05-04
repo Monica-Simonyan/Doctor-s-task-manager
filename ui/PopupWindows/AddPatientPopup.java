@@ -1,16 +1,16 @@
-package ui;
+package ui.PopupWindows;
 
 import model.exceptions.*;
 import model.patient.PersonalInformation;
+import ui.HomePage;
+import ui.PopupItems.DatePicker;
+import ui.PopupItems.GenderRadioButtons;
 import ui.PopupItems.PatientCategoryMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import static ui.PopupItems.DatePicker.placeComponents;
 import static ui.PopupItems.TimePicker.placeTimeComponents;
 
 public class AddPatientPopup extends JDialog {
@@ -19,15 +19,14 @@ public class AddPatientPopup extends JDialog {
     private final JTextField ageField;
     private String gender;
 
-    private final JRadioButton maleRadioButton;
-    private final JRadioButton femaleRadioButton;
+
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
 
     public AddPatientPopup() {
         JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5));
-        panel.setBorder(new EmptyBorder(0,5,0,0));
+        panel.setBorder(new EmptyBorder(0, 5, 0, 0));
         panel.setPreferredSize(new Dimension(400, 550));
 
 
@@ -43,28 +42,9 @@ public class AddPatientPopup extends JDialog {
         ageField = new JTextField();
         panel.add(ageField);
 
-        ButtonGroup genderGroup = new ButtonGroup();
-        maleRadioButton = new JRadioButton("Male");
-        maleRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JRadioButton selected=(JRadioButton)e.getSource();
-                gender=selected.getText();
-            }
-        });
-        femaleRadioButton = new JRadioButton("Female");
-        femaleRadioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JRadioButton selected=(JRadioButton)e.getSource();
-                gender=selected.getText();
-            }
-        });
-        genderGroup.add(maleRadioButton);
-        genderGroup.add(femaleRadioButton);
-        panel.add(maleRadioButton);
-        panel.add(femaleRadioButton);
-
+        GenderRadioButtons genderRadioButtons = new GenderRadioButtons();
+        panel.add(genderRadioButtons.maleRadioButton);
+        panel.add(genderRadioButtons.femaleRadioButton);
         panel.add(new JLabel("Gmail:"));
         gmailField = new JTextField();
         panel.add(gmailField);
@@ -77,23 +57,20 @@ public class AddPatientPopup extends JDialog {
         phoneNumberField = new JTextField();
         panel.add(phoneNumberField);
 
-        JLabel dateTxt = new JLabel("Date: ");
-        panel.add(dateTxt);
+        panel.add(new JLabel("Date: "));
         JPanel datePanel = new JPanel();
         datePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
-        placeComponents(datePanel);
+        DatePicker datePicker = new DatePicker();
+        datePicker.placeComponents(datePanel);
         panel.add(datePanel);
 
-        JLabel timeTxt = new JLabel("Time: ");
-        timeTxt.setSize(timeTxt.getWidth(), timeTxt.getHeight());
-        panel.add(timeTxt);
+        panel.add(new JLabel("Time: "));
         JPanel timePanel = new JPanel();
         timePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
         placeTimeComponents(timePanel);
         panel.add(timePanel);
 
-        JLabel menuTxt = new JLabel("Choose: ");
-        panel.add(menuTxt);
+        panel.add(new JLabel("Choose: "));
         PatientCategoryMenu categoriesMenu = new PatientCategoryMenu();
         panel.add(categoriesMenu);
         // Adding OK and Cancel buttons
@@ -103,20 +80,20 @@ public class AddPatientPopup extends JDialog {
             boolean isInputValid = false;
             PersonalInformation info;
             while (!isInputValid) {
-
                 isInputValid = true;
                 try {
+                    gender = genderRadioButtons.getSelectedGender();
                     info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
                             ageField.getText(), gmailField.getText(), addressField.getText(),
                             phoneNumberField.getText(), gender);
                     categoriesMenu.accessCategory().setPersonalInfo(info);
                     HomePage.update(categoriesMenu.accessCategory());
+
                 } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
                          InvalidGmailException | InvalidPatientException ex) {
                     JOptionPane.showMessageDialog(null, ex.getMessage());
                 }
             }
-
             dispose();
         });
         cancelButton.addActionListener(e -> dispose());

@@ -1,7 +1,7 @@
 package ui.Buttons;
 
 import model.patient.PersonalInformation;
-import ui.PatientCard;
+import ui.PopupWindows.PatientCardPopup;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -25,7 +25,7 @@ public class ShowPatientCard extends JLabel {
 
     private void openProfileWindow(PersonalInformation info) {
 
-        PatientCard profileFrame = new PatientCard();
+        PatientCardPopup profileFrame = new PatientCardPopup();
         profileFrame.setVisible(true);
     }
 }

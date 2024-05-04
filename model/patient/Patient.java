@@ -1,5 +1,7 @@
 package model.patient;
 
+import java.util.Date;
+
 public abstract class Patient implements Cloneable {
     //instance variables
     PersonalInformation personalInfo;
