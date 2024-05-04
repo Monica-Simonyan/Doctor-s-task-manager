@@ -2,7 +2,7 @@ package ui;
 
 import javax.swing.*;
 
-public class SortDropDownMenu extends JPanel{
+public class SortDropDownMenu extends JMenuBar{
     public SortDropDownMenu(){
         JMenuBar menuBar = new JMenuBar();
         JMenu sortMenu = new JMenu("Sort");
@@ -26,7 +26,7 @@ public class SortDropDownMenu extends JPanel{
         sortMenu.add(sortByNameItem);
         sortMenu.add(sortByAgeItem);
         sortMenu.add(sortByDateItem);
-        sortMenu.setBounds(0,25,70,20);
+        setBounds(0,30,70,20);
         menuBar.add(sortMenu);
         add(menuBar);
     }

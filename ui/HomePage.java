@@ -34,8 +34,6 @@ public class HomePage extends JFrame {
         patientListPanel.setLayout(new GridLayout(1000, 1, 0, 5));
         patientListPanel.setBackground(new Color(255, 255, 255, 255));
 
-        SortDropDownMenu sortDropDownMenu = new SortDropDownMenu();
-        add(sortDropDownMenu);
         JTextField search = new JTextField(10);
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener((ActionEvent e) -> {
@@ -43,20 +41,39 @@ public class HomePage extends JFrame {
         });
 
 
+
         JPanel searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
-        searchPanel.setBounds(0, 5, 250, 50);
+        searchPanel.add(new SortDropDownMenu());
+        searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
-
 
 
         AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             new AddPatientPopup();
         });
-        addButton.setBounds(270, 25, 40, 40);
+        addButton.setBounds(270, 10, 40, 40);
         add(addButton);
+
+
+
+
+//        sortByNameItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
+
+//        sortByAgeItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
+//
+//        sortByDateItem.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {}
+//        });
+//
+
+
 
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
