@@ -16,7 +16,7 @@ public class MinorPatient extends Patient implements Discount {
         setImageURL("src/ui/DefaultImages/Minor.png");
     }
 
-    public MinorPatient(PersonalInformation personalInfo, History history, Payments payments, String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
+    public MinorPatient(PersonalInformation personalInfo, History history, Payments<MinorPatient> payments, String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
         super(personalInfo, history, payments, "src/ui/DefaultImages/Minor.png");
         this.motherGuardianName = motherGuardianName;
         this.fatherGuardianName = fatherGuardianName;
@@ -117,7 +117,7 @@ public class MinorPatient extends Patient implements Discount {
      * @param amount integer amount of money
      * @return integer amount of money with discount applied
      */
-    public int applyDiscount(int amount) {
+    public static int applyDiscount(int amount) {
         amount *= 0.8;
         return amount;
     }

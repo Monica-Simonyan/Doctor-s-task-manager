@@ -2,8 +2,8 @@ package ui.Menus;
 
 import javax.swing.*;
 
-public class SortDropDownMenu extends JMenuBar{
-    public SortDropDownMenu(){
+public class SortDropDownMenu extends JMenuBar {
+    public SortDropDownMenu() {
         JMenuBar menuBar = new JMenuBar();
         JMenu sortMenu = new JMenu("Sort");
         JMenuItem sortByNameItem = new JMenuItem("By Name");
@@ -28,15 +28,8 @@ public class SortDropDownMenu extends JMenuBar{
         sortMenu.add(sortByAgeItem);
         sortMenu.add(sortByDateItem);
         sortMenu.add(sortByDefault);
-        setBounds(0,30,70,20);
+        setBounds(0, 30, 70, 20);
         menuBar.add(sortMenu);
         add(menuBar);
     }
-
-//    public static void main(String[] args) {
-//        JFrame f = new JFrame();
-//        f.setSize(300,300);
-//        f.add((new SortDropDownMenu()));
-//        f.setVisible(true);
-//    }
 }

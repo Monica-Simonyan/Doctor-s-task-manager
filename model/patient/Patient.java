@@ -2,11 +2,11 @@ package model.patient;
 
 import java.util.Date;
 
-public abstract class Patient implements Cloneable {
+public abstract class Patient implements Cloneable, Discount,PaymentCalculation {
     //instance variables
     private PersonalInformation personalInfo;
     private History history;
-    private Payments payments;
+    private Payments<Patient> payments;
     private Date nextVisitDate;
     private String imageURL;
 
@@ -15,7 +15,7 @@ public abstract class Patient implements Cloneable {
         personalInfo = new PersonalInformation();
         history = new History();
         nextVisitDate = new Date();
-        payments = new Payments();
+        payments = new Payments<>();
     }
 
     public Patient(PersonalInformation personalInfo, History history, Payments payments, String imageURL) {
@@ -32,8 +32,8 @@ public abstract class Patient implements Cloneable {
      *
      * @return payments of type Payments
      */
-    public Payments getPayments() {
-        return payments.clone();
+    public Payments<Patient> getPayments() {
+        return new Payments<>(payments);
     }
 
     /**
@@ -41,8 +41,8 @@ public abstract class Patient implements Cloneable {
      *
      * @param payments new payments of type Payments
      */
-    public void setPayments(Payments payments) {
-        this.payments = payments.clone();
+    public void setPayments(Payments<Patient> payments) {
+        this.payments = new Payments<>(payments);
     }
 
     /**
@@ -84,8 +84,17 @@ public abstract class Patient implements Cloneable {
     public Date getNextVisitDate() {
         return nextVisitDate;
     }
+
     public void setNextVisitDate(Date nextVisitDate) {
         this.nextVisitDate = nextVisitDate;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     /**
@@ -98,7 +107,7 @@ public abstract class Patient implements Cloneable {
             Patient clone = (Patient) super.clone();
             clone.history = history.clone();
             clone.personalInfo = personalInfo.clone();
-            clone.payments = payments.clone();
+            clone.payments = new Payments<>(payments);
             return clone;
         } catch (CloneNotSupportedException e) {
             return null;
@@ -121,11 +130,5 @@ public abstract class Patient implements Cloneable {
         return this.getClass() + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
     }
 
-    public String getImageURL() {
-        return imageURL;
-    }
 
-    public void setImageURL(String imageURL) {
-        this.imageURL = imageURL;
-    }
 }

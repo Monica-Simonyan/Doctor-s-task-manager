@@ -107,6 +107,8 @@ public class PatientCardPopup extends JDialog {
         });
 
         dataContainer.add(img);
+        dataContainer.add(informationPanel);
+        add(dataContainer);
         informationPanel.add(nextVisit);
         informationPanel.add(phone);
         informationPanel.add(email);
@@ -117,8 +119,7 @@ public class PatientCardPopup extends JDialog {
         informationPanel.add(prescriptionLabel);
         informationPanel.add(prescriptions);
         informationPanel.add(savePrescription);
-        dataContainer.add(informationPanel);
-        add(dataContainer);
+
         setPreferredSize(new Dimension(400, 550));
         pack();
         setResizable(false);
