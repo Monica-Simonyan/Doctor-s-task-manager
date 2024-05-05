@@ -9,7 +9,7 @@ import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
 import ui.Elements.PatientListItem;
-import ui.Menus.SortDropDownMenu;
+import ui.Menus.*;
 import ui.PopupWindows.AddPatientPopup;
 
 import javax.swing.*;
@@ -62,23 +62,6 @@ public class HomePage extends JFrame {
         add(addButton);
 
 
-
-
-//        sortByNameItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-
-//        sortByAgeItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
-//        sortByDateItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
-
-
-
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
@@ -128,19 +111,26 @@ public class HomePage extends JFrame {
      * Sorts the patients list by default
      */
     public static void sortPatientsByDefault() {
-        Collections.sort(patients);
+        patients.sort(new DefaultComparator());
         refreshPatientListPanel();
     }
     public static void sortPatientsByAge() {
-        for(int i = 0; i < patients.size()-1; i++){
-            if (patients.get(i).getPersonalInfo().getAge() > patients.get(i+1).getPersonalInfo().getAge()) {
-                Patient smaller = patients.get(i+1);
-                patients.set(i+1, patients.get(i));
-                patients.set(i, smaller);
-            }
-            refreshPatientListPanel();
-        }
-        Collections.sort(patients);
+        patients.sort(new AgeComparator());
+        refreshPatientListPanel();
+    }
+    /**
+     * Sorts the patients list by name.
+     */
+    public static void sortPatientsByName() {
+        patients.sort(new NameComparator());
+        refreshPatientListPanel();
+    }
+
+    /**
+     * Sorts the patients list by date.
+     */
+    public static void sortPatientsByDate() {
+        patients.sort(new DateComparator());
         refreshPatientListPanel();
     }
 

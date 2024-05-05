@@ -15,7 +15,7 @@ public class SortDropDownMenu extends JMenuBar {
         JMenuItem sortByDefault = new JMenuItem("By Default");
 
         sortByNameItem.addActionListener(e -> {
-
+            HomePage.sortPatientsByName();
         });
 
         sortByAgeItem.addActionListener(e -> {
@@ -23,6 +23,7 @@ public class SortDropDownMenu extends JMenuBar {
         });
 
         sortByDateItem.addActionListener(e -> {
+            HomePage.sortPatientsByDate();
         });
         sortByDefault.addActionListener(e -> {
             HomePage.sortPatientsByDefault();
