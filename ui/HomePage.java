@@ -108,7 +108,7 @@ public class HomePage extends JFrame {
     }
 
     /**
-     * Sorts the patients list by default
+     * Sorts the patients list by default.
      */
     public static void sortPatientsByDefault() {
         patients.sort(new DefaultComparator());
