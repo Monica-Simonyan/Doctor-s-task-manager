@@ -125,7 +125,7 @@ public class HomePage extends JFrame {
     }
 
     /**
-     * Sorts the patients list by default.
+     * Sorts the patients list by default
      */
     public static void sortPatientsByDefault() {
         Collections.sort(patients);
