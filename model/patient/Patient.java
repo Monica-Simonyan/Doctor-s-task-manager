@@ -118,7 +118,7 @@ public abstract class Patient implements Cloneable {
      * @return string representation of a patient
      */
     public String toString() {
-        return this.getClass() + "\n" + personalInfo + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
+        return this.getClass() + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
     }
 
     public String getImageURL() {

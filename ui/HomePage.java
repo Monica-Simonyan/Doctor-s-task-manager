@@ -7,6 +7,7 @@ import model.patientCategories.AdultPatient;
 import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
+import ui.Elements.PatientListItem;
 import ui.Menus.SortDropDownMenu;
 import ui.PopupWindows.AddPatientPopup;
 
@@ -23,9 +24,8 @@ import java.util.ArrayList;
 public class HomePage extends JFrame {
     private static JPanel patientListPanel;
     private static ArrayList<Patient> patients = new ArrayList<>();
-    static final int WIDTH = 350;
-    static final int HEIGHT = 650;
-
+    public static final int WIDTH = 350;
+    public static final int HEIGHT = 650;
 
     /**
      * Constructs a new HomePage object.
@@ -41,8 +41,6 @@ public class HomePage extends JFrame {
             // Perform search action here
         });
 
-
-
         JPanel searchPanel = new JPanel();
         searchPanel.add(search);
         searchPanel.add(searchButton);
@@ -50,31 +48,12 @@ public class HomePage extends JFrame {
         searchPanel.setBounds(0, 10, 250, 50);
         add(searchPanel);
 
-
         AddButton addButton = new AddButton(40);
         addButton.addActionListener(e -> {
             new AddPatientPopup();
         });
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
-
-
-
-
-//        sortByNameItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-
-//        sortByAgeItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
-//        sortByDateItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
-
-
 
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);

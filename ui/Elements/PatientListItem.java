@@ -1,8 +1,9 @@
-package ui;
+package ui.Elements;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;
 import ui.Buttons.ShowPatientCard;
+import ui.HomePage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -49,7 +50,6 @@ public class PatientListItem extends JPanel {
 
 
         ImageIcon profileImage = new ImageIcon(patient.getImageURL());
-        System.out.println(patient.getImageURL() + " " + patient);
         Image resizedImage = profileImage.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon resizedImageIcon = new ImageIcon(resizedImage);
         JLabel img = new JLabel(resizedImageIcon);

@@ -1,4 +1,4 @@
-package ui;
+package ui.Elements;
 
 import model.patient.Patient;
 import model.patient.PersonalInformation;

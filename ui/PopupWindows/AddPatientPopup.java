@@ -3,15 +3,15 @@ package ui.PopupWindows;
 import model.exceptions.*;
 import model.patient.PersonalInformation;
 import ui.HomePage;
-import ui.PopupItems.DatePicker;
-import ui.PopupItems.GenderRadioButtons;
+import ui.Elements.DatePicker;
+import ui.Elements.GenderRadioButtons;
 import ui.Menus.PatientCategoryMenu;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-import static ui.PopupItems.TimePicker.placeTimeComponents;
+import static ui.Elements.TimePicker.placeTimeComponents;
 
 /**
  * AddPatientPopup is a dialog window for adding a new patient's information.

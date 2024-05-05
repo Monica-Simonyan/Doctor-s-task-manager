@@ -1,7 +1,7 @@
 package ui.PopupWindows;
 
 import model.patient.*;
-import ui.InformationPanel;
+import ui.Elements.InformationPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
