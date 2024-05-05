@@ -2,20 +2,22 @@ package model.patient;
 
 import java.util.Date;
 
-public abstract class Patient implements Cloneable, Discount,PaymentCalculation {
-    //instance variables
+public abstract class Patient implements Cloneable, DiscountCalculation {
+    // Instance variables
+    private final int DISCOUNT = 10;
     private PersonalInformation personalInfo;
     private History history;
-    private Payments<Patient> payments;
+    private Payments payments;
     private Date nextVisitDate;
     private String imageURL;
 
+    // Constructors
     public Patient() {
         this.imageURL = "src/ui/DefaultImages/Adult.png";
         personalInfo = new PersonalInformation();
         history = new History();
         nextVisitDate = new Date();
-        payments = new Payments<>();
+        payments = new Payments();
     }
 
     public Patient(PersonalInformation personalInfo, History history, Payments payments, String imageURL) {
@@ -25,58 +27,31 @@ public abstract class Patient implements Cloneable, Discount,PaymentCalculation 
         setPayments(payments);
     }
 
-    //Accessors and mutators
-
-    /**
-     * Returns payments of the patient
-     *
-     * @return payments of type Payments
-     */
-    public Payments<Patient> getPayments() {
-        return new Payments<>(payments);
+    // Accessors and mutators
+    public int getDISCOUNT() {
+        return DISCOUNT;
     }
 
-    /**
-     * Sets the payments of the patient
-     *
-     * @param payments new payments of type Payments
-     */
-    public void setPayments(Payments<Patient> payments) {
-        this.payments = new Payments<>(payments);
+    public Payments getPayments() {
+        return payments;
     }
 
-    /**
-     * Returns history of the patient
-     *
-     * @return history of type History
-     */
+    public void setPayments(Payments payments) {
+        this.payments = new Payments(payments);
+    }
+
     public History getHistory() {
         return history.clone();
     }
 
-    /**
-     * Sets the history of the patient
-     *
-     * @param history new history of type History
-     */
     public void setHistory(History history) {
         this.history = history.clone();
     }
 
-    /**
-     * Returns the personal information of the patient
-     *
-     * @return personal information of type PersonalInformation
-     */
     public PersonalInformation getPersonalInfo() {
         return new PersonalInformation(personalInfo);
     }
 
-    /**
-     * Sets the personal information of the patient
-     *
-     * @param personalInfo new personal information of type PersonalInformation
-     */
     public void setPersonalInfo(PersonalInformation personalInfo) {
         this.personalInfo = new PersonalInformation(personalInfo);
     }
@@ -97,38 +72,67 @@ public abstract class Patient implements Cloneable, Discount,PaymentCalculation 
         this.imageURL = imageURL;
     }
 
-    /**
-     * Creates independent clone of the calling Patient object
-     *
-     * @return cloned object of type Patient
-     */
+    // Methods
     public Patient clone() {
         try {
             Patient clone = (Patient) super.clone();
             clone.history = history.clone();
             clone.personalInfo = personalInfo.clone();
-            clone.payments = new Payments<>(payments);
+            clone.payments = new Payments(payments);
             return clone;
         } catch (CloneNotSupportedException e) {
             return null;
         }
     }
 
+    public int countTotalFees() {
+        int total = 0;
+        for (Payments.Fee fee : payments.getFees()) {
+            total += fee.getAmount();
+        }
+        return total;
+    }
+
+    public int countPaidFee() {
+        int total = countTotalFees();
+        for (Payments.Fee fee : payments.getFees()) {
+            if (fee.getWasPaid()) {
+                total += fee.getAmount();
+            }
+        }
+        return total;
+    }
+
+    int countUnpaid() {
+        int total = 0;
+        for (Payments.Fee fee : payments.getFees()) {
+            if (!fee.getWasPaid()) {
+                total += fee.getAmount();
+            }
+        }
+        return total;
+    }
+
+    public void addDiscountedFee(Payments.Fee fee) {
+        applyDiscount(fee);
+        payments.addFee(fee);
+    }
+
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass())
             return false;
         else return this.personalInfo.equals(((Patient) obj).personalInfo);
-
     }
 
-    /**
-     * Overridden toString method returns the string representation of a patient
-     *
-     * @return string representation of a patient
-     */
+    public void applyDiscount(Payments.Fee fee) {
+        if (fee.getAmount() >= 20000) {
+            fee.setAmount(fee.getAmount() - getDISCOUNT());
+        }
+    }
+
+    // Overridden methods
+    @Override
     public String toString() {
-        return this.getClass() + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
+        return getClass().getSimpleName() + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
     }
-
-
 }

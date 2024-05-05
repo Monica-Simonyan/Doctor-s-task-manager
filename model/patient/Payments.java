@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Represents the payment records for a patient.
  * This class manages a list of fees, tracking both paid and unpaid amounts.
  */
-public class Payments<T extends Discount> {
+public class Payments {
 
     /**
      * Represents a specific fee with its payment status and amount.
@@ -37,6 +37,7 @@ public class Payments<T extends Discount> {
         public int getAmount() {
             return amount;
         }
+
         public boolean getWasPaid() {
             return wasPaid;
         }
@@ -71,15 +72,19 @@ public class Payments<T extends Discount> {
     /**
      * Constructs Payments with a list of fees, performing deep copying.
      *
-     * @param payments a list of fees to initialize the Payments object
+     * @param other a list of fees to initialize the Payments object
      */
-    public Payments(Payments<T> payments) {
-        fees = new ArrayList<>(payments.fees.size());
-        for (Fee fee : payments.fees) {
-            fees.add(fee.clone()); // Deep cloning of each Fee
+    public Payments(Payments other) {
+        fees = new ArrayList<>(other.fees.size());
+        for (Fee fee : other.fees) {
+            if (fee != null)
+                fees.add(fee.clone()); // Deep cloning of each Fee
         }
     }
 
+    public void addFee(Fee fee) {
+        fees.add(fee);
+    }
 
     /**
      * Gets the list of fees.
