@@ -19,6 +19,7 @@ public class SortDropDownMenu extends JMenuBar {
         });
 
         sortByAgeItem.addActionListener(e -> {
+            HomePage.sortPatientsByAge();
         });
 
         sortByDateItem.addActionListener(e -> {
