@@ -2,9 +2,9 @@ package model.patient;
 
 import java.util.Date;
 
-public abstract class Patient implements Cloneable, DiscountCalculation {
+public abstract class Patient implements Cloneable, DiscountCalculation, Comparable<Patient> {
     // Instance variables
-    private final int DISCOUNT = 10;
+    private final int DISCOUNT = 1000;
     private PersonalInformation personalInfo;
     private History history;
     private Payments payments;
@@ -73,6 +73,18 @@ public abstract class Patient implements Cloneable, DiscountCalculation {
     }
 
     // Methods
+    public int compareTo(Patient other) {
+        if (!((this.personalInfo.getName()).equals(other.personalInfo.getName())))
+            return this.personalInfo.getName().compareTo(other.personalInfo.getName());
+        else if (!((this.personalInfo.getLastName()).equals(other.personalInfo.getLastName())))
+            return this.personalInfo.getLastName().compareTo(other.personalInfo.getLastName());
+        else if (this.personalInfo.getAge() != other.personalInfo.getAge())
+            return this.personalInfo.getAge() - other.personalInfo.getAge();
+        else if (!(getNextVisitDate().equals(other.getNextVisitDate())))
+            return getNextVisitDate().compareTo(other.getNextVisitDate());
+        return 0;
+    }
+
     public Patient clone() {
         try {
             Patient clone = (Patient) super.clone();

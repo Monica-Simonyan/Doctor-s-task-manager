@@ -1,6 +1,9 @@
 package ui.Menus;
 
+import ui.HomePage;
+
 import javax.swing.*;
+;
 
 public class SortDropDownMenu extends JMenuBar {
     public SortDropDownMenu() {
@@ -11,18 +14,18 @@ public class SortDropDownMenu extends JMenuBar {
         JMenuItem sortByDateItem = new JMenuItem("By Date");
         JMenuItem sortByDefault = new JMenuItem("By Default");
 
-//        sortByNameItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
+        sortByNameItem.addActionListener(e -> {
 
-//        sortByAgeItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
-//        sortByDateItem.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {}
-//        });
-//
+        });
+
+        sortByAgeItem.addActionListener(e -> {
+        });
+
+        sortByDateItem.addActionListener(e -> {
+        });
+        sortByDefault.addActionListener(e -> {
+            HomePage.sortPatientsByDefault();
+        });
 
         sortMenu.add(sortByNameItem);
         sortMenu.add(sortByAgeItem);
