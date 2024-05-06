@@ -83,10 +83,14 @@ public class HomePage extends JFrame {
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
 
-        PersonalInformation i = null;
+
         //TESTING
+        PersonalInformation i = null;
+        PersonalInformation b = null;
         try {
             i = new PersonalInformation("Xanice", "smoth", "23",
+                    "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
+            b = new PersonalInformation("Pnna", "Hello", "55",
                     "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
         } catch (InvalidGenderException e) {
             throw new RuntimeException(e);
@@ -100,6 +104,7 @@ public class HomePage extends JFrame {
         PregnantPatient p = new PregnantPatient();
         p.setPersonalInfo(i);
         AdultPatient a = new AdultPatient();
+        a.setPersonalInfo(b);
         MinorPatient m = new MinorPatient();
         try {
             addPatient(p);
@@ -120,12 +125,23 @@ public class HomePage extends JFrame {
     }
 
     /**
-     * Sorts the patients list by default.
+     * Sorts the patients list by default
      */
     public static void sortPatientsByDefault() {
         Collections.sort(patients);
         refreshPatientListPanel();
-        System.out.println(patients);
+    }
+    public static void sortPatientsByAge() {
+        for(int i = 0; i < patients.size()-1; i++){
+            if (patients.get(i).getPersonalInfo().getAge() > patients.get(i+1).getPersonalInfo().getAge()) {
+                Patient smaller = patients.get(i+1);
+                patients.set(i+1, patients.get(i));
+                patients.set(i, smaller);
+            }
+            refreshPatientListPanel();
+        }
+        Collections.sort(patients);
+        refreshPatientListPanel();
     }
 
     /**

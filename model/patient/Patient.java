@@ -1,5 +1,6 @@
 package model.patient;
 
+import java.util.Collections;
 import java.util.Date;
 
 public abstract class Patient implements Cloneable, DiscountCalculation, Comparable<Patient> {
@@ -141,6 +142,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
             fee.setAmount(fee.getAmount() - getDISCOUNT());
         }
     }
+
 
     // Overridden methods
     @Override
