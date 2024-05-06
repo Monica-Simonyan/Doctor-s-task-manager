@@ -125,7 +125,7 @@ public class PatientCardPopup extends JDialog {
 
     private static JPanel getProcedurePanel() {
         String[] procedures = {"Surgery", "Appendectomy", "Breast biopsy", "Cataract surgery"};
-        double[] fees = {1000.0, 1500.0, 800.0, 2000.0};
+        int[] fees = {450000, 650000, 250000, 850000};
 
         JPanel procedurePanel = new JPanel();
         procedurePanel.setLayout(new GridLayout(procedures.length + 1, 1));

@@ -38,7 +38,6 @@ public class DatePicker {
         dateSpinner.setValue(currentDate);
         calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 1);
     }
-
     public Date getSelectedDate(){
         return selectedDate;
     }
