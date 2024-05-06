@@ -3,12 +3,14 @@ package ui.PopupWindows;
 import model.patient.*;
 
 import ui.Elements.InformationPanel;
+import ui.HomePage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.Scanner;
 
@@ -16,7 +18,7 @@ public class PatientCardPopup extends JDialog {
     private static final Color backgroundColor = new Color(222, 227, 235);
     private static String fileName;
     private JPanel dataContainer;
-    private JButton saveAllergy, savePrescription;
+    private JButton saveAllergy, savePrescription, back;
     private ImageIcon profile, imgIcon;
     private Image image;
     private JLabel img, nextVisit, phone, email, address, allergyLabel, allergyContent, prescriptionLabel;
@@ -94,9 +96,19 @@ public class PatientCardPopup extends JDialog {
                 }
             }
         });
+
+        back = new JButton("Back");
+        back.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                closeWindow();
+            }
+        });
+
         prescriptionPanel.add(prescriptionLabel);
         prescriptionPanel.add(prescriptions);
         prescriptionPanel.add(savePrescription);
+        prescriptionPanel.add(back);
 
         // Add components to panel
         informationPanel.add(nextVisit);
@@ -228,5 +240,11 @@ public class PatientCardPopup extends JDialog {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private void closeWindow(){
+        WindowEvent we = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(we);
+        setVisible(false);
     }
 }
