@@ -158,7 +158,7 @@ public class PatientCardPopup extends JDialog {
         }
 
         private static JButton getAddButton(JTextField procedureField, JTextField feeField, JPanel procedurePanel) {
-            ImageIcon icon = new ImageIcon("src\\pngimg.com - plus_PNG110.png");
+            ImageIcon icon = new ImageIcon("src\\ui\\DefaultImages\\pngimg.com - plus_PNG110.png");
             Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             icon = new ImageIcon(img);
             JButton addButton = new JButton(icon);
