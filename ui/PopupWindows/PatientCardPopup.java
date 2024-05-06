@@ -37,7 +37,6 @@ public class PatientCardPopup extends JDialog {
         img = new JLabel(imgIcon);
         img.setHorizontalTextPosition(0);
         img.setVerticalTextPosition(0);
-        //img.setBounds(0, 0, imgIcon.getIconWidth(), imgIcon.getIconHeight());
 
         loadWindow();
     }
