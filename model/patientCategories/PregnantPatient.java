@@ -2,68 +2,101 @@ package model.patientCategories;
 
 import model.patient.*;
 
-import java.util.ArrayList;
-
-public class PregnantPatient extends Patient implements Discount {
+/**
+ * Represents a pregnant patient, extending the Patient class.
+ */
+public class PregnantPatient extends Patient {
+    private final int DISCOUNT = 3000;
     private int trimester;
     private String contraindications;
 
+    /**
+     * Default constructor for PregnantPatient.
+     * Sets default image URL for pregnant patients.
+     */
     public PregnantPatient() {
         super();
         setImageURL("src/ui/DefaultImages/Pregnant.png");
     }
 
+    /**
+     * Constructs a PregnantPatient with specified parameters.
+     *
+     * @param personalInfo      personal information of the patient
+     * @param history           medical history of the patient
+     * @param payments          payment records of the patient
+     * @param trimester         current trimester of the pregnancy
+     * @param contraindications any contraindications or medical conditions
+     */
     public PregnantPatient(PersonalInformation personalInfo, History history, Payments payments, int trimester, String contraindications) {
         super(personalInfo, history, payments, "src/ui/DefaultImages/Pregnant.png");
         this.trimester = trimester;
         this.contraindications = contraindications;
     }
 
+    /**
+     * Constructs a PregnantPatient with specified trimester and contraindications.
+     *
+     * @param trimester         current trimester of the pregnancy
+     * @param contraindications any contraindications or medical conditions
+     */
     public PregnantPatient(int trimester, String contraindications) {
         this.trimester = trimester;
         this.contraindications = contraindications;
     }
 
     /**
-     * Adds the given fee to the list of fees
+     * Gets the current trimester of the pregnancy.
      *
-     * @param fee fee for a procedure of type Fee
+     * @return the trimester
      */
-    public void addFee(ArrayList<Payments.Fee> fees, Payments.Fee fee) {
-        fee.setAmount(applyDiscount(fee.getAmount()));
-        fees.add(fee);
-    }
-
-    /**
-     * Applied discount to the given amount of money
-     *
-     * @param amount integer amount of money
-     * @return integer amount of money with discount applied
-     */
-    public int applyDiscount(int amount) {
-        if (amount >= 20)
-            return (int) (amount * 0.9 - 5);
-        else
-            return (int) (amount * 0.85);
-    }
-
     public int getTrimester() {
         return trimester;
     }
 
+    /**
+     * Sets the current trimester of the pregnancy.
+     *
+     * @param trimester the trimester to set
+     */
     public void setTrimester(int trimester) {
         this.trimester = trimester;
     }
 
+    /**
+     * Gets any contraindications or medical conditions.
+     *
+     * @return the contraindications
+     */
     public String getContraindications() {
         return contraindications;
     }
 
+    /**
+     * Sets any contraindications or medical conditions.
+     *
+     * @param contraindications the contraindications to set
+     */
     public void setContraindications(String contraindications) {
         this.contraindications = contraindications;
     }
 
+    /**
+     * Returns a string representation of the PregnantPatient.
+     *
+     * @return string representation of the PregnantPatient
+     */
     public String toString() {
-        return "Pregnant";
+        return "Pregnant" + "\n" + getPersonalInfo();
+    }
+
+    /**
+     * Overrides the getDISCOUNT method to return the discount specific to pregnant patients.
+     *
+     * @return the discount for pregnant patients
+     */
+    @Override
+    public int getDISCOUNT() {
+        return DISCOUNT;
     }
 }

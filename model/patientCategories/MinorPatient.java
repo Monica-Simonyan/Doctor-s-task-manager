@@ -1,15 +1,17 @@
 package model.patientCategories;
 
-import model.patient.*;
+import model.patient.History;
+import model.patient.Patient;
+import model.patient.Payments;
+import model.patient.PersonalInformation;
 
-import java.util.ArrayList;
-
-public class MinorPatient extends Patient implements Discount {
+public class MinorPatient extends Patient {
     //instance variables
     private String motherGuardianName;
     private String fatherGuardianName;
     private String motherPhoneNumber;
     private String fatherGuardianPhoneNumber;
+    private final int DISCOUNT = 5000;
 
     public MinorPatient() {
         super();
@@ -99,30 +101,14 @@ public class MinorPatient extends Patient implements Discount {
     public void setFatherGuardianPhoneNumber(String fatherGuardianPhoneNumber) {
         this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
     }
-
-    /**
-     * Adds fee to the ArrayList of fees in Payments
-     *
-     * @param fees ArrayList of fees of type Payments.Fee
-     * @param fee  fee of type Payments.Fee
-     */
-    public void addFee(ArrayList<Payments.Fee> fees, Payments.Fee fee) {
-        fee.setAmount(applyDiscount(fee.getAmount()));
-        fees.add(fee);
-    }
-
-    /**
-     * Applied discount to the given amount of money
-     *
-     * @param amount integer amount of money
-     * @return integer amount of money with discount applied
-     */
-    public int applyDiscount(int amount) {
-        amount *= 0.8;
-        return amount;
+    @Override
+    public int getDISCOUNT() {
+        return DISCOUNT;
     }
 
     public String toString() {
         return "Minor";
     }
+
+
 }

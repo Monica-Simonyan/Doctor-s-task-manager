@@ -35,7 +35,7 @@ public class AddPatientPopup extends JDialog {
     public AddPatientPopup() {
         JPanel panel = new JPanel(new GridLayout(11, 2, 0, 5));
         panel.setBorder(new EmptyBorder(0, 5, 0, 0));
-        panel.setPreferredSize(new Dimension(400, 550));
+        panel.setPreferredSize(new Dimension(400, 500));
 
         // First Name
         panel.add(new JLabel("First Name:"));

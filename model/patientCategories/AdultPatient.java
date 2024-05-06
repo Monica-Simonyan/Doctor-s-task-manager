@@ -10,5 +10,4 @@ public class AdultPatient extends Patient {
     public String toString() {
         return "Adult";
     }
-
 }

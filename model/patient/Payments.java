@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * Represents the payment records for a patient.
  * This class manages a list of fees, tracking both paid and unpaid amounts.
  */
-public class Payments implements Cloneable {
+public class Payments {
 
     /**
      * Represents a specific fee with its payment status and amount.
      */
-     public static class Fee {
+    public static class Fee {
         private boolean wasPaid;
         private int amount;
 
@@ -19,47 +19,48 @@ public class Payments implements Cloneable {
          * Constructs a Fee with its payment status and amount.
          *
          * @param wasPaid true if the fee has been paid, false otherwise
-         * @param amount the amount of the fee
+         * @param amount  the amount of the fee
          */
         public Fee(boolean wasPaid, int amount) {
             this.wasPaid = wasPaid;
             this.amount = amount;
         }
 
+        public void setAmount(int amount) {
+            this.amount = amount;
+        }
+
+        public void setWasPaid(boolean wasPaid) {
+            this.wasPaid = wasPaid;
+        }
+
+        public int getAmount() {
+            return amount;
+        }
+
+        public boolean getWasPaid() {
+            return wasPaid;
+        }
+
         /**
          * Clones this Fee object.
+         *
          * @return a clone of this Fee instance
          */
         public Fee clone() {
             try {
                 return (Fee) super.clone();
             } catch (CloneNotSupportedException e) {
-                return null; // This should never happen since we're Cloneable
+                return null;
             }
         }
 
-        /**
-         * Sets the amount of the fee.
-         * @param amount the new amount of the fee
-         */
-        public void setAmount(int amount) {
-            this.amount = amount;
-        }
-
-        /**
-         * Gets the amount of the fee.
-         * @return the amount of the fee
-         */
-        public int getAmount() {
-            return amount;
-        }
-
-        public String toString(){
-            return amount+" AMD";
+        public String toString() {
+            return amount + " AMD";
         }
     }
 
-    private ArrayList<Fee> fees;
+    private final ArrayList<Fee> fees;
 
     /**
      * Default constructor that initializes an empty list of fees.
@@ -71,21 +72,18 @@ public class Payments implements Cloneable {
     /**
      * Constructs Payments with a list of fees, performing deep copying.
      *
-     * @param newFees a list of fees to initialize the Payments object
+     * @param other a list of fees to initialize the Payments object
      */
-    public Payments(ArrayList<Fee> newFees) {
-        fees = new ArrayList<>(newFees.size());
-        for (Fee fee : newFees) {
-            fees.add(fee.clone()); // Deep cloning of each Fee
+    public Payments(Payments other) {
+        fees = new ArrayList<>(other.fees.size());
+        for (Fee fee : other.fees) {
+            if (fee != null)
+                fees.add(fee.clone()); // Deep cloning of each Fee
         }
     }
 
-    /**
-     * Adds a fee to the list of fees, performing a clone to avoid external modifications.
-     * @param fee the Fee to add
-     */
     public void addFee(Fee fee) {
-        this.fees.add(fee.clone());
+        fees.add(fee);
     }
 
     /**
@@ -96,62 +94,16 @@ public class Payments implements Cloneable {
      * @return a shallow copy of the list of fees
      */
     public ArrayList<Fee> getFees() {
-        return fees; // Note: Shallow copy, internal state modification possible through objects
+        ArrayList<Fee> copy = new ArrayList<>(fees.size());
+        for (Fee fee : fees)
+            copy.add(fee.clone());
+        return copy;
     }
 
-    /**
-     * Calculates the total amount of fees that have been paid.
-     *
-     * @return the total amount of paid fees
-     */
-    public int countPaidFee() {
-        int total = 0;
-        for (Fee fee : fees) {
-            if (fee.wasPaid) {
-                total += fee.amount;
-            }
-        }
-        return total;
-    }
-
-    /**
-     * Calculates the total amount of fees that have not been paid.
-     *
-     * @return the total amount of unpaid fees
-     */
-    public int countUnpaid() {
-        int total = 0;
-        for (Fee fee : fees) {
-            if (!fee.wasPaid) {
-                total += fee.amount;
-            }
-        }
-        return total;
-    }
-
-    /**
-     * Creates a deep clone of this Payments object, including all fees.
-     *
-     * @return a deep clone of this Payments object
-     */
-    @Override
-    public Payments clone() {
-        try {
-            Payments clone = (Payments) super.clone();
-            clone.fees = new ArrayList<>();
-            for (Fee fee : this.fees) {
-                clone.fees.add(fee.clone());
-            }
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            return null; // This should never happen since we're Cloneable
-        }
-    }
-
-    public String toString(){
+    public String toString() {
         StringBuilder str = new StringBuilder();
-        for(Fee fee:fees)
-            str.append(fee+"\n");
+        for (Fee fee : fees)
+            str.append(fee + "\n");
         return str.toString();
     }
 }
