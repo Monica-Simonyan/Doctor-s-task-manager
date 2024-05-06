@@ -87,7 +87,7 @@ public class PregnantPatient extends Patient {
      * @return string representation of the PregnantPatient
      */
     public String toString() {
-        return "Pregnant" + "\n" + getPersonalInfo();
+        return "Pregnant" ;
     }
 
     /**

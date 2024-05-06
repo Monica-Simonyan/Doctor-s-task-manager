@@ -1,8 +1,9 @@
 
 package ui;
 
-import model.exceptions.InvalidPatientException;
+import model.exceptions.*;
 import model.patient.Patient;
+import model.patient.PersonalInformation;
 import model.patientCategories.AdultPatient;
 import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
@@ -15,6 +16,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The HomePage class represents the main user interface for managing patient information.
@@ -81,14 +83,28 @@ public class HomePage extends JFrame {
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
 
+        PersonalInformation i = null;
         //TESTING
+        try {
+            i = new PersonalInformation("Xanice", "smoth", "23",
+                    "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
+        } catch (InvalidGenderException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidGmailException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidAgeException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidPhoneNumberException e) {
+            throw new RuntimeException(e);
+        }
         PregnantPatient p = new PregnantPatient();
+        p.setPersonalInfo(i);
         AdultPatient a = new AdultPatient();
         MinorPatient m = new MinorPatient();
         try {
-            update(p);
-            update(a);
-            update(m);
+            addPatient(p);
+            addPatient(a);
+            addPatient(m);
         } catch (InvalidPatientException e) {
             throw new RuntimeException(e);
         }
@@ -100,6 +116,28 @@ public class HomePage extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Patient List");
         setVisible(true);
+
+    }
+
+    /**
+     * Sorts the patients list by default.
+     */
+    public static void sortPatientsByDefault() {
+        Collections.sort(patients);
+        refreshPatientListPanel();
+        System.out.println(patients);
+    }
+
+    /**
+     * Refreshes the patient list panel after sorting.
+     */
+    private static void refreshPatientListPanel() {
+        patientListPanel.removeAll();
+        for (Patient patient : patients) {
+            patientListPanel.add(new PatientListItem(patient));
+        }
+        patientListPanel.revalidate();
+        patientListPanel.repaint();
     }
 
     /**
@@ -109,9 +147,9 @@ public class HomePage extends JFrame {
      */
 
     /**
-     * Updates the patient list panel with the latest patient information.
+     * addPatients the patient list panel with the latest patient information.
      */
-    public static void update(Patient patient) throws InvalidPatientException {
+    public static void addPatient(Patient patient) throws InvalidPatientException {
         if (patients.contains(patient))
             throw new InvalidPatientException();
         patients.add(patient);
@@ -124,5 +162,6 @@ public class HomePage extends JFrame {
 
     public static void main(String[] args) {
         new HomePage();
+
     }
 }
