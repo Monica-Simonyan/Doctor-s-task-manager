@@ -1,4 +1,3 @@
-
 package ui;
 
 import model.exceptions.*;
@@ -9,6 +8,7 @@ import model.patientCategories.MinorPatient;
 import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
 import ui.Elements.PatientListItem;
+import ui.Elements.SearchBar;
 import ui.Menus.*;
 import ui.PopupWindows.AddPatientPopup;
 
@@ -38,12 +38,13 @@ public class HomePage extends JFrame {
         patientListPanel.setLayout(new GridLayout(1000, 1, 0, 5));
         patientListPanel.setBackground(new Color(255, 255, 255, 255));
 
+
+        SearchBar searchBar = new SearchBar(patients);
         JTextField search = new JTextField(10);
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener((ActionEvent e) -> {
-            // Perform search action here
+            searchBar.findPatient(search.toString());
         });
-
 
 
         JPanel searchPanel = new JPanel();
