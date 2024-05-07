@@ -156,7 +156,7 @@ public class PatientCardPopup extends JDialog {
 
         procedurePanel.add(inputPanel);
 
-        totalFeeLabel.setText("Total Payments: AMD 0.0");
+        totalFeeLabel.setText("Total Fee: AMD 0.0");
         procedurePanel.add(totalFeeLabel);
 
         return procedurePanel;
@@ -208,9 +208,9 @@ public class PatientCardPopup extends JDialog {
                                             @Override
                                             public void actionPerformed(ActionEvent e) {
                                                 if (!newCheckBox.isSelected()) {
-                                                    totalFeeLabel.setText("Total Payments: AMD" + (extractAmount(totalFeeLabel.getText()) + fee));
+                                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) + fee));
                                                 } else {
-                                                    totalFeeLabel.setText("Total Payments: AMD" + (extractAmount(totalFeeLabel.getText()) - fee));
+                                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) - fee));
                                                 }
                                             }
                                         });
@@ -249,7 +249,7 @@ public class PatientCardPopup extends JDialog {
             public void stateChanged(ChangeEvent e) {
                 int amount = (int) spinner.getValue();
                 // Add the amount to the total fee
-                totalFeeLabel.setText("Total Payments: AMD" + amount);
+                totalFeeLabel.setText("Total Fee: AMD" + amount);
             }
         });
         return spinner;
