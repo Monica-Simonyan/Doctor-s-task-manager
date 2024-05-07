@@ -23,15 +23,14 @@ public class PatientCardPopup extends JDialog {
     private final Patient patient;
     private final PersonalInformation info;
     private History history;
-    Payments payments;
+    Payments payments = new Payments();
     private int total;
-    private static JLabel totalFeeLabel = new JLabel();
+    private  JLabel totalFeeLabel = new JLabel();
 
     public PatientCardPopup(Patient patient) {
         this.patient = patient.clone();
         this.info = this.patient.getPersonalInfo();
 
-        JPanel dataContainer = new JPanel();
         ImageIcon profile = new ImageIcon(patient.getImageURL());
         Image image = profile.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(image);
@@ -155,6 +154,7 @@ public class PatientCardPopup extends JDialog {
     }
 
     private JButton getAddButton(JTextField procedureField, JTextField feeField, JPanel procedurePanel) {
+        patient.setPayments(payments);
         ImageIcon icon = new ImageIcon("src\\ui\\DefaultImages\\pngimg.com - plus_PNG110.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
@@ -187,26 +187,26 @@ public class PatientCardPopup extends JDialog {
 
                         JButton confirmButton = new JButton("Confirm Fee");
                         confirmButton.addActionListener(e11 -> {
-                            payments = new Payments();
-                            //history = new History();
                             int fee = (int) spinner.getValue();
-                            total += fee;
-                            patient.setPayments(payments);
 
-                            //history.addProcedures(procedures[index]);
                             Payments.Fee newFee = new Payments.Fee(false, fee);
+
                             patient.addDiscountedFee(newFee);
+
                             String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: AMD" + newFee + "</html>";
                             JCheckBox newCheckBox = new JCheckBox(newProcedureText);
-                            totalFeeLabel.setText("Total Fee: AMD" + patient.countTotalFees());
+                            System.out.println(patient.getPayments().getFees());
+                            System.out.println(patient.countTotalFees());
 
                             newCheckBox.addActionListener(e111 -> {
                                 if (!newCheckBox.isSelected()) {
                                     totalFeeLabel.setText("Total Fee: AMD" + patient.countTotalFees() + fee);
                                 } else {
+                                    newFee.setWasPaid(true);
                                     totalFeeLabel.setText("Total Fee: AMD" + (patient.countTotalFees() - fee));
                                 }
                             });
+                            totalFeeLabel.setText("Total Fee: AMD" + patient.countUnpaidFees());
                             procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 2);
                             procedurePanel.revalidate();
                             procedurePanel.repaint();

@@ -100,7 +100,6 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     public int countTotalFees() {
         int total = 0;
         for (Payments.Fee fee : payments.getFees()) {
-        //    if (fee != null)
                 total += fee.getAmount();
         }
         return total;
