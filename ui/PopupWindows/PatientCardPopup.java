@@ -7,6 +7,8 @@ import ui.HomePage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -135,12 +137,11 @@ public class PatientCardPopup extends JDialog {
 
 
 
-    private static JPanel getProcedurePanel() {
+    private JPanel getProcedurePanel() {
         String[] procedures = {"Surgery", "Appendectomy", "Breast biopsy", "Cataract surgery"};
-        int[] fees = {450000, 650000, 250000, 850000};
 
         JPanel procedurePanel = new JPanel();
-        procedurePanel.setLayout(new GridLayout(procedures.length + 1, 1));
+        procedurePanel.setLayout(new GridLayout(procedures.length + 2, 1));
 
         JLabel questionLabel = new JLabel("Procedures and Fees");
         procedurePanel.add(questionLabel);
@@ -155,10 +156,13 @@ public class PatientCardPopup extends JDialog {
 
         procedurePanel.add(inputPanel);
 
+        totalFeeLabel.setText("Total Fee: AMD 0.0");
+        procedurePanel.add(totalFeeLabel);
+
         return procedurePanel;
     }
 
-    private static JButton getAddButton(JTextField procedureField, JTextField feeField, JPanel procedurePanel) {
+    private JButton getAddButton(JTextField procedureField, JTextField feeField, JPanel procedurePanel) {
         ImageIcon icon = new ImageIcon("src\\ui\\DefaultImages\\pngimg.com - plus_PNG110.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
@@ -171,7 +175,6 @@ public class PatientCardPopup extends JDialog {
                 dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                 dialog.setLayout(new GridLayout(0, 1));
                 String[] procedures = {"Surgery", "Appendectomy", "Breast biopsy", "Cataract surgery"};
-                double[] fees = {1000.0, 1500.0, 800.0, 2000.0};
 
                 ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -186,24 +189,44 @@ public class PatientCardPopup extends JDialog {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             try {
-                                double selectedFee = fees[index];
-                                final double[] totalFee = {selectedFee};
-                                String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: $" + selectedFee + "</html>";
-                                JCheckBox newCheckBox = new JCheckBox(newProcedureText);
-                                newCheckBox.addActionListener(new ActionListener() {
+                                JDialog feeDialog = new JDialog();
+                                feeDialog.setTitle("Select Fee");
+                                feeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                                feeDialog.setLayout(new GridLayout(0, 1));
+
+                                SpinnerModel spinnerModel = new SpinnerNumberModel(20000, 10000, 2000000, 1000); // Initial value, minimum value, maximum value, step size
+                                JSpinner spinner = getjSpinner(spinnerModel);
+
+                                JButton confirmButton = new JButton("Confirm Fee");
+                                confirmButton.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
-                                        if (newCheckBox.isSelected()) {
-                                            totalFee[0] -= selectedFee;
-                                        } else {
-                                            totalFee[0] += selectedFee;
-                                        }
-                                        totalFeeLabel.setText("Total Fee: $" + totalFee[0]);
+                                        int fee = (int) spinner.getValue();
+                                        String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: AMD" + fee + "</html>";
+                                        JCheckBox newCheckBox = new JCheckBox(newProcedureText);
+                                        newCheckBox.addActionListener(new ActionListener() {
+                                            @Override
+                                            public void actionPerformed(ActionEvent e) {
+                                                if (!newCheckBox.isSelected()) {
+                                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) + fee));
+                                                } else {
+                                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) - fee));
+                                                }
+                                            }
+                                        });
+                                        procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 2);
+                                        procedurePanel.revalidate();
+                                        procedurePanel.repaint();
+                                        feeDialog.dispose();
                                     }
                                 });
-                                procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 1);
-                                procedurePanel.revalidate();
-                                procedurePanel.repaint();
+
+                                feeDialog.add(spinner);
+                                feeDialog.add(confirmButton);
+                                feeDialog.pack();
+                                feeDialog.setLocationRelativeTo(null);
+                                feeDialog.setVisible(true);
+
                                 dialog.dispose();
                             } catch (NumberFormatException ex) {
                                 JOptionPane.showMessageDialog(dialog, "Please enter a valid fee amount.");
@@ -219,6 +242,20 @@ public class PatientCardPopup extends JDialog {
         return addButton;
     }
 
+    private JSpinner getjSpinner(SpinnerModel spinnerModel) {
+        JSpinner spinner = new JSpinner(spinnerModel);
+        spinner.setPreferredSize(new Dimension(100, 30));
+        spinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                int amount = (int) spinner.getValue();
+                // Add the amount to the total fee
+                totalFeeLabel.setText("Total Fee: AMD" + amount);
+            }
+        });
+        return spinner;
+    }
+
+
 
     private void inputAllergies() {
         fileName = info.getName() + info.getLastName() + ".pdf";
@@ -228,6 +265,18 @@ public class PatientCardPopup extends JDialog {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    private int extractAmount(String labelText) {
+        int amount = 0;
+        String[] parts = labelText.split("AMD");
+        if (parts.length > 1) {
+            try {
+                amount = Integer.parseInt(parts[1].trim());
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return amount;
     }
 
     private void showAllergies() {
