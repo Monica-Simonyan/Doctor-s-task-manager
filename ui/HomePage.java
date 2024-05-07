@@ -1,22 +1,20 @@
 package ui;
 
 import model.exceptions.*;
+import ui.Menus.*;
+import model.patientCategories.*;
 import model.patient.Patient;
 import model.patient.PersonalInformation;
-import model.patientCategories.AdultPatient;
-import model.patientCategories.MinorPatient;
-import model.patientCategories.PregnantPatient;
 import ui.Buttons.AddButton;
 import ui.Elements.PatientListItem;
 import ui.Elements.SearchBar;
-import ui.Menus.*;
 import ui.PopupWindows.AddPatientPopup;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 /**
  * The HomePage class represents the main user interface for managing patient information.
@@ -76,13 +74,7 @@ public class HomePage extends JFrame {
                     "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
             b = new PersonalInformation("Pnna", "Hello", "55",
                     "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
-        } catch (InvalidGenderException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidGmailException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidAgeException e) {
-            throw new RuntimeException(e);
-        } catch (InvalidPhoneNumberException e) {
+        } catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
             throw new RuntimeException(e);
         }
         PregnantPatient p = new PregnantPatient();
@@ -169,6 +161,5 @@ public class HomePage extends JFrame {
 
     public static void main(String[] args) {
         new HomePage();
-
     }
 }

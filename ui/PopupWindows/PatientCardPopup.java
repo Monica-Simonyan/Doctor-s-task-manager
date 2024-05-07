@@ -24,6 +24,7 @@ public class PatientCardPopup extends JDialog {
     private final PersonalInformation info;
     private History history;
     Payments payments;
+    private int total;
     private static JLabel totalFeeLabel = new JLabel();
 
     public PatientCardPopup(Patient patient) {
@@ -62,7 +63,7 @@ public class PatientCardPopup extends JDialog {
         JPanel allergyPanel = new JPanel();
         JLabel allergyLabel = new JLabel("Allergies");
         allergyContent = new JLabel();
-    //    allergyLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+        //    allergyLabel.setFont(new Font("Serif", Font.PLAIN, 18));
         allergies = new JTextField("List Allergies", 20);
         allergyContent.setPreferredSize(new Dimension(200, 100));
         allergies.setBackground(backgroundColor);
@@ -163,7 +164,7 @@ public class PatientCardPopup extends JDialog {
             dialog.setTitle("Select Procedure");
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             dialog.setLayout(new GridLayout(0, 1));
-            String[] procedures = { "Appendectomy", "Breast biopsy", "Cataract surgery", "MRI", "CT", "Blood analysis"};
+            String[] procedures = {"Appendectomy", "Breast biopsy", "Cataract surgery", "MRI", "CT", "Blood analysis"};
 
             ButtonGroup buttonGroup = new ButtonGroup();
 
@@ -181,24 +182,29 @@ public class PatientCardPopup extends JDialog {
                         feeDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                         feeDialog.setLayout(new GridLayout(0, 1));
 
-                        SpinnerModel spinnerModel = new SpinnerNumberModel(10000, 5000, 2000000, 1000); // Initial value, minimum value, maximum value, step size
+                        SpinnerModel spinnerModel = new SpinnerNumberModel(20000, 10000, 2000000, 1000);
                         JSpinner spinner = getjSpinner(spinnerModel);
 
                         JButton confirmButton = new JButton("Confirm Fee");
                         confirmButton.addActionListener(e11 -> {
                             payments = new Payments();
-                            history = new History();
+                            //history = new History();
                             int fee = (int) spinner.getValue();
+                            total += fee;
                             patient.setPayments(payments);
+
+                            //history.addProcedures(procedures[index]);
                             Payments.Fee newFee = new Payments.Fee(false, fee);
                             patient.addDiscountedFee(newFee);
-                            String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: AMD" + fee + "</html>";
+                            String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: AMD" + newFee + "</html>";
                             JCheckBox newCheckBox = new JCheckBox(newProcedureText);
+                            totalFeeLabel.setText("Total Fee: AMD" + patient.countTotalFees());
+
                             newCheckBox.addActionListener(e111 -> {
                                 if (!newCheckBox.isSelected()) {
-                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) + fee));
+                                    totalFeeLabel.setText("Total Fee: AMD" + patient.countTotalFees() + fee);
                                 } else {
-                                    totalFeeLabel.setText("Total Fee: AMD" + (extractAmount(totalFeeLabel.getText()) - fee));
+                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countTotalFees() - fee));
                                 }
                             });
                             procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 2);
@@ -229,11 +235,6 @@ public class PatientCardPopup extends JDialog {
     private JSpinner getjSpinner(SpinnerModel spinnerModel) {
         JSpinner spinner = new JSpinner(spinnerModel);
         spinner.setPreferredSize(new Dimension(100, 30));
-        spinner.addChangeListener(e -> {
-            int amount = (int) spinner.getValue();
-            // Add the amount to the total fee
-            totalFeeLabel.setText("Total Fee: AMD" + amount);
-        });
         return spinner;
     }
 
@@ -273,7 +274,7 @@ public class PatientCardPopup extends JDialog {
         }
     }
 
-    private void closeWindow(){
+    private void closeWindow() {
         WindowEvent we = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(we);
         setVisible(false);

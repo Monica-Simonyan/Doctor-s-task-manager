@@ -1,11 +1,10 @@
 package model.patient;
 
-import java.util.Collections;
 import java.util.Date;
 
 public abstract class Patient implements Cloneable, DiscountCalculation, Comparable<Patient> {
     // Instance variables
-    private final int DISCOUNT = 1000;
+    private static final int DISCOUNT = 1000;
     private PersonalInformation personalInfo;
     private History history;
     private Payments payments;
@@ -101,12 +100,13 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     public int countTotalFees() {
         int total = 0;
         for (Payments.Fee fee : payments.getFees()) {
-            total += fee.getAmount();
+        //    if (fee != null)
+                total += fee.getAmount();
         }
         return total;
     }
 
-    public int countPaidFee() {
+    public int countPaidFees() {
         int total = countTotalFees();
         for (Payments.Fee fee : payments.getFees()) {
             if (fee.getWasPaid()) {
@@ -116,7 +116,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         return total;
     }
 
-    int countUnpaid() {
+   public  int countUnpaidFees() {
         int total = 0;
         for (Payments.Fee fee : payments.getFees()) {
             if (!fee.getWasPaid()) {
@@ -131,16 +131,16 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         payments.addFee(fee);
     }
 
+    public void applyDiscount(Payments.Fee fee) {
+        if (fee.getAmount() >= 50000) {
+            fee.setAmount(fee.getAmount() - getDISCOUNT());
+        }
+    }
+
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass())
             return false;
         else return this.personalInfo.equals(((Patient) obj).personalInfo);
-    }
-
-    public void applyDiscount(Payments.Fee fee) {
-        if (fee.getAmount() >= 20000) {
-            fee.setAmount(fee.getAmount() - getDISCOUNT());
-        }
     }
 
 

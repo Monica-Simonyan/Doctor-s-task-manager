@@ -11,7 +11,7 @@ public class Payments {
     /**
      * Represents a specific fee with its payment status and amount.
      */
-    public static class Fee {
+    public static class Fee implements Cloneable {
         private boolean wasPaid;
         private int amount;
 
