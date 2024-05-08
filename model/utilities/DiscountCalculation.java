@@ -1,6 +1,5 @@
 package model.utilities;
 
-import model.exceptions.DiscountablePaymentException;
 import model.patient.Payments;
 
 /**
@@ -19,7 +18,6 @@ public interface DiscountCalculation {
      * Adds a discounted fee to the list of fees.
      *
      * @param fee the fee to add
-     * @throws DiscountablePaymentException if the fee is not discountable
      */
-    void addDiscountedFee(Payments.Fee fee) throws DiscountablePaymentException;
+    void addDiscountedFee(Payments.Fee fee);
 }

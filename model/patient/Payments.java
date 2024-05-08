@@ -83,7 +83,7 @@ public class Payments {
     }
 
     public void addFee(Fee fee) {
-        fees.add(fee.clone());
+        fees.add(fee); //intentional privacy leak
     }
 
     /**

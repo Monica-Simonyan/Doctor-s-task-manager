@@ -25,12 +25,13 @@ public class PatientCardPopup extends JDialog {
     private History history;
     Payments payments = new Payments();
     private int total;
-    private  JLabel totalFeeLabel = new JLabel();
+    private JLabel totalFeeLabel = new JLabel();
 
     /**
      * Constructs a patient's medical card
-     * @param patient     the <code>Patient</code> patient whose medical
-     *                    card is being constructed
+     *
+     * @param patient the <code>Patient</code> patient whose medical
+     *                card is being constructed
      */
     public PatientCardPopup(Patient patient) {
         this.patient = patient.clone();
@@ -202,25 +203,22 @@ public class PatientCardPopup extends JDialog {
                         JButton confirmButton = new JButton("Confirm Fee");
                         confirmButton.addActionListener(e11 -> {
                             int fee = (int) spinner.getValue();
-
                             Payments.Fee newFee = new Payments.Fee(false, fee);
-
-                            patient.addDiscountedFee(newFee);
-
                             String newProcedureText = "<html>Procedure: " + procedures[index] + "<br>Fee: AMD" + newFee + "</html>";
                             JCheckBox newCheckBox = new JCheckBox(newProcedureText);
-                            System.out.println(patient.getPayments().getFees());
-                            System.out.println(patient.countTotalFees());
-
+                            patient.addDiscountedFee(newFee);
                             newCheckBox.addActionListener(e111 -> {
-                                if (!newCheckBox.isSelected()) {
-                                    totalFeeLabel.setText("Total Fee: AMD" + patient.countTotalFees() + fee);
-                                } else {
+                                if (newCheckBox.isSelected()) {
                                     newFee.setWasPaid(true);
-                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countTotalFees() - fee));
+                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
+                                } else {
+                                    newFee.setWasPaid(false);
+                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
                                 }
                             });
-                            totalFeeLabel.setText("Total Fee: AMD" + patient.countUnpaidFees());
+                            totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
+                            System.out.println(patient.getPayments().getFees());
+                            System.out.println(patient.countTotalFees());
                             procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 2);
                             procedurePanel.revalidate();
                             procedurePanel.repaint();
@@ -252,7 +250,6 @@ public class PatientCardPopup extends JDialog {
         return spinner;
     }
 
-
     /**
      * Extracts the amount the patient is to pay
      */
@@ -283,7 +280,6 @@ public class PatientCardPopup extends JDialog {
         }
     }
 
-
     /**
      * Displays the allergies the patient has
      */
@@ -300,7 +296,6 @@ public class PatientCardPopup extends JDialog {
             e.printStackTrace();
         }
     }
-
 
     /**
      * Reads the prescriptions a patient has

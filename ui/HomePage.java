@@ -26,7 +26,7 @@ import java.util.ArrayList;
  */
 public class HomePage extends JFrame {
     private static JPanel patientListPanel;
-    private static ArrayList<Patient> patients = new ArrayList<>();
+    private static final ArrayList<Patient> patients = new ArrayList<>();
     public static final int WIDTH = 350;
     static final int HEIGHT = 650;
 
@@ -43,9 +43,7 @@ public class HomePage extends JFrame {
         SearchBar searchBar = new SearchBar(patients);
         JTextField search = new JTextField(10);
         JButton searchButton = new JButton("Search");
-        searchButton.addActionListener((ActionEvent e) -> {
-            searchBar.findPatient(search.toString());
-        });
+        searchButton.addActionListener((ActionEvent e) -> searchBar.findPatient(search.toString()));
 
 
         JPanel searchPanel = new JPanel();
@@ -57,9 +55,7 @@ public class HomePage extends JFrame {
 
 
         AddButton addButton = new AddButton(40);
-        addButton.addActionListener(e -> {
-            new AddPatientPopup();
-        });
+        addButton.addActionListener(e -> new AddPatientPopup());
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
@@ -70,8 +66,8 @@ public class HomePage extends JFrame {
 
 
         //TESTING
-        PersonalInformation i = null;
-        PersonalInformation b = null;
+        PersonalInformation i;
+        PersonalInformation b;
         try {
             i = new PersonalInformation("Xanice", "smoth", "23",
                     "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
@@ -141,12 +137,6 @@ public class HomePage extends JFrame {
         patientListPanel.revalidate();
         patientListPanel.repaint();
     }
-
-    /**
-     * Adds a patient to the list of patients.
-     *
-     * @param patient The patient to be added.
-     */
 
     /**
      * addPatients the patient list panel with the latest patient information.
