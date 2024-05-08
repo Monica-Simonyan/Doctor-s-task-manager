@@ -77,13 +77,12 @@ public class Payments {
     public Payments(Payments other) {
         fees = new ArrayList<>(other.fees.size());
         for (Fee fee : other.fees) {
-            if (fee != null)
                 fees.add(fee.clone()); // Deep cloning of each Fee
         }
     }
 
     public void addFee(Fee fee) {
-        fees.add(fee); //intentional privacy leak
+        fees.add(fee);
     }
 
     /**

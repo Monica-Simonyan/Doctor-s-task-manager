@@ -6,8 +6,11 @@ import ui.Elements.InformationPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.Scanner;
@@ -16,16 +19,13 @@ public class PatientCardPopup extends JDialog {
     private static final Color backgroundColor = new Color(222, 227, 235);
     private String fileName;
     private final JLabel img;
-    private JLabel allergyContent;
-    private JLabel prescriptionContent;
-    private JTextField allergies, prescriptions;
+    private JTextArea allergies, prescriptions;
     private String allergyText, prescriptionText;
     private final Patient patient;
     private final PersonalInformation info;
-    private History history;
+    private final History history = new History();
     Payments payments = new Payments();
-    private int total;
-    private JLabel totalFeeLabel = new JLabel();
+    private final JLabel totalFeeLabel = new JLabel();
 
     /**
      * Constructs a patient's medical card
@@ -36,14 +36,17 @@ public class PatientCardPopup extends JDialog {
     public PatientCardPopup(Patient patient) {
         this.patient = patient.clone();
         this.info = this.patient.getPersonalInfo();
-
+        patient.setPayments(payments);
         ImageIcon profile = new ImageIcon(patient.getImageURL());
         Image image = profile.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon imgIcon = new ImageIcon(image);
         img = new JLabel(imgIcon);
         img.setHorizontalTextPosition(0);
         img.setVerticalTextPosition(0);
-
+        writePrescriptions(prescriptionText);
+        writeAllergies(allergyText);
+        readAllergies();
+        readPrescriptions();
         loadWindow();
     }
 
@@ -69,53 +72,25 @@ public class PatientCardPopup extends JDialog {
 
         // Add allergy panel
         JPanel allergyPanel = new JPanel();
-        JLabel allergyLabel = new JLabel("Allergies");
-        allergyContent = new JLabel();
-        allergies = new JTextField("List Allergies", 20);
-        allergyContent.setPreferredSize(new Dimension(200, 100));
+        allergies = new JTextArea(10, 30);
+        allergies.setLineWrap(true);
+        allergies.setText("List Allergies");
+        allergies.append("\n" + allergyText);
         allergies.setBackground(backgroundColor);
-        JButton saveAllergy = new JButton("Save");
-        saveAllergy.addActionListener(e -> {
-            allergyText = allergies.getText();
-            JOptionPane.showMessageDialog(null, "Saved");
-            allergyContent.setText(allergyText);
-            inputAllergies(allergyText);
-            allergyContent.setVisible(true);
-            allergyContent.setText(allergyText);
-            showAllergies();
-        });
-        allergyPanel.add(allergyLabel);
+        JButton saveAllergy = getSaveAllergy();
         allergyPanel.add(allergies);
         allergyPanel.add(saveAllergy);
 
         // Add prescription panel
         JPanel prescriptionPanel = new JPanel();
-        prescriptionContent = new JLabel("Prescriptions");
-        prescriptions = new JTextField("List Prescriptions", 20);
+        prescriptions = new JTextArea(10, 30);
+        prescriptions.setLineWrap(true);
+        prescriptions.setText("List Prescriptions");
+        prescriptions.append("\n" + prescriptionText);
         prescriptions.setBackground(backgroundColor);
-        JButton savePrescription = new JButton("Save");
-        savePrescription.addActionListener(e -> {
-            prescriptionText = prescriptions.getText();
-            JOptionPane.showMessageDialog(null, "Saved");
-            prescriptionContent.setText(prescriptionText);
-            inputPrescriptions(prescriptionText);
-            prescriptionContent.setVisible(true);
-            prescriptionContent.setText(prescriptionText);
-            showPrescriptions();
-        });
-
-        JButton back = new JButton("Back");
-        back.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                closeWindow();
-            }
-        });
-
-        prescriptionPanel.add(prescriptionContent);
+        JButton savePrescription = getSavePrescription();
         prescriptionPanel.add(prescriptions);
         prescriptionPanel.add(savePrescription);
-        prescriptionPanel.add(back);
 
         // Add components to panel
         informationPanel.add(nextVisit);
@@ -132,12 +107,49 @@ public class PatientCardPopup extends JDialog {
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setPreferredSize(new Dimension(500, 400)); // Set preferred size for JScrollPane
-
+        JButton okButton = getOkButton();
+        panel.add(okButton);
         add(scrollPane);
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+
+    }
+
+    public JButton getSaveAllergy() {
+        JButton saveAllergy = new JButton("Save");
+        saveAllergy.addActionListener(e -> {
+            allergyText = allergies.getText().substring("List Allergies".length());
+            JOptionPane.showMessageDialog(null, "Saved");
+        });
+        return saveAllergy;
+    }
+
+    private JButton getSavePrescription() {
+        JButton savePrescription = new JButton("Save");
+        savePrescription.addActionListener(e -> {
+            prescriptionText = prescriptions.getText().substring("List Prescriptions".length());
+            JOptionPane.showMessageDialog(null, "Saved");
+        });
+        return savePrescription;
+    }
+
+    private JButton getOkButton() {
+        JButton okButton = new JButton("OK");
+        okButton.setSize(100, 60);
+        okButton.addActionListener(e -> {
+
+            history.setAllergies(allergyText);
+            history.setPrescriptions(prescriptionText);
+            patient.setHistory(history);
+            writeAllergies(allergyText);
+            writePrescriptions(prescriptionText);
+            System.out.println(patient.getHistory().getPrescriptions() + " " + patient.getHistory().getAllergies());
+            closeWindow();
+        });
+
+        return okButton;
     }
 
     /**
@@ -152,27 +164,26 @@ public class PatientCardPopup extends JDialog {
         JLabel questionLabel = new JLabel("Procedures and Fees");
         procedurePanel.add(questionLabel);
 
-        JTextField procedureField = new JTextField();
-        JTextField feeField = new JTextField();
-        JButton addButton = getAddButton(procedureField, feeField, procedurePanel);
+        JButton addButton = getAddFeeButton(procedurePanel);
 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(1, 5));
         inputPanel.add(addButton);
-
         procedurePanel.add(inputPanel);
 
-        totalFeeLabel.setText("Total Fee: AMD 0.0");
+        totalFeeLabel.setText("Total Unpaid Fee: AMD 0.0");
         procedurePanel.add(totalFeeLabel);
 
         return procedurePanel;
     }
 
-    private JButton getAddButton(JTextField procedureField, JTextField feeField, JPanel procedurePanel) {
-        patient.setPayments(payments);
+    private JButton getAddFeeButton(JPanel procedurePanel) {
+        //    patient.setPayments(payments);
+
         ImageIcon icon = new ImageIcon("src\\ui\\DefaultImages\\pngimg.com - plus_PNG110.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
+
         JButton addButton = new JButton(icon);
         addButton.addActionListener(e -> {
             JDialog dialog = new JDialog();
@@ -210,15 +221,13 @@ public class PatientCardPopup extends JDialog {
                             newCheckBox.addActionListener(e111 -> {
                                 if (newCheckBox.isSelected()) {
                                     newFee.setWasPaid(true);
-                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
+                                    totalFeeLabel.setText("Total Unpaid Fees: " + (patient.countUnpaidFees()) + " AMD");
                                 } else {
                                     newFee.setWasPaid(false);
-                                    totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
+                                    totalFeeLabel.setText("Total Unpaid Fees: " + (patient.countUnpaidFees()) + " AMD");
                                 }
                             });
-                            totalFeeLabel.setText("Total Fee: AMD" + (patient.countUnpaidFees()));
-                            System.out.println(patient.getPayments().getFees());
-                            System.out.println(patient.countTotalFees());
+                            totalFeeLabel.setText("Total Fee: " + (patient.countUnpaidFees()) + " AMD");
                             procedurePanel.add(newCheckBox, procedurePanel.getComponentCount() - 2);
                             procedurePanel.revalidate();
                             procedurePanel.repaint();
@@ -250,30 +259,16 @@ public class PatientCardPopup extends JDialog {
         return spinner;
     }
 
-    /**
-     * Extracts the amount the patient is to pay
-     */
-    private int extractAmount(String labelText) {
-        int amount = 0;
-        String[] parts = labelText.split("AMD");
-        if (parts.length > 1) {
-            try {
-                amount = Integer.parseInt(parts[1].trim());
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-        return amount;
-    }
 
     /**
      * Reads the allergies a patient has
      */
-    private void inputAllergies(String allergies) {
+    private void writeAllergies(String allergies) {
         fileName = info.getName() + info.getLastName() + "allergies.txt";
         try {
-            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName));
-            outputStream.println(allergies);
+            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName, true));
+            if (allergies != null)
+                outputStream.println(allergies);
             outputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -283,28 +278,30 @@ public class PatientCardPopup extends JDialog {
     /**
      * Displays the allergies the patient has
      */
-    private void showAllergies() {
+    private void readAllergies() {
         fileName = info.getName() + info.getLastName() + "allergies.txt";
+        StringBuilder str = new StringBuilder();
         try {
             Scanner inputStream = new Scanner(new FileInputStream("src/PatientFiles/" + fileName));
             while (inputStream.hasNextLine()) {
-                allergyText = inputStream.nextLine();
-                System.out.println(allergyText);
+                str.append(inputStream.nextLine());
             }
+            allergyText = str.toString();
             inputStream.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 
     /**
      * Reads the prescriptions a patient has
      */
-    private void inputPrescriptions(String prescriptions) {
+    private void writePrescriptions(String prescriptions) {
         fileName = info.getName() + info.getLastName() + "prescriptions.txt";
         try {
-            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName));
-            outputStream.println(prescriptions);
+            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName, true));
+            if (prescriptions != null)
+                outputStream.println(prescriptions);
             outputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
@@ -314,16 +311,18 @@ public class PatientCardPopup extends JDialog {
     /**
      * Displays the prescriptions the patient has
      */
-    private void showPrescriptions() {
+    private void readPrescriptions() {
         fileName = info.getName() + info.getLastName() + "prescriptions.txt";
+        StringBuilder str = new StringBuilder();
         try {
             Scanner inputStream = new Scanner(new FileInputStream("src/PatientFiles/" + fileName));
             while (inputStream.hasNextLine()) {
-                allergyText = inputStream.nextLine();
+                str.append(inputStream.nextLine());
             }
+            prescriptionText = str.toString();
             inputStream.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 

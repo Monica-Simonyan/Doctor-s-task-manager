@@ -47,8 +47,8 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     }
 
     public void setHistory(History history) {
-        this.history = history.clone();
-    }
+        this.history = history;
+    } //Shallow
 
     public PersonalInformation getPersonalInfo() {
         return new PersonalInformation(personalInfo);

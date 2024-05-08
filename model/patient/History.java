@@ -54,6 +54,10 @@ public class History implements Cloneable {
         return prescriptions;
     }
 
+    public void setPrescriptions(String prescriptions) {
+        this.prescriptions = prescriptions;
+    }
+
     /**
      * Adds procedure to the list
      *
@@ -61,6 +65,10 @@ public class History implements Cloneable {
      */
     public void addProcedures(String procedure) {
         procedures.add(procedure);
+    }
+
+    public void setAllergies(String allergies) {
+        this.allergies = allergies;
     }
 
     /**
@@ -71,7 +79,7 @@ public class History implements Cloneable {
     public History clone() {
         try {
             History clone = (History) super.clone();
-            clone.procedures = new ArrayList<>();
+            clone.procedures = new ArrayList<>(procedures.size());
             for (String procedure : procedures) {
                 clone.procedures.add(procedure);
             }
@@ -81,17 +89,12 @@ public class History implements Cloneable {
         }
     }
 
-    public void printProcedures() {
-        for (String procedure : procedures)
-            System.out.println(procedure + "\n");
-    }
-
     /**
      * Overridden toString method returns the string representation of a patient's history
      *
      * @return string representation of a patient's history
      */
     public String toString() {
-        return allergies + '\n' + procedures + " " + prescriptions;
+        return allergies + "\n" + procedures + "\n " + prescriptions;
     }
 }
