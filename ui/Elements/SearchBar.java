@@ -10,14 +10,21 @@ import java.util.ArrayList;
 public class SearchBar extends JFrame {
     ArrayList<Patient> patients;
     PersonalInformation info;
-    Patient patient;
     JTextField search;
 
+
+    /**
+     * Constructs the searchbar.
+     */
     public SearchBar(ArrayList<Patient> patients){
         this.patients = patients;
         search = new JTextField(30);
     }
 
+    /**
+     * Finds a specific patient for the list of all patients
+     * @param name     the name of the searched patient
+     */
     public void findPatient(String name){
         try {
             for (int i = 0; i < patients.size(); i++) {
@@ -33,5 +40,4 @@ public class SearchBar extends JFrame {
             System.out.println(e.getMessage());
         }
     }
-
 }
