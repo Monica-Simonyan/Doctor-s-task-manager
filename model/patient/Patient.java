@@ -1,5 +1,7 @@
 package model.patient;
 
+import model.utilities.DiscountCalculation;
+
 import java.util.Date;
 
 public abstract class Patient implements Cloneable, DiscountCalculation, Comparable<Patient> {
@@ -100,7 +102,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     public int countTotalFees() {
         int total = 0;
         for (Payments.Fee fee : payments.getFees()) {
-                total += fee.getAmount();
+            total += fee.getAmount();
         }
         return total;
     }
@@ -115,7 +117,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         return total;
     }
 
-   public  int countUnpaidFees() {
+    public int countUnpaidFees() {
         int total = 0;
         for (Payments.Fee fee : payments.getFees()) {
             if (!fee.getWasPaid()) {

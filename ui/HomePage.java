@@ -1,10 +1,13 @@
 package ui;
 
 import model.exceptions.*;
+import model.patient.*;
+import model.utilities.AgeComparator;
+import model.utilities.DateComparator;
+import model.utilities.DefaultComparator;
+import model.utilities.NameComparator;
 import ui.Menus.*;
 import model.patientCategories.*;
-import model.patient.Patient;
-import model.patient.PersonalInformation;
 import ui.Buttons.AddButton;
 import ui.Elements.PatientListItem;
 import ui.Elements.SearchBar;

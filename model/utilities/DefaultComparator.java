@@ -1,4 +1,4 @@
-package ui.Menus;
+package model.utilities;
 
 import model.patient.Patient;
 

@@ -1,6 +1,7 @@
-package model.patient;
+package model.utilities;
 
 import model.exceptions.DiscountablePaymentException;
+import model.patient.Payments;
 
 /**
  * Interface for applying discounts to patient fees.
