@@ -90,7 +90,7 @@ public class AddPatientPopup extends JDialog {
         panel.add(new JLabel("Date: "));
         JPanel datePanel = new JPanel();
         datePanel.setBorder(new EmptyBorder(11, 0, 0, 0));
-        DatePicker datePicker = new DatePicker();
+        datePicker = new DatePicker();
         datePicker.placeComponents(datePanel);
         panel.add(datePanel);
 
@@ -169,7 +169,7 @@ public class AddPatientPopup extends JDialog {
                     ageField.getText(), gmailField.getText(), addressField.getText(),
                     phoneNumberField.getText(), gender);
             categoriesMenu.accessCategory().setPersonalInfo(info);
-            categoriesMenu.accessCategory().setNextVisitDate(datePicker);
+            categoriesMenu.accessCategory().setNextVisitDate(datePicker.getSelectedDate());
             HomePage.addPatient(categoriesMenu.accessCategory());
         } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
                  InvalidGmailException | InvalidPatientException ex) {

@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class DatePicker {
     Date selectedDate;
-
+    JSpinner dateSpinner;
     /**
      * Places a date picker component on the specified JPanel.
      *
@@ -19,12 +19,12 @@ public class DatePicker {
      */
     public void placeComponents(JPanel panel) {
         panel.setLayout(new GridLayout(0, 2, 5, 5));
-        JSpinner dateSpinner = new JSpinner(new SpinnerDateModel());
+        dateSpinner = new JSpinner(new SpinnerDateModel());
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dateSpinner, "MM/dd/yyyy");
         dateSpinner.setEditor(dateEditor);
         panel.add(dateSpinner);
         setDateToCurrent(dateSpinner);
-
+selectedDate = (Date)dateSpinner.getValue();
     }
 
     /**
@@ -39,6 +39,6 @@ public class DatePicker {
         calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 1);
     }
     public Date getSelectedDate(){
-        return selectedDate;
+        return selectedDate ;
     }
 }
