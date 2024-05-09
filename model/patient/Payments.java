@@ -77,7 +77,7 @@ public class Payments {
     public Payments(Payments other) {
         fees = new ArrayList<>(other.fees.size());
         for (Fee fee : other.fees) {
-                fees.add(fee.clone()); // Deep cloning of each Fee
+            fees.add(fee.clone()); // Deep cloning of each Fee
         }
     }
 

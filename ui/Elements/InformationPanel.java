@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class InformationPanel extends JPanel {
-    public InformationPanel(Patient patient, Color color){
+    public InformationPanel(Patient patient, Color color) {
         PersonalInformation info = patient.getPersonalInfo();
         JLabel category = new JLabel("Category: " + patient);
         JLabel fullNameTxt = new JLabel(info.getName() + " " + info.getLastName());

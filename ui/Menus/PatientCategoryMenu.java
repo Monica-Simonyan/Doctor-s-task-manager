@@ -48,9 +48,10 @@ public class PatientCategoryMenu extends JMenuBar {
         add(menu);
     }
 
-    public String getChosen(){
+    public String getChosen() {
         return this.chosen;
     }
+
     /**
      * Retrieves the selected patient category.
      *
