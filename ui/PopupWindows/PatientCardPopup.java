@@ -61,7 +61,7 @@ public class PatientCardPopup extends JDialog {
         informationPanel.setBorder(new EmptyBorder(10, 20, 0, 0));
 
         // Add patient information labels
-        JLabel nextVisit = new JLabel("Next Visit Date: " + patient.getNextVisitDate().toString().substring(0, 19));
+        JLabel nextVisit = new JLabel("Next Visit Date: " + patient.getNextVisitDate().toString());
         nextVisit.setFont(new Font("Serif", Font.PLAIN, 15));
         JLabel phone = new JLabel("Phone Number: " + info.getPhoneNumber());
         phone.setFont(new Font("Serif", Font.PLAIN, 15));
