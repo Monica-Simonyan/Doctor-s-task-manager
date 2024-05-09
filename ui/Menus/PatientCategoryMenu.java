@@ -12,6 +12,7 @@ import javax.swing.*;
  */
 public class PatientCategoryMenu extends JMenuBar {
     private Patient category = new AdultPatient();
+    String chosen;
 
     /**
      * Constructs a new PatientCategoryMenu object.
@@ -23,16 +24,20 @@ public class PatientCategoryMenu extends JMenuBar {
         JMenuItem item1 = new JMenuItem("Pregnant");
         JMenuItem item2 = new JMenuItem("Minor");
         JMenuItem item3 = new JMenuItem("Adult");
+        //String chosen;
 
         item1.addActionListener(e -> {
+            chosen = "Pregnant";
             menu.setText(item1.getText());
             category = new PregnantPatient();
         });
         item2.addActionListener(e -> {
+            chosen = "Minor";
             menu.setText(item2.getText());
             category = new MinorPatient();
         });
         item3.addActionListener(e -> {
+            chosen = "Adult";
             menu.setText(item3.getText());
             category = new AdultPatient();
         });
@@ -43,6 +48,9 @@ public class PatientCategoryMenu extends JMenuBar {
         add(menu);
     }
 
+    public String getChosen(){
+        return this.chosen;
+    }
     /**
      * Retrieves the selected patient category.
      *

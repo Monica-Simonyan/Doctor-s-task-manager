@@ -188,8 +188,9 @@ public class HomePage extends JFrame {
      * addPatients the patient list panel with the latest patient information
      */
     public static void addPatient(Patient patient) throws InvalidPatientException {
-        if (patients.contains(patient))
+        if (patients.contains(patient)) {
             throw new InvalidPatientException();
+        }
         patients.add(patient);
         patientListPanel.add(new PatientListItem(patient));
     }

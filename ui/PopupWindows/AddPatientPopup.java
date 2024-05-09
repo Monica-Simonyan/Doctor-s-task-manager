@@ -1,6 +1,7 @@
 package ui.PopupWindows;
 
 import model.exceptions.*;
+import model.patient.Patient;
 import model.patient.PersonalInformation;
 import model.patientCategories.AdultPatient;
 import model.patientCategories.MinorPatient;
@@ -36,6 +37,7 @@ public class AddPatientPopup extends JDialog {
     PregnantPatient p;
     AdultPatient a;
     MinorPatient m;
+    Patient patient;
 
     /**
      * Constructs the AddPatientPopup dialog.
@@ -126,8 +128,7 @@ public class AddPatientPopup extends JDialog {
                 }
             }
             dispose();
-            //addPatientToList();
-            //System.out.println("Patient added");
+            addPatientToList();
         });
 
         cancelButton.addActionListener(e -> dispose());
@@ -164,38 +165,29 @@ public class AddPatientPopup extends JDialog {
         try {
             i = new PersonalInformation(firstNameField.getText(), lastNameField.getText(), ageField.getText(),
                     gmailField.getText(), addressField.getText(), phoneNumberField.getText(), gender);
-        } catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
+        }
+        catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
             throw new RuntimeException(e);
         }
 
-        if(categoriesMenu.equals("Pregnant")){
-            PregnantPatient p = new PregnantPatient();
-            p.setPersonalInfo(i);
+        if(categoriesMenu.getChosen().equals("Pregnant")){
+            System.out.println("pre");
+            patient = new PregnantPatient();
+            System.out.println("pre");
         }
+        if(categoriesMenu.getChosen().equals("Adult")){
+            System.out.println("adl");
+            patient = new AdultPatient();
+        }
+        if(categoriesMenu.getChosen().equals("Minor")){
+            System.out.println("min");
+            patient = new MinorPatient();
+        }
+        patient.setPersonalInfo(i);
         try {
-            HomePage.addPatient(p);
-
-        } catch (InvalidPatientException e) {
-            throw new RuntimeException(e);
+            HomePage.addPatient(patient);
         }
-
-        if(categoriesMenu.equals("Adult")){
-            AdultPatient a = new AdultPatient();
-            a.setPersonalInfo(i);
-        }
-        try {
-            HomePage.addPatient(a);
-
-        } catch (InvalidPatientException e) {
-            throw new RuntimeException(e);
-        }
-        if(categoriesMenu.equals("Minor")){
-            MinorPatient m = new MinorPatient();
-            m.setPersonalInfo(i);
-        }
-        try {
-            HomePage.addPatient(m);
-        } catch (InvalidPatientException e) {
+        catch (InvalidPatientException e) {
             throw new RuntimeException(e);
         }
     }
