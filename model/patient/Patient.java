@@ -12,6 +12,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     private Payments payments;
     private Date nextVisitDate;
     private String imageURL;
+    public static int count;
 
     // Constructors
     public Patient() {
@@ -20,6 +21,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         history = new History();
         nextVisitDate = new Date();
         payments = new Payments();
+        count++;
     }
 
     public Patient(PersonalInformation personalInfo, History history, Payments payments, String imageURL) {
@@ -27,6 +29,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         setPersonalInfo(personalInfo);
         setHistory(history);
         setPayments(payments);
+        count++;
     }
 
     // Accessors and mutators
@@ -144,10 +147,13 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         else return this.personalInfo.equals(((Patient) obj).personalInfo);
     }
 
+    public String printPatient() {
+        return this + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
+    }
 
     // Overridden methods
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "\n" + getPersonalInfo() + "\n" + history + "\n" + payments + "\n" + nextVisitDate;
+        return getClass().toString();
     }
 }

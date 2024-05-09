@@ -16,7 +16,14 @@ import ui.PopupWindows.AddPatientPopup;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 /**
@@ -55,7 +62,9 @@ public class HomePage extends JFrame {
 
 
         AddButton addButton = new AddButton(40);
-        addButton.addActionListener(e -> new AddPatientPopup());
+        addButton.addActionListener(e -> {
+            new AddPatientPopup();
+        });
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
@@ -96,7 +105,42 @@ public class HomePage extends JFrame {
         setLocationRelativeTo(null);
         setTitle("Patient List");
         setVisible(true);
+        addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+                readPatients();
+            }
 
+            @Override
+            public void windowClosing(WindowEvent e) {
+                writePatients();
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+
+            }
+        });
     }
 
     /**
@@ -106,10 +150,12 @@ public class HomePage extends JFrame {
         patients.sort(new DefaultComparator());
         refreshPatientListPanel();
     }
+
     public static void sortPatientsByAge() {
         patients.sort(new AgeComparator());
         refreshPatientListPanel();
     }
+
     /**
      * Sorts the patients list by name.
      */
@@ -152,7 +198,38 @@ public class HomePage extends JFrame {
         return patients;
     }
 
+    public void writePatients() {
+        for (Patient p : patients) {
+            String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
+            try {
+                PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName, true));
+                outputStream.println(p.printPatient());
+                outputStream.close();
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void readPatients() {
+        StringBuilder str = new StringBuilder();
+        for (Patient p : patients) {
+            String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
+            try {
+                Scanner inputStream = new Scanner(new FileInputStream("src/PatientFiles/" + fileName));
+                while (inputStream.hasNextLine()) {
+                    str.append(inputStream.nextLine());
+                }
+                inputStream.close();
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        System.out.println(str);
+    }
+
     public static void main(String[] args) {
         new HomePage();
     }
 }
+
