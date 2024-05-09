@@ -74,7 +74,7 @@ public class PatientCardPopup extends JDialog {
         JPanel allergyPanel = new JPanel();
         allergies = new JTextArea(10, 30);
         allergies.setLineWrap(true);
-        allergies.setText("List Allergies");
+        //allergies.setText("List Allergies");
         allergies.append("\n" + allergyText);
         allergies.setBackground(backgroundColor);
         JButton saveAllergy = getSaveAllergy();
@@ -85,7 +85,7 @@ public class PatientCardPopup extends JDialog {
         JPanel prescriptionPanel = new JPanel();
         prescriptions = new JTextArea(10, 30);
         prescriptions.setLineWrap(true);
-        prescriptions.setText("List Prescriptions");
+        //prescriptions.setText("List Prescriptions");
         prescriptions.append("\n" + prescriptionText);
         prescriptions.setBackground(backgroundColor);
         JButton savePrescription = getSavePrescription();
@@ -266,7 +266,7 @@ public class PatientCardPopup extends JDialog {
     private void writeAllergies(String allergies) {
         fileName = info.getName() + info.getLastName() + "allergies.txt";
         try {
-            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui.PatientFiles/" + fileName, true));
+            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui/PatientFiles/" + fileName, true));
             if (allergies != null)
                 outputStream.println(allergies);
             outputStream.close();
@@ -282,7 +282,7 @@ public class PatientCardPopup extends JDialog {
         fileName = info.getName() + info.getLastName() + "allergies.txt";
         StringBuilder str = new StringBuilder();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("src/ui.PatientFiles/" + fileName));
+            Scanner inputStream = new Scanner(new FileInputStream("src/ui/PatientFiles/" + fileName));
             while (inputStream.hasNextLine()) {
                 str.append(inputStream.nextLine());
             }
@@ -299,7 +299,7 @@ public class PatientCardPopup extends JDialog {
     private void writePrescriptions(String prescriptions) {
         fileName = info.getName() + info.getLastName() + "prescriptions.txt";
         try {
-            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui.PatientFiles/" + fileName, true));
+            PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui/PatientFiles/" + fileName, true));
             if (prescriptions != null)
                 outputStream.println(prescriptions);
             outputStream.close();
@@ -315,7 +315,7 @@ public class PatientCardPopup extends JDialog {
         fileName = info.getName() + info.getLastName() + "prescriptions.txt";
         StringBuilder str = new StringBuilder();
         try {
-            Scanner inputStream = new Scanner(new FileInputStream("src/ui.PatientFiles/" + fileName));
+            Scanner inputStream = new Scanner(new FileInputStream("src/ui/PatientFiles/" + fileName));
             while (inputStream.hasNextLine()) {
                 str.append(inputStream.nextLine());
             }
