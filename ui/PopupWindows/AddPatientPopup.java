@@ -30,10 +30,10 @@ public class AddPatientPopup extends JDialog {
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
-    PatientCategoryMenu categoriesMenu;
+    private final PatientCategoryMenu categoriesMenu;
+    private final GenderRadioButtons genderRadioButtons;
+    DatePicker datePicker;
 
-    // String to store the selected gender
-    private String gender;
     PregnantPatient p;
     AdultPatient a;
     MinorPatient m;
@@ -80,7 +80,7 @@ public class AddPatientPopup extends JDialog {
 
         // Gender selection
         panel.add(new JLabel("Gender: "));
-        GenderRadioButtons genderRadioButtons = new GenderRadioButtons();
+        genderRadioButtons = new GenderRadioButtons();
         JPanel radioBtns = new JPanel();
         radioBtns.add(genderRadioButtons.maleRadioButton);
         radioBtns.add(genderRadioButtons.femaleRadioButton);
@@ -128,8 +128,9 @@ public class AddPatientPopup extends JDialog {
 //                    JOptionPane.showMessageDialog(null, ex.getMessage());
 //                }
 //            }
-            dispose();
             addPatientToList();
+            dispose();
+
         });
 
         cancelButton.addActionListener(e -> dispose());
@@ -143,7 +144,7 @@ public class AddPatientPopup extends JDialog {
         setVisible(true);
     }
 
-    private void createFile(){
+    private void createFile() {
         String file = firstNameField.toString() + lastNameField.toString();
         File fileName1 = new File("src/ui/PatientFiles/" + file + "allergies.txt");
         File fileName2 = new File("src/ui/PatientFiles/" + file + "prescriptions.txt");
@@ -155,44 +156,25 @@ public class AddPatientPopup extends JDialog {
             if (!(fileName2.createNewFile())) {
                 System.out.println("File created!");
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public void addPatientToList(){
-        PersonalInformation i = null;
+    public void addPatientToList() {
+        PersonalInformation info;
         try {
-            i = new PersonalInformation(firstNameField.getText(), lastNameField.getText(), ageField.getText(),
-                    gmailField.getText(), addressField.getText(), phoneNumberField.getText(), gender);
-        }
-        catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            String gender = genderRadioButtons.getSelectedGender();
+            info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
+                    ageField.getText(), gmailField.getText(), addressField.getText(),
+                    phoneNumberField.getText(), gender);
+            categoriesMenu.accessCategory().setPersonalInfo(info);
+            categoriesMenu.accessCategory().setNextVisitDate(datePicker);
+            HomePage.addPatient(categoriesMenu.accessCategory());
+        } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+                 InvalidGmailException | InvalidPatientException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
 
-        if(categoriesMenu.getChosen().equals("Pregnant")){
-            System.out.println("pre");
-            patient = new PregnantPatient();
-            patient.setPersonalInfo(i);
-            System.out.println("pre");
-        }
-        if(categoriesMenu.getChosen().equals("Adult")){
-            System.out.println("adl");
-            patient = new AdultPatient();
-            patient.setPersonalInfo(i);
-        }
-        if(categoriesMenu.getChosen().equals("Minor")){
-            System.out.println("min");
-            patient = new MinorPatient();
-            patient.setPersonalInfo(i);
-        }
-
-        try {
-            HomePage.addPatient(patient);
-        }
-        catch (InvalidPatientException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
     }
 }

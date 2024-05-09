@@ -24,7 +24,7 @@ public class DatePicker {
         dateSpinner.setEditor(dateEditor);
         panel.add(dateSpinner);
         setDateToCurrent(dateSpinner);
-        selectedDate = (Date) dateSpinner.getValue();
+
     }
 
     /**
@@ -32,7 +32,7 @@ public class DatePicker {
      *
      * @param dateSpinner The JSpinner to set the date for.
      */
-    private static void setDateToCurrent(JSpinner dateSpinner) {
+    private void setDateToCurrent(JSpinner dateSpinner) {
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
         dateSpinner.setValue(currentDate);

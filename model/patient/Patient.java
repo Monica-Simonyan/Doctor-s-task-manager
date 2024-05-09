@@ -19,7 +19,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         this.imageURL = "src/ui/DefaultImages/Adult.png";
         personalInfo = new PersonalInformation();
         history = new History();
-        nextVisitDate = new Date();
+       // nextVisitDate = new Date();
         payments = new Payments();
         count++;
     }

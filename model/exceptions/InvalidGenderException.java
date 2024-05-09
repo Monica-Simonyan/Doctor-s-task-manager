@@ -2,7 +2,7 @@ package model.exceptions;
 
 public class InvalidGenderException extends Exception {
     public InvalidGenderException() {
-        super();
+        super("Please select a gender");
     }
 
     public InvalidGenderException(String msg) {
