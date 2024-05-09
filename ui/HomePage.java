@@ -185,7 +185,7 @@ public class HomePage extends JFrame {
     }
 
     /**
-     * addPatients the patient list panel with the latest patient information.
+     * addPatients the patient list panel with the latest patient information
      */
     public static void addPatient(Patient patient) throws InvalidPatientException {
         if (patients.contains(patient))
@@ -202,7 +202,7 @@ public class HomePage extends JFrame {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
             try {
-                PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/PatientFiles/" + fileName, true));
+                PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui.PatientFiles/" + fileName, true));
                 outputStream.println(p.printPatient());
                 outputStream.close();
             } catch (FileNotFoundException e) {
@@ -216,7 +216,7 @@ public class HomePage extends JFrame {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
             try {
-                Scanner inputStream = new Scanner(new FileInputStream("src/PatientFiles/" + fileName));
+                Scanner inputStream = new Scanner(new FileInputStream("src/ui.PatientFiles/" + fileName));
                 while (inputStream.hasNextLine()) {
                     str.append(inputStream.nextLine());
                 }
