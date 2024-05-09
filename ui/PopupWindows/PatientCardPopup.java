@@ -136,7 +136,7 @@ public class PatientCardPopup extends JDialog {
     }
 
     private JButton getOkButton() {
-        JButton okButton = new JButton("Back");
+        JButton okButton = new JButton("Ok");
         okButton.setSize(100, 60);
         okButton.addActionListener(e -> {
 

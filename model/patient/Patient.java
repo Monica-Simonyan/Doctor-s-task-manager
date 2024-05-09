@@ -50,7 +50,8 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     }
 
     public void setHistory(History history) {
-        this.history = history;
+        if (history != null)
+            this.history = history;
     } //Shallow
 
     public PersonalInformation getPersonalInfo() {
@@ -58,7 +59,8 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     }
 
     public void setPersonalInfo(PersonalInformation personalInfo) {
-        this.personalInfo = new PersonalInformation(personalInfo);
+        if (personalInfo != null)
+            this.personalInfo = new PersonalInformation(personalInfo);
     }
 
     public Date getNextVisitDate() {

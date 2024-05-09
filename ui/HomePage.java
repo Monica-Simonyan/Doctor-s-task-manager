@@ -75,15 +75,15 @@ public class HomePage extends JFrame {
 
 
         //TESTING
-        PersonalInformation i;
-        PersonalInformation b;
+        PersonalInformation i = null;
+        PersonalInformation b = null;
         try {
-            i = new PersonalInformation("Xanice", "smoth", "23",
-                    "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
+            i = new PersonalInformation("Janice", "Smith", "23",
+                    "janice@gmail.com", "Baker street 15", "32542354", "female");
             b = new PersonalInformation("Pnna", "Hello", "55",
                     "@gmail.com", "sdfgdfhgbdhb", "32542354", "male");
         } catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         PregnantPatient p = new PregnantPatient();
         p.setPersonalInfo(i);
@@ -95,7 +95,7 @@ public class HomePage extends JFrame {
             addPatient(a);
             addPatient(m);
         } catch (InvalidPatientException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
         setLayout(null);
@@ -108,6 +108,7 @@ public class HomePage extends JFrame {
         addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {
+                writePatients();
                 readPatients();
             }
 
@@ -203,7 +204,7 @@ public class HomePage extends JFrame {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
             try {
-                PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui.PatientFiles/" + fileName, true));
+                PrintWriter outputStream = new PrintWriter(new FileOutputStream("src/ui/PatientFiles/" + fileName, true));
                 outputStream.println(p.printPatient());
                 outputStream.close();
             } catch (FileNotFoundException e) {
@@ -217,7 +218,7 @@ public class HomePage extends JFrame {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
             try {
-                Scanner inputStream = new Scanner(new FileInputStream("src/ui.PatientFiles/" + fileName));
+                Scanner inputStream = new Scanner(new FileInputStream("src/ui/PatientFiles/" + fileName));
                 while (inputStream.hasNextLine()) {
                     str.append(inputStream.nextLine());
                 }

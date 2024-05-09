@@ -111,22 +111,23 @@ public class AddPatientPopup extends JDialog {
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
             createFile();
-            boolean isInputValid = false;
-            PersonalInformation info;
-            while (!isInputValid) {
-                isInputValid = true;
-                try {
-                    gender = genderRadioButtons.getSelectedGender();
-                    info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
-                            ageField.getText(), gmailField.getText(), addressField.getText(),
-                            phoneNumberField.getText(), gender);
-                    categoriesMenu.accessCategory().setPersonalInfo(info);
-                    HomePage.addPatient(categoriesMenu.accessCategory());
-                } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
-                         InvalidGmailException | InvalidPatientException ex) {
-                    JOptionPane.showMessageDialog(null, ex.getMessage());
-                }
-            }
+//            boolean isInputValid = false;
+//            PersonalInformation info;
+//            while (!isInputValid) {
+//                isInputValid = true;
+//                try {
+//                    gender = genderRadioButtons.getSelectedGender();
+//                    info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
+//                            ageField.getText(), gmailField.getText(), addressField.getText(),
+//                            phoneNumberField.getText(), gender);
+//                    categoriesMenu.accessCategory().setPersonalInfo(info);
+//                    categoriesMenu.accessCategory().setNextVisitDate(datePicker.getSelectedDate());
+//                    HomePage.addPatient(categoriesMenu.accessCategory());
+//                } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+//                         InvalidGmailException | InvalidPatientException ex) {
+//                    JOptionPane.showMessageDialog(null, ex.getMessage());
+//                }
+//            }
             dispose();
             addPatientToList();
         });
@@ -161,34 +162,37 @@ public class AddPatientPopup extends JDialog {
     }
 
     public void addPatientToList(){
-        PersonalInformation i;
+        PersonalInformation i = null;
         try {
             i = new PersonalInformation(firstNameField.getText(), lastNameField.getText(), ageField.getText(),
                     gmailField.getText(), addressField.getText(), phoneNumberField.getText(), gender);
         }
         catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
 
         if(categoriesMenu.getChosen().equals("Pregnant")){
             System.out.println("pre");
             patient = new PregnantPatient();
+            patient.setPersonalInfo(i);
             System.out.println("pre");
         }
         if(categoriesMenu.getChosen().equals("Adult")){
             System.out.println("adl");
             patient = new AdultPatient();
+            patient.setPersonalInfo(i);
         }
         if(categoriesMenu.getChosen().equals("Minor")){
             System.out.println("min");
             patient = new MinorPatient();
+            patient.setPersonalInfo(i);
         }
-        patient.setPersonalInfo(i);
+
         try {
             HomePage.addPatient(patient);
         }
         catch (InvalidPatientException e) {
-            throw new RuntimeException(e);
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 }
