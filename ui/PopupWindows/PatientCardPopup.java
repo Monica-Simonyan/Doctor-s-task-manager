@@ -120,7 +120,7 @@ public class PatientCardPopup extends JDialog {
     public JButton getSaveAllergy() {
         JButton saveAllergy = new JButton("Save");
         saveAllergy.addActionListener(e -> {
-            allergyText = allergies.getText().substring("List Allergies".length());
+            allergyText = allergies.getText();
             JOptionPane.showMessageDialog(null, "Saved");
         });
         return saveAllergy;
@@ -129,14 +129,14 @@ public class PatientCardPopup extends JDialog {
     private JButton getSavePrescription() {
         JButton savePrescription = new JButton("Save");
         savePrescription.addActionListener(e -> {
-            prescriptionText = prescriptions.getText().substring("List Prescriptions".length());
+            prescriptionText = prescriptions.getText();
             JOptionPane.showMessageDialog(null, "Saved");
         });
         return savePrescription;
     }
 
     private JButton getOkButton() {
-        JButton okButton = new JButton("OK");
+        JButton okButton = new JButton("Back");
         okButton.setSize(100, 60);
         okButton.addActionListener(e -> {
 

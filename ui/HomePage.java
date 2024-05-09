@@ -103,7 +103,7 @@ public class HomePage extends JFrame {
         setSize(WIDTH, HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
-        setTitle("Patient List");
+        setTitle("Home Page");
         setVisible(true);
         addWindowListener(new WindowListener() {
             @Override
