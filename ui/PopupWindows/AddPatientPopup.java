@@ -2,6 +2,9 @@ package ui.PopupWindows;
 
 import model.exceptions.*;
 import model.patient.PersonalInformation;
+import model.patientCategories.AdultPatient;
+import model.patientCategories.MinorPatient;
+import model.patientCategories.PregnantPatient;
 import ui.HomePage;
 import ui.Elements.DatePicker;
 import ui.Elements.GenderRadioButtons;
@@ -10,6 +13,7 @@ import ui.Menus.PatientCategoryMenu;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.*;
 
 import static ui.Elements.TimePicker.placeTimeComponents;
 
@@ -25,9 +29,13 @@ public class AddPatientPopup extends JDialog {
     private final JTextField gmailField;
     private final JTextField addressField;
     private final JTextField phoneNumberField;
+    PatientCategoryMenu categoriesMenu;
 
     // String to store the selected gender
     private String gender;
+    PregnantPatient p;
+    AdultPatient a;
+    MinorPatient m;
 
     /**
      * Constructs the AddPatientPopup dialog.
@@ -93,13 +101,14 @@ public class AddPatientPopup extends JDialog {
 
         // Category selection
         panel.add(new JLabel("Choose: "));
-        PatientCategoryMenu categoriesMenu = new PatientCategoryMenu();
+        categoriesMenu = new PatientCategoryMenu();
         panel.add(categoriesMenu);
 
         // OK and Cancel buttons
         JButton okButton = new JButton("OK");
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
+            createFile();
             boolean isInputValid = false;
             PersonalInformation info;
             while (!isInputValid) {
@@ -117,7 +126,10 @@ public class AddPatientPopup extends JDialog {
                 }
             }
             dispose();
+            //addPatientToList();
+            //System.out.println("Patient added");
         });
+
         cancelButton.addActionListener(e -> dispose());
         panel.add(okButton);
         panel.add(cancelButton);
@@ -127,5 +139,64 @@ public class AddPatientPopup extends JDialog {
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void createFile(){
+        String file = firstNameField.toString() + lastNameField.toString();
+        File fileName1 = new File("src/ui/PatientFiles/" + file + "allergies.txt");
+        File fileName2 = new File("src/ui/PatientFiles/" + file + "prescriptions.txt");
+
+        try {
+            if (fileName1.createNewFile()) {
+                System.out.println("File created!");
+            }
+            if (!(fileName2.createNewFile())) {
+                System.out.println("File created!");
+            }
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void addPatientToList(){
+        PersonalInformation i;
+        try {
+            i = new PersonalInformation(firstNameField.getText(), lastNameField.getText(), ageField.getText(),
+                    gmailField.getText(), addressField.getText(), phoneNumberField.getText(), gender);
+        } catch (InvalidGenderException | InvalidGmailException | InvalidAgeException | InvalidPhoneNumberException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(categoriesMenu.equals("Pregnant")){
+            PregnantPatient p = new PregnantPatient();
+            p.setPersonalInfo(i);
+        }
+        try {
+            HomePage.addPatient(p);
+
+        } catch (InvalidPatientException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(categoriesMenu.equals("Adult")){
+            AdultPatient a = new AdultPatient();
+            a.setPersonalInfo(i);
+        }
+        try {
+            HomePage.addPatient(a);
+
+        } catch (InvalidPatientException e) {
+            throw new RuntimeException(e);
+        }
+        if(categoriesMenu.equals("Minor")){
+            MinorPatient m = new MinorPatient();
+            m.setPersonalInfo(i);
+        }
+        try {
+            HomePage.addPatient(m);
+        } catch (InvalidPatientException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
