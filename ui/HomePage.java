@@ -47,10 +47,10 @@ public class HomePage extends JFrame {
         patientListPanel.setBackground(new Color(255, 255, 255, 255));
 
 
-        SearchBar searchBar = new SearchBar(patients);
+        SearchBar searchBar = new SearchBar(patients, patientListPanel);
         JTextField search = new JTextField(10);
         JButton searchButton = new JButton("Search");
-        searchButton.addActionListener((ActionEvent e) -> searchBar.findPatient(search.toString()));
+        searchButton.addActionListener((ActionEvent e) -> searchBar.findPatient(search.getText(), patients));
 
 
         JPanel searchPanel = new JPanel();
@@ -68,11 +68,9 @@ public class HomePage extends JFrame {
         addButton.setBounds(270, 10, 40, 40);
         add(addButton);
 
-
         JScrollPane scrollPane = new JScrollPane(patientListPanel);
         scrollPane.setBounds(0, 70, WIDTH, 550);
         add(scrollPane);
-
 
         //TESTING
         PersonalInformation i = null;
@@ -200,7 +198,7 @@ public class HomePage extends JFrame {
         return patients;
     }
 
-    public void writePatients() {
+    public static void writePatients() {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
             try {
@@ -228,6 +226,21 @@ public class HomePage extends JFrame {
             }
         }
         System.out.println(str);
+    }
+
+    public void findPatient(String name){
+        try {
+
+            for(int k = 0; k < patients.size(); k++){
+                System.out.println(patients.get(k).getPersonalInfo().getName());
+                if(name.equalsIgnoreCase(patients.get(k).getPersonalInfo().getName())){
+                    System.out.println("FOUND!!!");
+                }
+            }
+        }
+        catch (NullPointerException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public static void main(String[] args) {
