@@ -2,10 +2,7 @@ package ui;
 
 import model.exceptions.*;
 import model.patient.*;
-import model.utilities.AgeComparator;
-import model.utilities.DateComparator;
-import model.utilities.DefaultComparator;
-import model.utilities.NameComparator;
+import model.utilities.*;
 import ui.Menus.*;
 import model.patientCategories.*;
 import ui.Buttons.AddButton;
@@ -18,10 +15,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -228,17 +222,16 @@ public class HomePage extends JFrame {
         System.out.println(str);
     }
 
-    public void findPatient(String name){
+    public void findPatient(String name) {
         try {
 
-            for(int k = 0; k < patients.size(); k++){
+            for (int k = 0; k < patients.size(); k++) {
                 System.out.println(patients.get(k).getPersonalInfo().getName());
-                if(name.equalsIgnoreCase(patients.get(k).getPersonalInfo().getName())){
+                if (name.equalsIgnoreCase(patients.get(k).getPersonalInfo().getName())) {
                     System.out.println("FOUND!!!");
                 }
             }
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e.getMessage());
         }
     }

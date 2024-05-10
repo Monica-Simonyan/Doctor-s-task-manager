@@ -86,7 +86,7 @@ public class PersonalInformation implements Cloneable {
      * @param gender the gender to set.
      */
     public void setGender(String gender) throws InvalidGenderException {
-        if (!(Gender.valueOf(gender.toUpperCase()).equals(Gender.MALE) || Gender.valueOf(gender.toUpperCase()).equals(Gender.FEMALE)))
+        if (gender == null || !(Gender.valueOf(gender.toUpperCase()).equals(Gender.MALE) || Gender.valueOf(gender.toUpperCase()).equals(Gender.FEMALE)))
             throw new InvalidGenderException("Please enter a valid gender");
         else
             this.gender = Gender.valueOf(gender.toUpperCase());
