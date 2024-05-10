@@ -111,6 +111,23 @@ public class AddPatientPopup extends JDialog {
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
             createFile();
+//            boolean isInputValid = false;
+//            PersonalInformation info;
+//            while (!isInputValid) {
+//                isInputValid = true;
+//                try {
+//                    gender = genderRadioButtons.getSelectedGender();
+//                    info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
+//                            ageField.getText(), gmailField.getText(), addressField.getText(),
+//                            phoneNumberField.getText(), gender);
+//                    categoriesMenu.accessCategory().setPersonalInfo(info);
+//                    categoriesMenu.accessCategory().setNextVisitDate(datePicker.getSelectedDate());
+//                    HomePage.addPatient(categoriesMenu.accessCategory());
+//                } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
+//                         InvalidGmailException | InvalidPatientException ex) {
+//                    JOptionPane.showMessageDialog(null, ex.getMessage());
+//                }
+//            }
             addPatientToList();
             dispose();
 
