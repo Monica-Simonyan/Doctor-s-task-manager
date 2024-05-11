@@ -1,4 +1,3 @@
-
 package ui.Elements;
 
 import javax.swing.*;
@@ -40,6 +39,11 @@ public class DatePicker {
         calendar.set(Calendar.SECOND, calendar.get(Calendar.SECOND) + 1);
     }
 
+
+    /**
+     * Returns the selected date
+     * @return     <code>Date</code> date
+     */
     public Date getSelectedDate() {
         return (Date) dateSpinner.getValue();
     }

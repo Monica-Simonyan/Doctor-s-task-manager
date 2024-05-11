@@ -150,6 +150,9 @@ public class HomePage extends JFrame {
         refreshPatientListPanel();
     }
 
+    /**
+     * Sorts the patients list by age.
+     */
     public static void sortPatientsByAge() {
         patients.sort(new AgeComparator());
         refreshPatientListPanel();
@@ -194,10 +197,18 @@ public class HomePage extends JFrame {
         patientListPanel.add(new PatientListItem(patient));
     }
 
+    /**
+     * Returns the ArrayList of patients
+     * @return     <code>Patient</code> patients
+     */
     public static ArrayList<Patient> accessPatients() {
         return patients;
     }
 
+
+    /**
+     * Writes in the files created for patients.
+     */
     public static void writePatients() {
         for (Patient p : patients) {
             String fileName = p.getPersonalInfo().getName() + p.getPersonalInfo().getLastName();
@@ -211,6 +222,9 @@ public class HomePage extends JFrame {
         }
     }
 
+    /**
+     * Reads from the files of the patients.
+     */
     private void readPatients() {
         StringBuilder str = new StringBuilder();
         for (Patient p : patients) {
@@ -228,23 +242,12 @@ public class HomePage extends JFrame {
         System.out.println(str);
     }
 
-    public void findPatient(String name){
-        try {
 
-            for(int k = 0; k < patients.size(); k++){
-                System.out.println(patients.get(k).getPersonalInfo().getName());
-                if(name.equalsIgnoreCase(patients.get(k).getPersonalInfo().getName())){
-                    System.out.println("FOUND!!!");
-                }
-            }
-        }
-        catch (NullPointerException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
+    /**
+     * The main method from where the program is run.
+     * @param args     <code>String[]</code> args
+     */
     public static void main(String[] args) {
         new HomePage();
     }
 }
-

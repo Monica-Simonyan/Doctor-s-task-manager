@@ -1,4 +1,3 @@
-
 package ui.Menus;
 
 import model.patient.Patient;
@@ -46,10 +45,6 @@ public class PatientCategoryMenu extends JMenuBar {
         menu.add(item2);
         menu.add(item3);
         add(menu);
-    }
-
-    public String getChosen() {
-        return this.chosen;
     }
 
     /**

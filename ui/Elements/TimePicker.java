@@ -1,4 +1,3 @@
-
 package ui.Elements;
 
 import javax.swing.*;

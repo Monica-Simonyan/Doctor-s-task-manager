@@ -1,7 +1,6 @@
 package ui.Buttons;
 
 import model.patient.Patient;
-import model.patient.PersonalInformation;
 import ui.PopupWindows.PatientCardPopup;
 
 import javax.swing.*;
@@ -10,7 +9,15 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+/**
+ * Represents the patient's medical card
+ */
 public class ShowPatientCard extends JLabel {
+
+    /**
+     * Displays the patient card
+     * @param patient     <code>Patient</code> patient
+     */
     public ShowPatientCard(Patient patient) {
         setText("More...");
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -24,6 +31,11 @@ public class ShowPatientCard extends JLabel {
         });
     }
 
+
+    /**
+     * Displays the medical card window
+     * @param patient     <code>Patient</code> patient
+     */
     private void openProfileWindow(Patient patient) {
 
         PatientCardPopup profileFrame = new PatientCardPopup(patient);

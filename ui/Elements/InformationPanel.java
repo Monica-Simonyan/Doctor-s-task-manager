@@ -4,10 +4,18 @@ import model.patient.Patient;
 import model.patient.PersonalInformation;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Represents the patients present in the arrayList in the Home Page
+ */
 public class InformationPanel extends JPanel {
+
+    /**
+     * Constructs the information panel
+     * @param patient     <code>Patient</code> patient
+     * @param color       <code>Color</code> color
+     */
     public InformationPanel(Patient patient, Color color) {
         PersonalInformation info = patient.getPersonalInfo();
         JLabel category = new JLabel("Category: " + patient);

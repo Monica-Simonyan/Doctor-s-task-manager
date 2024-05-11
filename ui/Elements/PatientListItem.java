@@ -64,6 +64,4 @@ public class PatientListItem extends JPanel {
         setSize(new Dimension(HomePage.WIDTH, 170));
         setBackground(color);
     }
-
-
 }

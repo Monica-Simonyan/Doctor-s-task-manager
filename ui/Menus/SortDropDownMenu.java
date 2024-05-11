@@ -3,8 +3,10 @@ package ui.Menus;
 import ui.HomePage;
 
 import javax.swing.*;
-;
 
+/**
+ * Represents the dropdown manu for sorting the patients by name, age, and date
+ */
 public class SortDropDownMenu extends JMenuBar {
     public SortDropDownMenu() {
         JMenuBar menuBar = new JMenuBar();

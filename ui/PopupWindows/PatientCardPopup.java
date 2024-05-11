@@ -6,15 +6,14 @@ import ui.Elements.InformationPanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.WindowEvent;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Represents the Patient Card
+ */
 public class PatientCardPopup extends JDialog {
     private static final Color backgroundColor = new Color(222, 227, 235);
     private String fileName;
@@ -117,6 +116,10 @@ public class PatientCardPopup extends JDialog {
 
     }
 
+    /**
+     * The button for saving the inputted allergies.
+     * @return     <code>JButton</code> saveAllergy
+     */
     public JButton getSaveAllergy() {
         JButton saveAllergy = new JButton("Save");
         saveAllergy.addActionListener(e -> {
@@ -126,6 +129,10 @@ public class PatientCardPopup extends JDialog {
         return saveAllergy;
     }
 
+    /**
+     * The button for saving the inputted prescriptions.
+     * @return
+     */
     private JButton getSavePrescription() {
         JButton savePrescription = new JButton("Save");
         savePrescription.addActionListener(e -> {
@@ -135,6 +142,10 @@ public class PatientCardPopup extends JDialog {
         return savePrescription;
     }
 
+    /**
+     * The OK button closing the PatientCardPopUp window.
+     * @return     <code>JButton</code> okButton
+     */
     private JButton getOkButton() {
         JButton okButton = new JButton("Ok");
         okButton.setSize(100, 60);
@@ -153,7 +164,8 @@ public class PatientCardPopup extends JDialog {
     }
 
     /**
-     *
+     * Displays the panel where the procedures of the patient
+     * are written.
      */
     private JPanel getProcedurePanel() {
         String[] procedures = {"Surgery", "Appendectomy", "Breast biopsy", "Cataract surgery"};
@@ -177,9 +189,12 @@ public class PatientCardPopup extends JDialog {
         return procedurePanel;
     }
 
+    /**
+     * Creates a button for adding the fees
+     * @param procedurePanel     <code>JPanel</code> procedurePanel
+     * @return                   <code>JButton</code> addButton
+     */
     private JButton getAddFeeButton(JPanel procedurePanel) {
-        //    patient.setPayments(payments);
-
         ImageIcon icon = new ImageIcon("src\\ui\\DefaultImages\\pngimg.com - plus_PNG110.png");
         Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
         icon = new ImageIcon(img);
@@ -253,6 +268,12 @@ public class PatientCardPopup extends JDialog {
         return addButton;
     }
 
+    /**
+     * Creates a JSpinner for the doctor to select the
+     * price of the procedure
+     * @param spinnerModel     <code>JSpinner</code> spinner
+     * @return                 <code>JSpinner</code> spinner
+     */
     private JSpinner getjSpinner(SpinnerModel spinnerModel) {
         JSpinner spinner = new JSpinner(spinnerModel);
         spinner.setPreferredSize(new Dimension(100, 30));

@@ -111,23 +111,6 @@ public class AddPatientPopup extends JDialog {
         JButton cancelButton = new JButton("Cancel");
         okButton.addActionListener(e -> {
             createFile();
-//            boolean isInputValid = false;
-//            PersonalInformation info;
-//            while (!isInputValid) {
-//                isInputValid = true;
-//                try {
-//                    gender = genderRadioButtons.getSelectedGender();
-//                    info = new PersonalInformation(firstNameField.getText(), lastNameField.getText(),
-//                            ageField.getText(), gmailField.getText(), addressField.getText(),
-//                            phoneNumberField.getText(), gender);
-//                    categoriesMenu.accessCategory().setPersonalInfo(info);
-//                    categoriesMenu.accessCategory().setNextVisitDate(datePicker.getSelectedDate());
-//                    HomePage.addPatient(categoriesMenu.accessCategory());
-//                } catch (InvalidPhoneNumberException | InvalidAgeException | InvalidGenderException |
-//                         InvalidGmailException | InvalidPatientException ex) {
-//                    JOptionPane.showMessageDialog(null, ex.getMessage());
-//                }
-//            }
             addPatientToList();
             dispose();
 
@@ -144,6 +127,10 @@ public class AddPatientPopup extends JDialog {
         setVisible(true);
     }
 
+    /**
+     * Creates two files for a patient: one for the allergies and
+     * one for the prescriptions
+     */
     private void createFile() {
         String file = firstNameField.toString() + lastNameField.toString();
         File fileName1 = new File("src/ui/PatientFiles/" + file + "allergies.txt");
@@ -161,6 +148,9 @@ public class AddPatientPopup extends JDialog {
         }
     }
 
+    /**
+     * Adds patients to list
+     */
     public void addPatientToList() {
         PersonalInformation info;
         try {
