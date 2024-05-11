@@ -4,36 +4,24 @@ import model.patient.History;
 import model.patient.Patient;
 import model.patient.Payments;
 import model.patient.PersonalInformation;
-
+/**
+ * The MinorPatient class represents an adult patient.
+ * It extends the Patient class and provides specific functionalities or attributes
+ * tailored for minor patients.
+ */
 public class MinorPatient extends Patient {
-    //instance variables
     private String motherGuardianName;
     private String fatherGuardianName;
     private String motherPhoneNumber;
     private String fatherGuardianPhoneNumber;
     private final int DISCOUNT = 5000;
-
+    /**
+     * Constructs a new MinorPatient object with default values.
+     */
     public MinorPatient() {
         super();
         setImageURL("src/ui/DefaultImages/Minor.png");
     }
-
-    public MinorPatient(PersonalInformation personalInfo, History history, Payments payments, String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
-        super(personalInfo, history, payments, "src/ui/DefaultImages/Minor.png");
-        this.motherGuardianName = motherGuardianName;
-        this.fatherGuardianName = fatherGuardianName;
-        this.motherPhoneNumber = motherPhoneNumber;
-        this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
-    }
-
-    public MinorPatient(String motherGuardianName, String fatherGuardianName, String motherPhoneNumber, String fatherGuardianPhoneNumber) {
-        this.motherGuardianName = motherGuardianName;
-        this.fatherGuardianName = fatherGuardianName;
-        this.motherPhoneNumber = motherPhoneNumber;
-        this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
-    }
-
-    //Accessors and mutators
 
     /**
      * Returns the name of mother guardian
@@ -97,15 +85,27 @@ public class MinorPatient extends Patient {
     public String getFatherGuardianPhoneNumber() {
         return fatherGuardianPhoneNumber;
     }
-
+    /**
+     * Returns the phone number of father guardian
+     * @param fatherGuardianPhoneNumber  new phone number of father guardian of type String
+     */
     public void setFatherGuardianPhoneNumber(String fatherGuardianPhoneNumber) {
         this.fatherGuardianPhoneNumber = fatherGuardianPhoneNumber;
     }
+    /**
+     * Retrieves the discount amount applicable to adult patients.
+     *
+     * @return the discount amount
+     */
     @Override
     public int getDISCOUNT() {
         return DISCOUNT;
     }
-
+    /**
+     * Returns a string representation of the MinorPatient object.
+     *
+     * @return a string representation of the MinorPatient object
+     */
     public String toString() {
         return "Minor";
     }

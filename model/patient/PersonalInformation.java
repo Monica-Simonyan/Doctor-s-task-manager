@@ -65,11 +65,11 @@ public class PersonalInformation implements Cloneable {
         this.age = that.age;
         this.address = that.address;
         this.gender = that.gender;
-        this.phoneNumber = that.phoneNumber; // Assume already validated
-        this.gmail = that.gmail;             // Assume already validated
+        this.phoneNumber = that.phoneNumber;
+        this.gmail = that.gmail;
     }
 
-    // Getters and setters with documentation
+
 
     /**
      * Retrieves the gender of the individual.
@@ -86,7 +86,7 @@ public class PersonalInformation implements Cloneable {
      * @param gender the gender to set.
      */
     public void setGender(String gender) throws InvalidGenderException {
-        if (!(Gender.valueOf(gender.toUpperCase()).equals(Gender.MALE) || Gender.valueOf(gender.toUpperCase()).equals(Gender.FEMALE)))
+        if (gender == null || !(Gender.valueOf(gender.toUpperCase()).equals(Gender.MALE) || Gender.valueOf(gender.toUpperCase()).equals(Gender.FEMALE)))
             throw new InvalidGenderException("Please enter a valid gender");
         else
             this.gender = Gender.valueOf(gender.toUpperCase());
@@ -232,6 +232,12 @@ public class PersonalInformation implements Cloneable {
             return null; // This should never happen
         }
     }
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param obj the reference object with which to compare
+     * @return true if this object is the same as the obj argument; false otherwise
+     */
 
     public boolean equals(Object obj) {
         if (obj == null || obj.getClass() != this.getClass())

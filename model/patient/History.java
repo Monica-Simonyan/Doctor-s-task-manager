@@ -53,7 +53,11 @@ public class History implements Cloneable {
     public String getPrescriptions() {
         return prescriptions;
     }
-
+    /**
+     * Sets the prescriptions for the patient.
+     *
+     * @param prescriptions a string representing the prescriptions for the patient
+     */
     public void setPrescriptions(String prescriptions) {
         this.prescriptions = prescriptions;
     }
@@ -66,7 +70,11 @@ public class History implements Cloneable {
     public void addProcedures(String procedure) {
         procedures.add(procedure);
     }
-
+    /**
+     * Sets the allergies for the patient.
+     *
+     * @param allergies a string representing the allergies for the patient
+     */
     public void setAllergies(String allergies) {
         this.allergies = allergies;
     }
