@@ -4,7 +4,7 @@ Authors: Monika Simonyan
 
 
 
-"Doctor's Task Manager" is a program that helps a doctor keep track of all his patients. In this project, the doctor is able to add and remove patients, as well as see the medical cards of the patients that he has. It is also possible for a doctor to search for a patient in a searchbar and add information about their allergies and prescriptions.
+"Doctor's Task Manager" is a program that helps a doctor keep track of all his patients. In this project, the doctor is able to add and remove patients, as well as see the medical cards of the patients that he has. It is also possible for a doctor to search for a patient in a searchbar and add information about their allergies and prescriptions. Also, the project initially has 3 dummy patients, that do not have a "nextVisitDate", therefore the "more" button does not work for them. However, when adding a new patient, the "more" button works normally, since we give a value for "nextVisitDate" when creating a new patient.
 
 
 
