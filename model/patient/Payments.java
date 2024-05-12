@@ -26,18 +26,35 @@ public class Payments {
             this.amount = amount;
         }
 
+        /**
+         * A mutator that sets the value of amount
+         * @param amount amount
+         */
         public void setAmount(int amount) {
             this.amount = amount;
         }
+
+        /**
+         * A mutator that sets the value of WasPaid
+         * @param wasPaid boolean parameter
+         */
 
         public void setWasPaid(boolean wasPaid) {
             this.wasPaid = wasPaid;
         }
 
+        /**
+         * An accessor that returns the amount
+         * @return amount
+         */
         public int getAmount() {
             return amount;
         }
 
+        /**
+         * An Accessor that returns the value of wasPaid
+         * @return boolean wasPaid
+         */
         public boolean getWasPaid() {
             return wasPaid;
         }
@@ -55,6 +72,10 @@ public class Payments {
             }
         }
 
+        /**
+         * A method that returns the String representation of amount
+         * @return amount
+         */
         public String toString() {
             return amount + " AMD";
         }
@@ -81,6 +102,10 @@ public class Payments {
         }
     }
 
+    /**
+     * Void type method that adds fee
+     * @param fee Fee
+     */
     public void addFee(Fee fee) {
         fees.add(fee);
     }
@@ -99,6 +124,10 @@ public class Payments {
         return copy;
     }
 
+    /**
+     * This method returns a String value of payments
+     * @return String value of fee
+     */
     public String toString() {
         StringBuilder str = new StringBuilder();
         for (Fee fee : fees)
