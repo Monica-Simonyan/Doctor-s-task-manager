@@ -65,11 +65,11 @@ public class PersonalInformation implements Cloneable {
         this.age = that.age;
         this.address = that.address;
         this.gender = that.gender;
-        this.phoneNumber = that.phoneNumber; // Assume already validated
-        this.gmail = that.gmail;             // Assume already validated
+        this.phoneNumber = that.phoneNumber;
+        this.gmail = that.gmail;
     }
 
-    // Getters and setters with documentation
+
 
     /**
      * Retrieves the gender of the individual.

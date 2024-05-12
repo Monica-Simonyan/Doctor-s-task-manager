@@ -45,8 +45,6 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
         setPayments(payments);
         count++;
     }
-
-    // Accessors and mutators
     /**
      * Retrieves the discount amount applicable to the patient.
      *
@@ -87,7 +85,7 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     public void setHistory(History history) {
         if (history != null)
             this.history = history;
-    } //Shallow
+    }
     /**
      * Retrieves a deep copy of the personal information of the patient.
      *
@@ -138,8 +136,6 @@ public abstract class Patient implements Cloneable, DiscountCalculation, Compara
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
-
-    // Methods
     /**
      * Compares this patient with another patient based on their personal information
      * (name, last name, age) and next visit date.

@@ -10,7 +10,6 @@ import model.patient.PersonalInformation;
  * tailored for minor patients.
  */
 public class MinorPatient extends Patient {
-    //instance variables
     private String motherGuardianName;
     private String fatherGuardianName;
     private String motherPhoneNumber;
@@ -23,8 +22,6 @@ public class MinorPatient extends Patient {
         super();
         setImageURL("src/ui/DefaultImages/Minor.png");
     }
-
-    //Accessors and mutators
 
     /**
      * Returns the name of mother guardian
